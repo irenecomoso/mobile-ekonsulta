@@ -1,0 +1,7 @@
+{
+  "name": "ekunsulta-mobile",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "angular"
+}
