@@ -1,0 +1,67 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>doctor-register</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <form #info='ngForm' (ngSubmit)="registerDoctor(info.value)" class="register-form">
+    <ion-list lines="full" class="ion-no-margin">
+      <ion-item>
+        <ion-label position="floating">Full Name</ion-label>
+        <ion-input [(ngModel)]="model.fullname" name="fullname" placeholder="Firstname Mi. Lastname"></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-label>Date of Birth</ion-label>
+        <ion-datetime type="date" placeholder="Select Date"[(ngModel)]="model.dob" name="dob"></ion-datetime>
+      </ion-item>
+      <ion-item>
+        <ion-label>Contact Number</ion-label>
+        <ion-input type="text" placeholder="(+63)" [(ngModel)]="model.contactNumber" name="contactNumber"></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-label>License Number</ion-label>
+        <ion-input type="text"[(ngModel)]="model.licenseNumber" name="licenseNumber"></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-label>Specialization</ion-label>
+        <!--<ion-select [(ngModel)]="model.specialization" name="specialization"></ion-select>
+        <ion-select-option *ngFor="let list of spList" value="list.id">{{list.name}}</ion-select-option>-->
+        <ion-select [(ngModel)]="model.specialization" name="specialization">
+          <ion-select-option value="G6W5fK9nr6eKnOUftBRy">General Paracticioner</ion-select-option>
+          <ion-select-option value="t0zLiBUTsuM2iN0toLB6">General Doctor</ion-select-option>
+          <ion-select-option value="knCsZ2qEOaZx2wxT7Qxi">Allergist</ion-select-option>
+        </ion-select>
+      </ion-item>
+      <ion-item>
+        <ion-label position="floating">Address</ion-label>
+        <ion-input [(ngModel)]="model.address" name="address"></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-label>Email</ion-label>
+        <ion-input  type="text"[(ngModel)]="model.email" name="email"></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-label>Password</ion-label>
+        <ion-input type="password" [(ngModel)]="model.password" name="password"></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-label>Confirm Password</ion-label>
+        <ion-input primary type="password" [(ngModel)]="confirmPass" name="confirmPass"></ion-input>
+      </ion-item>
+
+    </ion-list>
+    <div class="check">
+      <ion-checkbox checked="false" color="secondary"></ion-checkbox>
+      <ion-label>&nbsp;I agree with the <u>Terms and Coditions</u></ion-label>
+    </div>
+    <div style="text-align:center;">
+      <ion-button display="center" id="btn1" color="rgb(28,54,94)" type="submit">Sign Up</ion-button>
+    </div>
+  </form>
+  <div class="form-group">
+    <p *ngIf="error.message.length > 0" class="text-danger">
+        {{error.message}} </p>
+  </div>
+
+</ion-content>
