@@ -31,6 +31,34 @@ const routes: Routes = [
     path: 'register-choice',
     loadChildren: () => import('./register-choice/register-choice.module').then( m => m.RegisterChoicePageModule)
   },
+  {
+    path: 'menu',
+    loadChildren: () => import('./menu/menu.module').then( m => m.MenuPageModule)
+  },
+  {
+    path: 'patient-chat-info',
+    loadChildren: () => import('./patient-chat-info/patient-chat-info.module').then( m => m.PatientChatInfoPageModule)
+  },
+  {
+    path: 'patient-consultation',
+    loadChildren: () => import('./patient-consultation/patient-consultation.module').then( m => m.PatientConsultationPageModule)
+  },
+  {
+    path: 'patient-doctor-chat',
+    loadChildren: () => import('./patient-doctor-chat/patient-doctor-chat.module').then( m => m.PatientDoctorChatPageModule)
+  },
+  {
+    path: 'patient-doctors-list',
+    loadChildren: () => import('./patient-doctors-list/patient-doctors-list.module').then( m => m.PatientDoctorsListPageModule)
+  },
+  {
+    path: 'patient-payment',
+    loadChildren: () => import('./patient-payment/patient-payment.module').then( m => m.PatientPaymentPageModule)
+  },
+  {
+    path: 'patient-transactionhistory',
+    loadChildren: () => import('./patient-transactionhistory/patient-transactionhistory.module').then( m => m.PatientTransactionhistoryPageModule)
+  },
 ];
 
 @NgModule({
