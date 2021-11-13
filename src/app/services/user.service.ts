@@ -31,4 +31,8 @@ export class UserService {
   {
      return this.db.firestore.collection('Users').doc(user_id).get();
   }
+  get_avatar(user_id)
+  {
+    return this.db.firestore.collection('avatar').doc(user_id).get();
+  }
 }

@@ -16,8 +16,6 @@ import * as firebase from 'firebase';
 export class AuthService {
   newUser: any;
   authState: any = null;
-  //userCredential: any;
-  //defaultAuth = firebase;
 
   constructor(private afu: AngularFireAuth, private router: Router, private db: AngularFirestore, public store: AngularFireStorage) {}
    //Get user Data
@@ -70,6 +68,8 @@ export class AuthService {
       contact_number: this.newUser.contact_number,
       member_ID: this.newUser.member_ID,
       health_insurance : this.newUser.health_insurance,
+      createdAt: formatDate(new Date(), 'MM/dd/yyyy', 'en'),
+      updatedAt: formatDate(new Date(), 'MM/dd/yyyy', 'en'),
       role: 'patient',
       status:'active',
       isVerified: 'pending',

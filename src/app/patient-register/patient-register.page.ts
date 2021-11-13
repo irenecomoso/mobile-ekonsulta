@@ -31,6 +31,7 @@ export class PatientRegisterPage implements OnInit {
   ngOnInit(): void {
   }
   register_Patient(frm){
+    //console.log(frm);
     if(frm.password === this.confirmPass){
       console.log(frm);
       this.clearErrorMessage();
@@ -41,7 +42,8 @@ export class PatientRegisterPage implements OnInit {
         this.router.navigate(['/patient-register'])
       });
   }
-  }
+}
+
   clearErrorMessage()
   {
     this.error = {name : '', message : ''};
