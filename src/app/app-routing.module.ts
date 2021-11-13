@@ -79,6 +79,11 @@ const routes: Routes = [
     path: 'doctor-chat-info',
     loadChildren: () => import('./doctor-chat-info/doctor-chat-info.module').then( m => m.DoctorChatInfoPageModule)
   },
+  {
+    path: 'doctor-transactionhistory',
+    loadChildren: () => import('./doctor-transactionhistory/doctor-transactionhistory.module').then( m => m.DoctorTransactionhistoryPageModule)
+  },
+
 ];
 
 @NgModule({
