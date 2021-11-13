@@ -16,9 +16,13 @@
         </ion-item>
         <ion-item>
           <ion-label position="stacked"></ion-label>
-          <ion-input value="Bithdate: "readonly ></ion-input>
-          <ion-input value="Email: " readonly></ion-input>
-          <ion-input value="Mobile #:" readonly></ion-input>
+            <ion-input name="Name" readonly>Name: {{info.fullname}}</ion-input>
+            <ion-input name="Email" readonly>Email: {{info.email}}</ion-input>
+            <ion-input name="Date of Birth" readonly>Date of Birth: {{info.dob}}</ion-input>
+            <ion-input name="Contact Number" readonly>Contact Number: {{info.contact_number}}</ion-input>
+            <ion-input name="Address" readonly>Address: {{info.address}}</ion-input>
+            <ion-input name="License Number" readonly>License Number: {{info.license_number}}</ion-input>
+            <ion-input name="Specialization" readonly>Specialization: {{spInfo.name}}</ion-input>
         </ion-item><br><br><br><br><br>
         <div class="buttons">
           <ion-button  id="btn1" color="rgb(28,54,94)" expand="block"><ion-icon name="create"></ion-icon> Edit</ion-button>

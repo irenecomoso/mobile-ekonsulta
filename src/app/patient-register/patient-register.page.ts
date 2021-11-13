@@ -43,7 +43,6 @@ export class PatientRegisterPage implements OnInit {
       });
   }
 }
-
   clearErrorMessage()
   {
     this.error = {name : '', message : ''};

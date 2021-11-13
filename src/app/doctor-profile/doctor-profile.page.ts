@@ -1,4 +1,7 @@
+/* eslint-disable no-var */
+/* eslint-disable @typescript-eslint/semi */
 /* eslint-disable @typescript-eslint/naming-convention */
+import { UserService } from './../services/user.service';
 import { Component, OnInit } from '@angular/core';
 import { AuthService } from '../services/auth.service';
 export class DoctorInfo
@@ -27,10 +30,32 @@ export class DoctorProfilePage implements OnInit {
   imgUrl: any;
   file: any;
 
-  constructor(public afu: AuthService) { }
+  constructor(public userservice: UserService,public afu: AuthService) { }
 
   ngOnInit(): void {
     this.userId = this.afu.get_UID();
-  }
+    this.userservice.get_patientInfo(this.userId).then(e=>{
+     // console.log(e.data());
+      this.info = e.data();
+    }).then(()=>{
+      this.userservice.get_specializationInfo(this.info.specialization).then(e=>{
+        this.spInfo = e.data();
+      })
+    })
 
+    this.userservice.get_avatar(this.userId).then(e=>{
+      this.imgUrl = e.data().image;
+    })
+
+    var data;
+    var tempArray = [];
+    this.userservice.get_Speciaalization().then(e=>{
+      e.forEach(item=>{
+        data = item.data();
+        data.uid = item.id;
+        tempArray.push(data);
+      })
+    })
+    this.spList = tempArray;
+  }
 }

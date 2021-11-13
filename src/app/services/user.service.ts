@@ -35,4 +35,17 @@ export class UserService {
   {
     return this.db.firestore.collection('avatar').doc(user_id).get();
   }
+  get_patient_insuranceInfo(id,ins_id)
+  {
+    return this.db.firestore.collection('Users').doc(id).collection('Insurance_Info')
+    .where('health_insurance','==',ins_id).get();
+  }
+  get_patientInfo(id)
+  {
+    return this.db.firestore.collection('Users').doc(id).get();
+  }
+  get_specializationInfo(id)
+  {
+    return this.db.firestore.collection('specialization').doc(id).get();
+  }
 }
