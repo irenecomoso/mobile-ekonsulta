@@ -81,6 +81,13 @@ const routes: Routes = [
     loadChildren: () => import('./doctor-chat-info/doctor-chat-info.module').then( m => m.DoctorChatInfoPageModule)
   },
   {
+<<<<<<< HEAD
+=======
+    path: 'doctor-edit-profile',
+    loadChildren: () => import('./doctor-edit-profile/doctor-edit-profile.module').then( m => m.DoctorEditProfilePageModule)
+  },
+  {
+>>>>>>> 7f704006858988275eee5696e1f70ff3b7c1490e
     path: 'doctor-landing',
     loadChildren: () => import('./doctor-landing/doctor-landing.module').then( m => m.DoctorLandingPageModule)
   },
@@ -100,8 +107,13 @@ const routes: Routes = [
     path: 'doctor-transactionhistory',
     loadChildren: () => import('./doctor-transactionhistory/doctor-transactionhistory.module').then( m => m.DoctorTransactionhistoryPageModule)
   },  {
+<<<<<<< HEAD
     path: 'doctor-edit-profile',
     loadChildren: () => import('./doctor-edit-profile/doctor-edit-profile.module').then( m => m.DoctorEditProfilePageModule)
+=======
+    path: 'doctor-patientanalytics',
+    loadChildren: () => import('./doctor-patientanalytics/doctor-patientanalytics.module').then( m => m.DoctorPatientanalyticsPageModule)
+>>>>>>> 7f704006858988275eee5696e1f70ff3b7c1490e
   },
 
 ];
