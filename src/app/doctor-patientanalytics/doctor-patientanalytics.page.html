@@ -1,0 +1,36 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>E-konsulta</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-header class="ion-no-border">
+  <ion-toolbar style="text-align:center;">
+    <ion-segment value="consultations" [(ngModel)]="selectTabs">
+      <ion-segment-button value="Daily">
+        <ion-label>Daily</ion-label>
+      </ion-segment-button>
+      <ion-segment-button value="Weekly">
+        <ion-label style="text-align: center;">Weekly</ion-label>
+      </ion-segment-button>
+      <ion-segment-button value="Monthly">
+        <ion-label>Monthly</ion-label>
+      </ion-segment-button>
+    </ion-segment>
+  </ion-toolbar>
+</ion-header>
+
+
+<ion-content>
+  <div *ngIf="selectTabs==='Daily'">
+
+  </div>
+
+  <div *ngIf="selectTabs==='Weekly'">
+
+  </div>
+
+  <div *ngIf="selectTabs==='Monthly'">
+
+  </div>
+</ion-content>
