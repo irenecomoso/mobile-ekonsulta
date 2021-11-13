@@ -8,56 +8,65 @@
 </ion-header>
 
 <ion-content>
-  <div class="container">
-    <div class="outer">
-      <img src="https://ionicframework.com/docs/demos/api/avatar/avatar.svg" id="pic">
-      <div class="inner">
-        <input class="inputfile" type="file" name="pic" accept="image/*">
-        <label><ion-icon name="cloud-upload-outline"></ion-icon></label>
+  <form #form='ngForm' (ngSubmit)="update(form.value)" class="update-form">
+    <!--<ion-item>
+      <ion-label position="stacked"></ion-label>
+        <ion-input name="Email" >Email: {{info.email}}</ion-input>
+        <ion-input name="Date of Birth" >Date of Birth: {{info.dob}}</ion-input>
+        <ion-input name="Contact Number" >Contact Number: {{info.contact_number}}</ion-input>
+        <ion-input name="Address" >Address: {{info.address}}</ion-input>
+        <ion-input name="License Number" >License Number: {{info.license_number}}</ion-input>
+        <ion-input name="Specialization" >Specialization: {{spInfo.name}}</ion-input>
+    </ion-item><br><br><br><br><br>-->
+    <div class="container">
+      <div class="outer">
+        <img src="https://ionicframework.com/docs/demos/api/avatar/avatar.svg" id="pic">
+        <div class="inner">
+          <input class="inputfile" type="file" name="pic" accept="image/*">
+          <label><ion-icon name="cloud-upload-outline"></ion-icon></label>
+        </div>
       </div>
     </div>
-  </div>
-  <ion-list lines="full" class="ion-no-margin">
-    <ion-item>
-      <ion-label>Email</ion-label>
-      <ion-input type="text"></ion-input>
-    </ion-item>
-    <ion-item>
-      <ion-label>Password</ion-label>
-      <ion-input type="password"></ion-input>
-    </ion-item>
-    <ion-item>
-      <ion-label position="floating">Full Name</ion-label>
-      <ion-input placeholder="Firstname Mi. Lastname"></ion-input>
-    </ion-item>
-    <ion-item>
-      <ion-label>Date of Birth</ion-label>
-      <ion-datetime  placeholder="Select Date"></ion-datetime>
-    </ion-item>
-    <ion-item>
-      <ion-label>Contact Number</ion-label>
-      <ion-input placeholder="(+63)" type="number"></ion-input>
-    </ion-item>
-    <ion-item>
-      <ion-label>License Number</ion-label>
-      <ion-input type="text"></ion-input>
-    </ion-item>
-    <ion-item>
-      <ion-label>Specialization</ion-label>
-      <ion-select>
-        <ion-select-option value="General Paracticioner">General Paracticioner</ion-select-option>
-        <ion-select-option value="EENT">Manulife</ion-select-option>
-        <ion-select-option value="Allergist">Allergist</ion-select-option>
-        <ion-select-option value="Pediatrician">Pediatrician</ion-select-option>
-        <ion-select-option value="Dermatologist">Dermatologist</ion-select-option>
-      </ion-select>
-    </ion-item>
-    <ion-item>
-      <ion-label position="floating">Address</ion-label>
-      <ion-input></ion-input>
-    </ion-item>
-  </ion-list>
-  <div style="text-align:center;">
-    <ion-button display="center" id="btn1" color="rgb(28,54,94)" >Save Changes</ion-button>
-  </div><br>
+    <ion-list lines="full" class="ion-no-margin">
+      <ion-item>
+        <ion-label>Email:</ion-label>
+        <ion-input type="text"[(ngModel)]="model.email" name="email">{{info.email}}</ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-label>Password:</ion-label>
+        <ion-input value="{{info.password}}" [(ngModel)]="model.password"name="password"></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-label position="floating">Full Name</ion-label>
+        <ion-input placeholder="Firstname Mi. Lastname" value="{{info.fullname}}" [(ngModel)]="model.fullname" name="fullname"></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-label>Date of Birth</ion-label>
+        <ion-datetime  placeholder="Select Date" value="{{info.dob}}" [(ngModel)]="model.dob"name="dob"></ion-datetime>
+      </ion-item>
+      <ion-item>
+        <ion-label>Contact Number</ion-label>
+        <ion-input placeholder="(+63)" type="number" value="{{info.contact_number}}" [(ngModel)]="model.contact_number"name="contact_number"></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-label>License Number</ion-label>
+        <ion-input type="text" value="{{info.license_number}}" [(ngModel)]="model.license_number" name="license_number"></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-label>Specialization</ion-label>
+        <ion-select [(ngModel)]="model.specialization" name="specialization" value="{{info.specialization}}" name="specialization">
+          <ion-select-option value="G6W5fK9nr6eKnOUftBRy">General Paracticioner</ion-select-option>
+          <ion-select-option value="t0zLiBUTsuM2iN0toLB6">General Doctor</ion-select-option>
+          <ion-select-option value="knCsZ2qEOaZx2wxT7Qxi">Allergist</ion-select-option>
+        </ion-select>
+      </ion-item>
+      <ion-item>
+        <ion-label position="floating">Address</ion-label>
+        <ion-input value="{{info.address}}" [(ngModel)]="model.address" name="address"></ion-input>
+      </ion-item>
+    </ion-list>
+    <div style="text-align:center;">
+      <ion-button display="center" id="btn1" color="rgb(28,54,94)" type="submit" routerLink="/patient-profile">Save Changes</ion-button>
+    </div><br>
+  </form>
 </ion-content>

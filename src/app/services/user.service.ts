@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/semi */
 /* eslint-disable @typescript-eslint/naming-convention */
 import { AngularFireStorage,AngularFireStorageModule } from '@angular/fire/storage';
 import { Injectable } from '@angular/core';
@@ -14,7 +15,7 @@ import 'firebase/auth';
 })
 export class UserService {
 
-  constructor(public db: AngularFirestore) { }
+  constructor(public db: AngularFirestore,public fireb: FirebaseApp) { }
   get_Speciaalization()
   {
     return this.db.firestore.collection('specialization').get();
@@ -47,5 +48,16 @@ export class UserService {
   get_specializationInfo(id)
   {
     return this.db.firestore.collection('specialization').doc(id).get();
+  }
+  update_user(user_id,record)
+  {
+    const user = this.fireb.auth().currentUser;
+    const newPassword = record.password;
+   return user.updatePassword(newPassword).then(()=>{
+      console.log('Password Changed!');
+      this.db.collection('Users').doc(user_id).update(record);
+    }).catch((error)=>{
+      console.log(error);
+    })
   }
 }

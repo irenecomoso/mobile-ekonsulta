@@ -13,12 +13,11 @@
             <ion-avatar slot="start">
               <img src="https://ionicframework.com/docs/demos/api/avatar/avatar.svg">
             </ion-avatar>
-            <ion-label class="name">Lorem ipsum</ion-label><br><br>
+            <ion-label class="name">{{info.fullname}}</ion-label><br><br>
           </ion-item>
           <ion-item>
             <ion-label position="stacked"></ion-label>
             <ion-input name="patientID" readonly>Patient ID: {{userID}}</ion-input>
-            <ion-input name="PatientName" readonly>Patient Name: {{info.fullname}}</ion-input>
             <ion-input name="Date of Birth" readonly>Date of Birth: {{info.dob}}</ion-input>
             <ion-input name="Email" readonly>Email: {{info.email}}</ion-input>
             <ion-input name="Contact Number" readonly>Contact Number: {{info.contact_number}}</ion-input>
@@ -27,7 +26,7 @@
             <ion-input name="Member ID:" readonly>Member ID: {{info.member_ID}}</ion-input>
           </ion-item><br><br><br><br><br>
           <div class="buttons">
-            <ion-button  id="btn1" color="rgb(28,54,94)" expand="block"><ion-icon name="create"></ion-icon> Edit</ion-button>
+            <ion-button  id="btn1" color="rgb(28,54,94)" expand="block"routerLink="/patient-edit-profile"><ion-icon name="create"></ion-icon> Edit</ion-button>
             <ion-button  id="btn2" color="rgb(28,54,94)" routerLink="/login"><ion-icon name="exit"></ion-icon> Logout</ion-button>
           </div>
         </ion-card-content>
