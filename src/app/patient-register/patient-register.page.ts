@@ -1,5 +1,7 @@
+/* eslint-disable no-var */
 /* eslint-disable @typescript-eslint/semi */
 /* eslint-disable @typescript-eslint/naming-convention */
+import { UserService } from './../services/user.service';
 import { Component, OnInit } from '@angular/core';
 import { FormGroup } from '@angular/forms';
 import { Router } from '@angular/router';
@@ -26,9 +28,21 @@ export class PatientRegisterPage implements OnInit {
   error: { name: string;message: string } = { name: '', message: ''};
   confirmPass: string;
   pass_message: string ;
-  constructor(public afu: AuthService,public router: Router) { }
+  insList: any = [];
+  constructor(public afu: AuthService,public router: Router,public userservice: UserService) { }
 
   ngOnInit(): void {
+    var data;
+    var tempArray = [];
+    this.userservice.get_HealthInsurance().then(e=>{
+      e.forEach(item=>{
+        data = item.data();
+        data.uid = item.id;
+        tempArray.push(data);
+      })
+    })
+    this.insList = tempArray;
+    console.log(this.insList);
   }
   register_Patient(frm){
     //console.log(frm);

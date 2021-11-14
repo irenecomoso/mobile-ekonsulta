@@ -1,3 +1,4 @@
+/* eslint-disable curly */
 /* eslint-disable @typescript-eslint/semi */
 /* eslint-disable @typescript-eslint/naming-convention */
 import { AngularFireStorage,AngularFireStorageModule } from '@angular/fire/storage';
@@ -15,7 +16,7 @@ import 'firebase/auth';
 })
 export class UserService {
 
-  constructor(public db: AngularFirestore,public fireb: FirebaseApp) { }
+  constructor(public db: AngularFirestore,public fireb: FirebaseApp, public afau: AngularFireAuth, public store: AngularFireStorage) { }
   get_Speciaalization()
   {
     return this.db.firestore.collection('specialization').get();
@@ -59,5 +60,29 @@ export class UserService {
     }).catch((error)=>{
       console.log(error);
     })
+  }
+  upload_avatar(a, user_id)
+  {
+    //Uploading image into fireStorage
+    this.store.ref('Users/' + user_id + '/profile.jpg').put(a).then(res =>{
+      console.log('successfully uploaded!');
+
+      //getting image URL and pass it into fireStore avatar
+      this.afau.onAuthStateChanged(user => {
+      if(user)
+      this.store.storage.ref('Users/' + user_id + '/profile.jpg').getDownloadURL().then(e =>{
+          this.db.collection('avatar').doc(user_id).set({
+            image : e
+          })
+          console.log('Profile Changed!');
+        })
+      })
+    }).catch(error => {
+      console.log(error.message);
+    })
+  }
+  update_patient_insurance(user_id,record)
+  {
+    return this.db.collection('Users').doc(user_id).update(record);
   }
 }

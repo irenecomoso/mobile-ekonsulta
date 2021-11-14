@@ -1,3 +1,4 @@
+/* eslint-disable eol-last */
 import { Router } from '@angular/router';
 import { FormGroup } from '@angular/forms';
 /* eslint-disable no-var */
@@ -47,6 +48,7 @@ export class DoctorEditProfilePage implements OnInit {
         tempArray.push(data);
       })
     })
+
     this.spList = tempArray;
     this.model.fullname = this.info.fullname;
     this.model.dob = this.info.dob;
@@ -58,11 +60,14 @@ export class DoctorEditProfilePage implements OnInit {
     this.model.specialization = this.info.specialization;
   }
   update(frm){
-    this.userservice.update_user(this.userId,frm).then(()=>{
+      this.userservice.update_user(this.userId,frm).then(()=>{
       this.ngOnInit();
       alert('Updated successfully!');
       //this.router.navigate(['/patient-profile'])
     })
   }
-
+  uploadImage()
+  {
+    this.userservice.upload_avatar(this.file,this.userId);
+  }
 }
