@@ -111,6 +111,14 @@ const routes: Routes = [
     path: 'doctor-patientprescription',
     loadChildren: () => import('./doctor-patientprescription/doctor-patientprescription.module').then( m => m.DoctorPatientprescriptionPageModule)
   },
+  {
+    path: 'doctor-feedback',
+    loadChildren: () => import('./doctor-feedback/doctor-feedback.module').then( m => m.DoctorFeedbackPageModule)
+  },
+  {
+    path: 'doctor-reviews',
+    loadChildren: () => import('./doctor-reviews/doctor-reviews.module').then( m => m.DoctorReviewsPageModule)
+  },
 
 
 ];
