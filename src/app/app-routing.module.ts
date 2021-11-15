@@ -107,6 +107,10 @@ const routes: Routes = [
     path: 'doctor-patientanalytics',
     loadChildren: () => import('./doctor-patientanalytics/doctor-patientanalytics.module').then( m => m.DoctorPatientanalyticsPageModule)
   },
+  {
+    path: 'doctor-patientprescription',
+    loadChildren: () => import('./doctor-patientprescription/doctor-patientprescription.module').then( m => m.DoctorPatientprescriptionPageModule)
+  },
 
 ];
 

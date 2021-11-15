@@ -1,0 +1,36 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>E-konsulta</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-button routerLink="/doctor-chat-info" id="back" icon-only fill clear shape="square">
+    <ion-icon name="arrow-back-outline"></ion-icon>
+  </ion-button>
+  <ion-card>
+    <ion-card-header>
+      <ion-card-title>Prescription</ion-card-title>
+    </ion-card-header>
+    <ion-card-content style="text-align: left;">
+      <ion-item>
+        <ion-label id="profile_image" color="secondary">Add Prescription</ion-label>
+        <ion-input type="file" accept="image/*"></ion-input>
+      </ion-item>
+    </ion-card-content>
+  </ion-card>
+  <ion-card>
+    <ion-card-header>
+      <ion-card-title>Consultation Summary</ion-card-title>
+    </ion-card-header>
+    <ion-card-content style="text-align: left;">
+      <ion-item>
+        <ion-label id="profile_image" color="secondary">Add Medical Record</ion-label>
+        <ion-input type="file" accept="image/*"></ion-input>
+      </ion-item>
+    </ion-card-content>
+  </ion-card>
+  <div class="buttons" style="text-align: center;">
+    <ion-button  id="btn1" color="rgb(28,54,94)" expand="block">Upload</ion-button>
+  </div>
+</ion-content>
