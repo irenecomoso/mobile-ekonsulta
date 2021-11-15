@@ -25,12 +25,11 @@
       </ion-item>
       <ion-item>
         <ion-label>Specialization</ion-label>
-        <!--<ion-select [(ngModel)]="model.specialization" name="specialization"></ion-select>
-        <ion-select-option *ngFor="let list of spList" value="list.id">{{list.name}}</ion-select-option>-->
         <ion-select [(ngModel)]="model.specialization" name="specialization">
-          <ion-select-option value="G6W5fK9nr6eKnOUftBRy">General Paracticioner</ion-select-option>
+        <ion-select-option *ngFor="let list of spList" value="list.id">{{list.name}}</ion-select-option>
+          <!--<ion-select-option value="G6W5fK9nr6eKnOUftBRy">General Paracticioner</ion-select-option>
           <ion-select-option value="t0zLiBUTsuM2iN0toLB6">General Doctor</ion-select-option>
-          <ion-select-option value="knCsZ2qEOaZx2wxT7Qxi">Allergist</ion-select-option>
+          <ion-select-option value="knCsZ2qEOaZx2wxT7Qxi">Allergist</ion-select-option>-->
         </ion-select>
       </ion-item>
       <ion-item>

@@ -21,7 +21,7 @@ export class DoctorRegisterPage implements OnInit {
   error: { name: string; message: string } = { name: '', message: ''};
   constructor(public afu: AuthService,public router: Router,public userservice: UserService) { }
   ngOnInit(): void {
-    /*var data;
+    var data;
     var tempArray = [];
     this.userservice.get_Speciaalization().then(e=>{
       e.forEach(item=>{
@@ -31,7 +31,7 @@ export class DoctorRegisterPage implements OnInit {
       })
     })
     this.spList = tempArray;
-    console.log(this.spList)*/
+    console.log(this.spList)
   }
   registerDoctor(frm){
     console.log(frm);
