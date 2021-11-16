@@ -103,7 +103,8 @@ const routes: Routes = [
   {
     path: 'doctor-patientanalytics',
     loadChildren: () => import('./doctor-patientanalytics/doctor-patientanalytics.module').then( m => m.DoctorPatientanalyticsPageModule)
-  },  {
+  },
+  {
     path: 'doctor-edit-profile',
     loadChildren: () => import('./doctor-edit-profile/doctor-edit-profile.module').then( m => m.DoctorEditProfilePageModule)
   },
@@ -119,6 +120,22 @@ const routes: Routes = [
     path: 'doctor-reviews',
     loadChildren: () => import('./doctor-reviews/doctor-reviews.module').then( m => m.DoctorReviewsPageModule)
   },
+  {
+    path: 'patient-choosefeedback',
+    loadChildren: () => import('./patient-choosefeedback/patient-choosefeedback.module').then( m => m.PatientChoosefeedbackPageModule)
+  },  {
+    path: 'patient-doctorfeedback',
+    loadChildren: () => import('./patient-doctorfeedback/patient-doctorfeedback.module').then( m => m.PatientDoctorfeedbackPageModule)
+  },
+  {
+    path: 'patient-labfeedback',
+    loadChildren: () => import('./patient-labfeedback/patient-labfeedback.module').then( m => m.PatientLabfeedbackPageModule)
+  },
+  {
+    path: 'patient-insurancefeedback',
+    loadChildren: () => import('./patient-insurancefeedback/patient-insurancefeedback.module').then( m => m.PatientInsurancefeedbackPageModule)
+  },
+
 
 
 ];
