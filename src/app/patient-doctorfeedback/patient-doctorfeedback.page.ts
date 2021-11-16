@@ -6,7 +6,6 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./patient-doctorfeedback.page.scss'],
 })
 export class PatientDoctorfeedbackPage implements OnInit {
-
   constructor() { }
 
   ngOnInit() {
