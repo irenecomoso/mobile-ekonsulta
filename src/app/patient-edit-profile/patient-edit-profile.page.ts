@@ -114,5 +114,12 @@ export class PatientEditProfilePage implements OnInit {
       this.ngOnInit();
     })
   }
+  update(e)
+  {
+    this.userservice.update_user(this.userID,e).then(()=>{
+      console.log('patient Updated!');
+      this.ngOnInit();
+    })
+  }
 
 }

@@ -1,3 +1,5 @@
+/* eslint-disable object-shorthand */
+/* eslint-disable @typescript-eslint/quotes */
 /* eslint-disable curly */
 /* eslint-disable @typescript-eslint/semi */
 /* eslint-disable @typescript-eslint/naming-convention */
@@ -9,6 +11,7 @@ import { AngularFirestore } from '@angular/fire/firestore';
 import { Router } from '@angular/router';
 import * as firebase from 'firebase';
 import 'firebase/auth';
+import { formatDate } from '@angular/common';
 
 
 @Injectable({
@@ -84,5 +87,30 @@ export class UserService {
   update_patient_insurance(user_id,record)
   {
     return this.db.collection('Users').doc(user_id).update(record);
+  }
+  get_doctorList()
+  {
+    return this.db.firestore.collection('Users').where("role", "==", "doctor").get();
+  }
+  doctor_reply(id,feedback,name,review_id,sent_to)
+  {
+    return this.db.collection('Users').doc(id).collection('reviews').doc(review_id)
+    .collection('reply').add({
+      createdAt: formatDate(new Date(),"MM/dd/yyyy","en"),
+      feedback: feedback,
+      from : id,
+      fullname: name,
+      sent_to: sent_to,
+    })
+  }
+  get_doctorReply(id,review_id)
+  {
+    return this.db.firestore.collection('Users').doc(id).collection('reviews').doc(review_id)
+    .collection('reply').get();
+  }
+  get_Doctor_Reviews(id)
+  {
+    return this.db.firestore.collection('Users').doc(id).collection('reviews')
+    .orderBy('createdAt','desc').get();
   }
 }

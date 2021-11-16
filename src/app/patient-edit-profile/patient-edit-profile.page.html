@@ -10,50 +10,52 @@
 <ion-content>
   <div class="container">
     <div class="outer">
-      <img src="https://ionicframework.com/docs/demos/api/avatar/avatar.svg" id="pic">
+      <ion-img src="{{imgUrl}}" alt="img" class="profile-pic" width="180" height="180"></ion-img>
       <div class="inner">
         <input class="inputfile" type="file" name="pic" accept="image/*">
-        <label><ion-icon name="cloud-upload-outline"></ion-icon></label>
+        <label><ion-icon type="button" (click)="uploadImage()" name="cloud-upload-outline"></ion-icon></label>
       </div>
     </div>
   </div>
   <ion-list lines="full" class="ion-no-margin">
-    <ion-item>
-      <ion-label>Email:</ion-label>
-      <ion-input type="text"[(ngModel)]="model.email" name="email" value="{{info.email}}"></ion-input>
-    </ion-item>
-    <ion-item>
-      <ion-label>Password:</ion-label>
-      <ion-input type="text" [(ngModel)]="model.password" name="password" value="{{info.password}}"></ion-input>
-    </ion-item>
-    <ion-item>
-      <ion-label position="floating">Full Name:</ion-label>
-      <ion-input [(ngModel)]="model.fullname" name="fullname" value="{{info.fullname}}"></ion-input>
-    </ion-item>
-    <ion-item>
-      <ion-label>Date of Birth</ion-label>
-      <ion-datetime [(ngModel)]="model.dob" name="dob" value="{{info.dob}}"></ion-datetime>
-    </ion-item>
-    <ion-item>
-      <ion-label position="floating">Address</ion-label>
-      <ion-input [(ngModel)]="model.address" name="address" value="{{info.address}}"></ion-input>
-    </ion-item>
-    <ion-item>
-      <ion-label>Health Insurance</ion-label>
-      <ion-select [(ngModel)]="health_insurance" name="health_insurance" value="{{info.health_insurance}}">
-        <ion-select-option *ngFor="let list of insList" value="{{list.uid}}">{{list.name}}</ion-select-option>
-      </ion-select>
-    </ion-item>
-    <ion-item>
-      <ion-label>Health Insurance ID</ion-label>
-      <ion-input type="text" [(ngModel)]="member_ID" value="{{info.member_ID}}"></ion-input>
-    </ion-item>
-    <ion-item>
-      <ion-label>Contact Number</ion-label>
-      <ion-input placeholder="(+63)" [(ngModel)]="model.contact_number" name="contact_number" value="{{info.contact_number}}"></ion-input>
-    </ion-item>
+    <form #form='ngForm' (ngSubmit)="update(form.value)">
+      <ion-item>
+        <ion-label>Email:</ion-label>
+        <ion-input type="text"[(ngModel)]="model.email" name="email" value="{{info.email}}" readonly></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-label>Password:</ion-label>
+        <ion-input type="text" [(ngModel)]="model.password" name="password" value="{{info.password}}"></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-label position="floating">Full Name:</ion-label>
+        <ion-input [(ngModel)]="model.fullname" name="fullname" value="{{info.fullname}}"></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-label>Date of Birth</ion-label>
+        <ion-datetime [(ngModel)]="model.dob" name="dob" value="{{info.dob}}"></ion-datetime>
+      </ion-item>
+      <ion-item>
+        <ion-label position="floating">Address</ion-label>
+        <ion-input [(ngModel)]="model.address" name="address" value="{{info.address}}"></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-label>Health Insurance</ion-label>
+        <ion-select [(ngModel)]="health_insurance" name="health_insurance" value="{{info.health_insurance}}">
+          <ion-select-option *ngFor="let list of insList" value="{{list.uid}}">{{list.name}}</ion-select-option>
+        </ion-select>
+      </ion-item>
+      <ion-item>
+        <ion-label>Health Insurance ID</ion-label>
+        <ion-input type="text" [(ngModel)]="member_ID" value="{{info.member_ID}}" name="member_ID"></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-label>Contact Number</ion-label>
+        <ion-input placeholder="(+63)" [(ngModel)]="model.contact_number" name="contact_number" value="{{info.contact_number}}"></ion-input>
+      </ion-item>
+    </form>
   </ion-list>
   <div style="text-align:center;">
-    <ion-button display="center" id="btn1" color="rgb(28,54,94)" >Save Changes</ion-button>
+    <ion-button display="center" id="btn1" color="rgb(28,54,94)" type="button" routerLink="/patient-profile" >Save Changes</ion-button>
   </div><br>
 </ion-content>
