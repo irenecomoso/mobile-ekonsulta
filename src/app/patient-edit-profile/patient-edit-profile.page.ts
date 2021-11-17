@@ -1,3 +1,4 @@
+import { Router } from '@angular/router';
 /* eslint-disable @typescript-eslint/dot-notation */
 /* eslint-disable prefer-const */
 import { AuthService } from './../services/auth.service';
@@ -39,7 +40,7 @@ export class PatientEditProfilePage implements OnInit {
 
   health_insurance: string;
   member_ID: string;
-  constructor(public afu: AuthService, public userservice: UserService) { }
+  constructor(public afu: AuthService, public userservice: UserService, public router: Router) { }
 
   ngOnInit(): void {
     this.userID = this.afu.get_UID();
@@ -114,11 +115,13 @@ export class PatientEditProfilePage implements OnInit {
       this.ngOnInit();
     })
   }
-  update(e)
+  update(a)
   {
-    this.userservice.update_user(this.userID,e).then(()=>{
+      this.userservice.update_user(this.userID,a).then(()=>{
+      console.log(a);
       console.log('patient Updated!');
       this.ngOnInit();
+      //this.router.navigate(['/patient-profile']);
     })
   }
 

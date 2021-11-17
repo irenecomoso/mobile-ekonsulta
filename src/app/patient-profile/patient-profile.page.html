@@ -10,7 +10,9 @@
       <ion-card>
         <ion-card-content>
           <ion-item>
-            <ion-img src="{{imgUrl}}" alt="img" class="profile-pic" width="180" height="180"></ion-img>
+            <ion-avatar slot="start">
+              <img src="{{imgUrl}}">
+            </ion-avatar>
             <ion-label class="name">{{info.fullname}}</ion-label><br><br>
           </ion-item>
           <ion-item>

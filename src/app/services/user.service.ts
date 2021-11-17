@@ -113,4 +113,73 @@ export class UserService {
     return this.db.firestore.collection('Users').doc(id).collection('reviews')
     .orderBy('createdAt','desc').get();
   }
+  userReply_existDoc(id,user_id)
+  {
+    return this.db.firestore.collection('Users').doc(id).collection('reviews')
+    .where('from','==',user_id).get();
+  }
+  create_Doctor_feedback(doc_id,user_id,feedback,name)
+  {
+    return this.db.firestore.collection('Users').doc(doc_id)
+    .collection('reviews').add({
+      createdAt: formatDate(new Date(),'MM/dd/yyyy','en'),
+      feedback : feedback,
+      from: user_id,
+      fullname: name
+    })
+  }
+  get_labPartner()
+  {
+    return this.db.collection('Laboratory_Partner').get();
+  }
+  userReply_exist(id,user_id)
+  {
+    return this.db.firestore.collection('Health_Insurance').doc(id).collection('reviews')
+    .where('from','==',user_id).get();
+  }
+  create_healthInsurance_feedback(ins_id,user_id,feedback,name)
+  {
+    return this.db.firestore.collection('Health_Insurance').doc(ins_id)
+    .collection('reviews').add({
+      createdAt: formatDate(new Date(),'MM/dd/yyyy','en'),
+      feedback : feedback,
+      from: user_id,
+      fullname: name
+    })
+  }
+  get_health_review(id)
+  {
+    return this.db.firestore.collection('Health_Insurance').doc(id).collection('reviews')
+    .orderBy('createdAt','desc').get();
+  }
+  get_insurance_reply(id,review_id)
+  {
+    return this.db.firestore.collection('Health_Insurance').doc(id).collection('reviews').doc(review_id)
+    .collection('reply').get();
+  }
+  userReply_existLab(id,user_id)
+  {
+    return this.db.firestore.collection('Laboratory_Partner').doc(id).collection('reviews')
+    .where('from','==',user_id).get();
+  }
+  create_labPartner_feedback(lab_id,user_id,feedback,name)
+  {
+    return this.db.firestore.collection('Laboratory_Partner').doc(lab_id)
+    .collection('reviews').add({
+      createdAt: formatDate(new Date(),'MM/dd/yyyy','en'),
+      feedback : feedback,
+      from: user_id,
+      fullname: name
+    })
+  }
+  get_Lab_Reviews(id)
+  {
+    return this.db.firestore.collection('Laboratory_Partner').doc(id).collection('reviews')
+    .orderBy('createdAt','desc').get();
+  }
+  get_labreply(id,review_id)
+  {
+    return this.db.firestore.collection('Laboratory_Partner').doc(id).collection('reviews').doc(review_id)
+    .collection('reply').get();
+  }
 }

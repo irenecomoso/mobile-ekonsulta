@@ -25,12 +25,6 @@
           <ion-select-option *ngFor="let list of insList" value="{{list.uid}}">{{list.name}}</ion-select-option>
         </ion-select>
       </ion-item>
-          <!--<ion-select value="None"></ion-select>
-          <ion-select-option value="0nZUcm8RjjWRIV25YBQCDvrMwwk1">Bell's Diagnostic Center</ion-select-option>
-          <ion-select-option value="MhD4ScrYHpSWag01UMT9WSiTRbY2">Jai-jai Insurance</ion-select-option>
-          <ion-select-option value="cMXGoLfuPsRvC2Jd9aSLsJQMpB03">Kaarls Insurance</ion-select-option>
-        </ion-select>-->
-
       <ion-item>
         <ion-label>Health Insurance ID</ion-label>
         <ion-input [(ngModel)]="model.member_ID" name="member_ID" type="text"></ion-input>

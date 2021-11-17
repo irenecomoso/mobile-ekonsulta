@@ -10,10 +10,10 @@
 <ion-content>
   <div class="container">
     <div class="outer">
-      <ion-img src="{{imgUrl}}" alt="img" class="profile-pic" width="180" height="180"></ion-img>
+      <img src="{{imgUrl}}" id="pic">
       <div class="inner">
-        <input class="inputfile" type="file" name="pic" accept="image/*">
-        <label><ion-icon type="button" (click)="uploadImage()" name="cloud-upload-outline"></ion-icon></label>
+        <input class="inputfile" (change)="choosefile($event)" type="file" name="pic" accept="image/*">
+        <label><ion-icon name="cloud-upload-outline" (click)="uploadImage()"></ion-icon></label>
       </div>
     </div>
   </div>
@@ -56,6 +56,6 @@
     </form>
   </ion-list>
   <div style="text-align:center;">
-    <ion-button display="center" id="btn1" color="rgb(28,54,94)" type="button" routerLink="/patient-profile" >Save Changes</ion-button>
+    <ion-button display="center" id="btn1" color="rgb(28,54,94)" type="submit" routerLink="/patient-profile">Save Changes</ion-button>
   </div><br>
 </ion-content>

@@ -24,162 +24,56 @@
 </ion-header>
 
 <ion-content>
-  <div *ngIf="selectTabs==='Doctors'">
-    <ion-searchbar animated placeholder="Search Doctors"></ion-searchbar>
+  <div *ngIf="selectTabs==='Doctors'" class="doctors">
+    <ion-searchbar animated [(ngModel)]="searchName" (input)="doctor_list()" name="searchName" placeholder="Search Doctors"></ion-searchbar>
     <ion-list>
-      <ion-item button routerLink="/patient-doctorfeedback">
-       <ion-label>
-         <h2>Finn</h2>
-         <p>Listen, I've had a pretty messed up day...</p>
-       </ion-label>
-      </ion-item>
-      <ion-item button routerLink="/patient-doctorfeedback">
-       <ion-label>
-         <h2>Finn</h2>
-         <p>Listen, I've had a pretty messed up day...</p>
-       </ion-label>
-      </ion-item>
-      <ion-item button routerLink="/patient-doctorfeedback">
-        <ion-label>
-          <h2>Finn</h2>
-          <p>Listen, I've had a pretty messed up day...</p>
-        </ion-label>
-       </ion-item>
-       <ion-item button routerLink="/patient-doctorfeedback">
-        <ion-label>
-          <h2>Finn</h2>
-          <p>Listen, I've had a pretty messed up day...</p>
-        </ion-label>
-       </ion-item><ion-item button routerLink="/patient-doctorfeedback">
-        <ion-label>
-          <h2>Finn</h2>
-          <p>Listen, I've had a pretty messed up day...</p>
-        </ion-label>
-       </ion-item>
-       <ion-item button routerLink="/patient-doctorfeedback">
-        <ion-label>
-          <h2>Finn</h2>
-          <p>Listen, I've had a pretty messed up day...</p>
-        </ion-label>
-       </ion-item><ion-item button routerLink="/patient-doctorfeedback">
-        <ion-label>
-          <h2>Finn</h2>
-          <p>Listen, I've had a pretty messed up day...</p>
-        </ion-label>
-       </ion-item>
-       <ion-item button routerLink="/patient-doctorfeedback">
-        <ion-label>
-          <h2>Finn</h2>
-          <p>Listen, I've had a pretty messed up day...</p>
-        </ion-label>
-       </ion-item><ion-item button routerLink="/patient-doctorfeedback">
-        <ion-label>
-          <h2>Finn</h2>
-          <p>Listen, I've had a pretty messed up day...</p>
-        </ion-label>
-       </ion-item>
-       <ion-item button routerLink="/patient-doctorfeedback">
-        <ion-label>
-          <h2>Finn</h2>
-          <p>Listen, I've had a pretty messed up day...</p>
-        </ion-label>
-       </ion-item><ion-item button routerLink="/patient-doctorfeedback">
-        <ion-label>
-          <h2>Finn</h2>
-          <p>Listen, I've had a pretty messed up day...</p>
-        </ion-label>
-       </ion-item>
-       <ion-item button routerLink="/patient-doctorfeedback">
-        <ion-label>
-          <h2>Finn</h2>
-          <p>Listen, I've had a pretty messed up day...</p>
-        </ion-label>
-       </ion-item><ion-item button routerLink="/patient-doctorfeedback">
-        <ion-label>
-          <h2>Finn</h2>
-          <p>Listen, I've had a pretty messed up day...</p>
-        </ion-label>
-       </ion-item>
-       <ion-item button routerLink="/patient-doctorfeedback">
-        <ion-label>
-          <h2>Finn</h2>
-          <p>Listen, I've had a pretty messed up day...</p>
-        </ion-label>
-       </ion-item><ion-item button routerLink="/patient-doctorfeedback">
-        <ion-label>
-          <h2>Finn</h2>
-          <p>Listen, I've had a pretty messed up day...</p>
-        </ion-label>
-       </ion-item>
-       <ion-item button routerLink="/patient-doctorfeedback">
-        <ion-label>
-          <h2>Finn</h2>
-          <p>Listen, I've had a pretty messed up day...</p>
-        </ion-label>
-       </ion-item>
+      <ion-label *ngFor="let list of list" class="card">
+        <ion-item button (click)="view_review_doc(list)">
+          <ion-avatar slot="start">
+            <img src="{{list.image}}">
+          </ion-avatar>
+          <ion-label>
+            <h2>{{list.fullname}}</h2>
+            <div *ngFor="let spList of spList">
+              <p *ngIf="list.specialization === spList.uid" class="card-text mb-1">{{spList.name}}</p>
+            </div>
+          </ion-label>
+        </ion-item>
+      </ion-label>
     </ion-list>
   </div>
 
-  <div *ngIf="selectTabs==='Lab'">
-    <ion-searchbar animated placeholder="Search Lab Partners"></ion-searchbar>
+  <div *ngIf="selectTabs==='Lab'" class="lab">
+    <ion-searchbar animated [(ngModel)]="searchName" (input)="get_labList()" placeholder="Search Lab Partners"></ion-searchbar>
     <ion-list>
-      <ion-item button routerLink="/patient-labfeedback">
-       <ion-label>
-        <h2>Han</h2>
-        <p>I've got enough on my plate as it is, and I...</p>
-       </ion-label>
-      </ion-item>
-      <ion-item button routerLink="/patient-labfeedback">
-       <ion-label>
-        <h2>Han</h2>
-        <p>I've got enough on my plate as it is, and I...</p>
-       </ion-label>
-      </ion-item>
-      <ion-item button routerLink="/patient-labfeedback">
-       <ion-label>
-        <h2>Han</h2>
-        <p>I've got enough on my plate as it is, and I...</p>
-       </ion-label>
-      </ion-item>
-      <ion-item button routerLink="/patient-labfeedback">
-       <ion-label>
-        <h2>Han</h2>
-        <p>I've got enough on my plate as it is, and I...</p>
-       </ion-label>
-      </ion-item>
+      <ion-label *ngFor="let list of list" class="card">
+        <ion-item button (click)="view_review_lab(list)">
+          <ion-avatar slot="start">
+            <img src="{{list.image}}">
+          </ion-avatar>
+          <ion-label>
+            <h2>{{list.name}}</h2>
+            <h2>{{list.address}}</h2>
+          </ion-label>
+        </ion-item>
+      </ion-label>
     </ion-list>
   </div>
 
-  <div *ngIf="selectTabs==='Insurance'">
-    <ion-searchbar animated placeholder="Search Health Insurance"></ion-searchbar>
+  <div *ngIf="selectTabs==='Insurance'" class="insurance">
+    <ion-searchbar animated [(ngModel)]="searchName" (input)="get_healthList()" placeholder="Search Health Insurance"></ion-searchbar>
     <ion-list>
-      <ion-item button routerLink="/patient-insurancefeedback">
-       <ion-label>
-        <h2>Kim</h2>
-        <p>Lorem ipsum dolor</p>
-       </ion-label>
-      </ion-item>
-      <ion-item button  routerLink="/patient-insurancefeedback">
-        <ion-label>
-         <h2>Kim</h2>
-         <p>Lorem ipsum dolor</p>
-        </ion-label>
-       </ion-item> <ion-item button  routerLink="/patient-insurancefeedback">
-        <ion-label>
-         <h2>Kim</h2>
-         <p>Lorem ipsum dolor</p>
-        </ion-label>
-       </ion-item> <ion-item button  routerLink="/patient-insurancefeedback">
-        <ion-label>
-         <h2>Kim</h2>
-         <p>Lorem ipsum dolor</p>
-        </ion-label>
-       </ion-item> <ion-item button  routerLink="/patient-insurancefeedback">
-        <ion-label>
-         <h2>Kim</h2>
-         <p>Lorem ipsum dolor</p>
-        </ion-label>
-       </ion-item>
+      <ion-label *ngFor="let list of list" class="card">
+        <ion-item button (click)="view_review_insurance(list)">
+          <ion-avatar slot="start">
+            <img src="{{list.image}}">
+          </ion-avatar>
+          <ion-label>
+            <h2>{{list.name}}</h2>
+            <h2>{{list.address}}</h2>
+          </ion-label>
+        </ion-item>
+      </ion-label>
     </ion-list>
   </div>
 </ion-content>
