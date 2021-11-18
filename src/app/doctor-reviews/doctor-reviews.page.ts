@@ -1,3 +1,5 @@
+/* eslint-disable @typescript-eslint/no-inferrable-types */
+/* eslint-disable @typescript-eslint/quotes */
 /* eslint-disable @typescript-eslint/no-shadow */
 /* eslint-disable one-var */
 /* eslint-disable no-var */
@@ -21,8 +23,8 @@ export class DoctorReviewsPage implements OnInit {
 
   reply: string;
 
-  reviewId: string;
-  sent_to: string;
+  reviewId: string = "";
+  sent_to: string = "";
   constructor(public userservice: UserService, public afu: AuthService) { }
 
   ngOnInit(): void {
