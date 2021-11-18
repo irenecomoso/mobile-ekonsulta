@@ -1,3 +1,5 @@
+/* eslint-disable @typescript-eslint/no-inferrable-types */
+/* eslint-disable @typescript-eslint/quotes */
 /* eslint-disable @typescript-eslint/no-shadow */
 /* eslint-disable curly */
 /* eslint-disable eqeqeq */
@@ -15,11 +17,13 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./patient-choosefeedback.page.scss'],
 })
 export class PatientChoosefeedbackPage implements OnInit {
-  selectTabs= 'Doctors';
+  selectTabs = "Doctors";
   list: any = [];
   spList: any = [];
 
-  searchName: string;
+  searchNamedoc: string = "";
+  searchNameins: string = "";
+  searchNamelab: string = "";
 
   constructor(public userservice: UserService,public router: Router,public share: SharedDataService) { }
   ngOnInit(): void {
@@ -62,7 +66,7 @@ export class PatientChoosefeedbackPage implements OnInit {
         }).then(()=>{
           this.list = tempArray.filter(e=>{
             if(e.fullname != undefined)
-            return e.fullname.toLocaleLowerCase().match(this.searchName.toLocaleLowerCase());
+            return e.fullname.toLocaleLowerCase().match(this.searchNamedoc.toLocaleLowerCase());
           });
         })
       })
@@ -83,7 +87,7 @@ export class PatientChoosefeedbackPage implements OnInit {
         }).then(()=>{
           this.list = tempArray.filter(a=>{
             if(a.name != undefined)
-             return a.name.toLocaleLowerCase().match(this.searchName.toLocaleLowerCase());
+             return a.name.toLocaleLowerCase().match(this.searchNameins.toLocaleLowerCase());
           })
         })
       })
@@ -109,7 +113,7 @@ export class PatientChoosefeedbackPage implements OnInit {
         }).then(()=>{
           this.list = tempArray.filter(a=>{
             if(a.name != undefined)
-            return a.name.toLocaleLowerCase().match(this.searchName.toLocaleLowerCase())
+            return a.name.toLocaleLowerCase().match(this.searchNamelab.toLocaleLowerCase())
           })
         })
       })

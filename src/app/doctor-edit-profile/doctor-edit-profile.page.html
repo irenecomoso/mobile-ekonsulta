@@ -9,28 +9,19 @@
 
 <ion-content>
   <form #form='ngForm' (ngSubmit)="update(form.value)" class="update-form">
-    <!--<ion-item>
-      <ion-label position="stacked"></ion-label>
-        <ion-input name="Email" >Email: {{info.email}}</ion-input>
-        <ion-input name="Date of Birth" >Date of Birth: {{info.dob}}</ion-input>
-        <ion-input name="Contact Number" >Contact Number: {{info.contact_number}}</ion-input>
-        <ion-input name="Address" >Address: {{info.address}}</ion-input>
-        <ion-input name="License Number" >License Number: {{info.license_number}}</ion-input>
-        <ion-input name="Specialization" >Specialization: {{spInfo.name}}</ion-input>
-    </ion-item><br><br><br><br><br>-->
     <div class="container">
       <div class="outer">
-        <img src="https://ionicframework.com/docs/demos/api/avatar/avatar.svg" id="pic">
+        <img src="{{imgUrl}}" id="pic">
         <div class="inner">
-          <input class="inputfile" type="file" name="pic" accept="image/*">
-          <label><ion-icon name="cloud-upload-outline"></ion-icon></label>
+          <input class="inputfile" (change)="choosefile($event)" type="file" name="pic" accept="image/*">
+          <label><ion-icon name="cloud-upload-outline" (click)="uploadImage()"></ion-icon></label>
         </div>
       </div>
     </div>
     <ion-list lines="full" class="ion-no-margin">
       <ion-item>
         <ion-label>Email:</ion-label>
-        <ion-input type="text"[(ngModel)]="model.email" name="email">{{info.email}}</ion-input>
+        <ion-input type="text"[(ngModel)]="model.email" name="email" value="{{info.email}}"></ion-input>
       </ion-item>
       <ion-item>
         <ion-label>Password:</ion-label>
@@ -38,15 +29,15 @@
       </ion-item>
       <ion-item>
         <ion-label position="floating">Full Name</ion-label>
-        <ion-input placeholder="Firstname Mi. Lastname" value="{{info.fullname}}" [(ngModel)]="model.fullname" name="fullname"></ion-input>
+        <ion-input [(ngModel)]="model.fullname" name="fullname" value="{{info.fullname}}"></ion-input>
       </ion-item>
       <ion-item>
         <ion-label>Date of Birth</ion-label>
-        <ion-datetime  placeholder="Select Date" value="{{info.dob}}" [(ngModel)]="model.dob"name="dob"></ion-datetime>
+        <ion-datetime value="{{info.dob}}" [(ngModel)]="model.dob"name="dob"></ion-datetime>
       </ion-item>
       <ion-item>
         <ion-label>Contact Number</ion-label>
-        <ion-input placeholder="(+63)" type="number" value="{{info.contact_number}}" [(ngModel)]="model.contact_number"name="contact_number"></ion-input>
+        <ion-input placeholder="(+63)" value="{{info.contact_number}}" [(ngModel)]="model.contact_number" name="contact_number"></ion-input>
       </ion-item>
       <ion-item>
         <ion-label>License Number</ion-label>
@@ -64,7 +55,7 @@
       </ion-item>
     </ion-list>
     <div style="text-align:center;">
-      <ion-button display="center" id="btn1" color="rgb(28,54,94)" type="submit" routerLink="/patient-profile">Save Changes</ion-button>
+      <ion-button display="center" id="btn1" color="rgb(28,54,94)" type="submit" >Save Changes</ion-button>
     </div><br>
   </form>
 </ion-content>

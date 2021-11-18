@@ -19,6 +19,10 @@
   </div>
   <ion-list lines="full" class="ion-no-margin">
     <form #form='ngForm' (ngSubmit)="update(form.value)">
+      <!--<ion-item>
+        <ion-label>Patient ID:</ion-label>
+        <ion-input type="text"  name="email" value="{{userID}}" readonly></ion-input>
+      </ion-item>-->
       <ion-item>
         <ion-label>Email:</ion-label>
         <ion-input type="text"[(ngModel)]="model.email" name="email" value="{{info.email}}" readonly></ion-input>
@@ -53,9 +57,13 @@
         <ion-label>Contact Number</ion-label>
         <ion-input placeholder="(+63)" [(ngModel)]="model.contact_number" name="contact_number" value="{{info.contact_number}}"></ion-input>
       </ion-item>
+      <div style="text-align:center;">
+        <ion-button display="center" id="btn1" color="rgb(28,54,94)" type="submit" >Save Changes</ion-button>
+      </div><br>
     </form>
   </ion-list>
-  <div style="text-align:center;">
-    <ion-button display="center" id="btn1" color="rgb(28,54,94)" type="submit" routerLink="/patient-profile">Save Changes</ion-button>
-  </div><br>
+  <div class="form-group">
+    <p *ngIf="error.message.length > 0" class="text-danger">
+        {{error.message}} </p>
+  </div>
 </ion-content>

@@ -1,3 +1,5 @@
+/* eslint-disable @typescript-eslint/no-inferrable-types */
+/* eslint-disable @typescript-eslint/quotes */
 import { Router } from '@angular/router';
 /* eslint-disable @typescript-eslint/dot-notation */
 /* eslint-disable prefer-const */
@@ -27,7 +29,7 @@ export class PatientInfo
 export class PatientEditProfilePage implements OnInit {
   model = new PatientInfo();
 
-  userID: string;
+  userID: string = "";
   imgUrl: any;
   info: any = [];
   insList: any = [];
@@ -35,11 +37,12 @@ export class PatientEditProfilePage implements OnInit {
 
   insurance_info: any = [];
 
-  request_error: string;
-  request_sent: string;
+  request_error: string = "";
+  request_sent: string = "";
 
-  health_insurance: string;
-  member_ID: string;
+  health_insurance: string = "";
+  member_ID: string = "";
+  error: { name: string;message: string } = { name: '', message: ''};
   constructor(public afu: AuthService, public userservice: UserService, public router: Router) { }
 
   ngOnInit(): void {
@@ -115,14 +118,17 @@ export class PatientEditProfilePage implements OnInit {
       this.ngOnInit();
     })
   }
-  update(a)
+  update(frm)
   {
-      this.userservice.update_user(this.userID,a).then(()=>{
-      console.log(a);
+      this.userservice.update_user(this.userID,frm).then(()=>{
+      console.log(frm);
       console.log('patient Updated!');
       this.ngOnInit();
-      //this.router.navigate(['/patient-profile']);
+      this.router.navigate(['/patient-profile']);
     })
+  }
+  data(frm){
+console.log(frm);
   }
 
 }

@@ -6,7 +6,7 @@
 
 <ion-header class="ion-no-border">
   <ion-toolbar style="text-align:center;">
-    <ion-searchbar animated [(ngModel)]="searchName" (input)="doctor_list()" name="searchName"></ion-searchbar>
+    <ion-searchbar animated [(ngModel)]="searchName" (input)="doctor_list()" name="searchName" placeholder="Search Doctor"></ion-searchbar>
     <ion-item>
       <ion-label>Specialization</ion-label>
       <ion-select interface="popover" value="All" name="specialization">
@@ -34,3 +34,4 @@
     </ion-label>
   </ion-list>
 </ion-content>
+

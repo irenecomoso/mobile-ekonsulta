@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-inferrable-types */
 /* eslint-disable no-var */
 /* eslint-disable one-var */
 /* eslint-disable eqeqeq */
@@ -15,7 +16,7 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./patient-insurancefeedback.page.scss'],
 })
 export class PatientInsurancefeedbackPage implements OnInit {
-  userId: string;
+  userId: string = "";
 
   info: any = [];
   info2: any = [];
@@ -25,7 +26,7 @@ export class PatientInsurancefeedbackPage implements OnInit {
   flist: any = [];
   replyList: any = [];
 
-  feedback: string;
+  feedback: string = "";
 
   constructor(public userservice: UserService, public share: SharedDataService, public afu: AuthService) { }
 

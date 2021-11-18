@@ -1,3 +1,6 @@
+/* eslint-disable @typescript-eslint/quotes */
+/* eslint-disable @typescript-eslint/no-inferrable-types */
+/* eslint-disable @typescript-eslint/naming-convention */
 /* eslint-disable eol-last */
 import { Router } from '@angular/router';
 import { FormGroup } from '@angular/forms';
@@ -5,8 +8,18 @@ import { FormGroup } from '@angular/forms';
 /* eslint-disable @typescript-eslint/semi */
 import { AuthService } from 'src/app/services/auth.service';
 import { UserService } from './../services/user.service';
-import { DoctorInfo } from './../doctor-profile/doctor-profile.page';
 import { Component, OnInit } from '@angular/core';
+export class DoctorInfo
+{
+  fullname: string;
+  email: string;
+  password: string;
+  dob: string;
+  contact_number: string;
+  address: string ;
+  license_number: string;
+  specialization: string;
+}
 
 @Component({
   selector: 'app-doctor-edit-profile',
@@ -16,7 +29,7 @@ import { Component, OnInit } from '@angular/core';
 export class DoctorEditProfilePage implements OnInit {
   model = new DoctorInfo();
   info: any = [];
-  userId: string;
+  userId: string = "";
   spInfo: any = [];
   spList: any = [];
   imgUrl: any;
@@ -48,26 +61,21 @@ export class DoctorEditProfilePage implements OnInit {
         tempArray.push(data);
       })
     })
-
-    this.spList = tempArray;
-    this.model.fullname = this.info.fullname;
-    this.model.dob = this.info.dob;
-    this.model.email = this.info.email;
-    this.model.password = this.info.password;
-    this.model.contact_number = this.info.contact_number;
-    this.model.address = this.info.address;
-    this.model.license_number = this.info.license_number;
-    this.model.specialization = this.info.specialization;
   }
   update(frm){
       this.userservice.update_user(this.userId,frm).then(()=>{
+      console.log('Updated successfully!');
       this.ngOnInit();
-      alert('Updated successfully!');
-      //this.router.navigate(['/patient-profile'])
+      this.router.navigate(['/doctor-profile'])
     })
   }
   uploadImage()
   {
     this.userservice.upload_avatar(this.file,this.userId);
+  }
+  choosefile(e)
+  {
+    this.file = e.target.files[0];
+    console.log(this.file);
   }
 }

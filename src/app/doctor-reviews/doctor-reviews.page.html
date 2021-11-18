@@ -5,5 +5,58 @@
 </ion-header>
 
 <ion-content>
-
+  <ion-list>
+    <ion-item>
+      <ion-avatar slot="start">
+        <img src="{{imgUrl}}">
+      </ion-avatar>
+      <ion-label>
+        <h2>{{info.fullname}}</h2>
+        <p>Email: {{info.email}}</p>
+        <p>Contact: {{info.contact_number}}</p>
+        <p>Address: {{info.address}}</p>
+      </ion-label>
+    </ion-item>
+  </ion-list>
+  <div class="lower-part">
+    <div>
+      <button class='submit' type="submit" data-bs-toggle="modal" data-bs-target="#toReply">Add feedback</button>
+    </div>
+    <ul class="list-group py-2 whole-trans">
+      <li *ngFor="let list of fList" class="list-group-item flex-column align-items-start">
+        <div class="d-flex w-100 justify-content-between">
+          <h5 class="mb-1"><span><img src="{{list.image}}" alt="" width="25" height="25" class="cute-pic"></span>{{list.fullname}}</h5>
+          <small>{{list.createdAt}}</small>
+        </div>
+        <div>
+          <p class="mb-1">{{list.feedback}}</p>
+        </div>
+        <div *ngFor="let reply of replyList">
+          <div *ngIf="list.from === reply.sent_to" class="reply-to">
+              <h5 class="mb-1"><span> <img src="{{imgUrl}}" alt="" class="cute-pic" width="16px" height="16px"></span>{{reply.fullname}}</h5>
+              <p class="ureply">{{reply.feedback}}</p>
+          </div>
+        </div>
+        <div>
+          <button (click)="reply_button(list)" class='submit' type="button" data-bs-toggle="modal" data-bs-target="#toReply">Reply</button>
+        </div>
+       <!-- <small>Transaction ID</small>-->
+      </li>
+    </ul>
+  </div>
+  <form #form="ngForm" (ngSubmit)="reply_user(form.value)" >
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="addSpclLabel">Add a reply</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="close"></button>
+      </div>
+        <div class="modal-body">
+          <textarea [(ngModel)]="reply" name="reply" id="" cols="50" rows="5" placeholder="Reply..."></textarea>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Cancel</button>
+          <button type="submit" class="btn btn-info" data-bs-dismiss="modal">Add</button>
+        </div>
+    </div>
+  </form>
 </ion-content>

@@ -1,3 +1,5 @@
+/* eslint-disable @typescript-eslint/no-inferrable-types */
+/* eslint-disable @typescript-eslint/quotes */
 import { SharedDataService } from './../services/shared-data.service';
 /* eslint-disable @typescript-eslint/no-shadow */
 /* eslint-disable @typescript-eslint/semi */
@@ -19,8 +21,8 @@ export class PatientDoctorsListPage implements OnInit {
   list: any = [];
   spList: any = [];
 
-  searchName: string;
-
+  searchName: string = "";
+  selectTabs = 'Doctors';
   constructor(public userservice: UserService,public router: Router,public share: SharedDataService) { }
   ngOnInit(): void {
 

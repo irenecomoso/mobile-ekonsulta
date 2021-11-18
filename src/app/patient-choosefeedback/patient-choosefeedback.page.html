@@ -25,7 +25,7 @@
 
 <ion-content>
   <div *ngIf="selectTabs==='Doctors'" class="doctors">
-    <ion-searchbar animated [(ngModel)]="searchName" (input)="doctor_list()" name="searchName" placeholder="Search Doctors"></ion-searchbar>
+    <ion-searchbar animated [(ngModel)]="searchNamedoc" (input)="doctor_list()" name="searchName" placeholder="Search Doctors"></ion-searchbar>
     <ion-list>
       <ion-label *ngFor="let list of list" class="card">
         <ion-item button (click)="view_review_doc(list)">
@@ -44,7 +44,7 @@
   </div>
 
   <div *ngIf="selectTabs==='Lab'" class="lab">
-    <ion-searchbar animated [(ngModel)]="searchName" (input)="get_labList()" placeholder="Search Lab Partners"></ion-searchbar>
+    <ion-searchbar animated [(ngModel)]="searchNamelab" (input)="get_labList()" placeholder="Search Lab Partners"></ion-searchbar>
     <ion-list>
       <ion-label *ngFor="let list of list" class="card">
         <ion-item button (click)="view_review_lab(list)">
@@ -61,7 +61,7 @@
   </div>
 
   <div *ngIf="selectTabs==='Insurance'" class="insurance">
-    <ion-searchbar animated [(ngModel)]="searchName" (input)="get_healthList()" placeholder="Search Health Insurance"></ion-searchbar>
+    <ion-searchbar animated [(ngModel)]="searchNameins" (input)="get_healthList()" placeholder="Search Health Insurance"></ion-searchbar>
     <ion-list>
       <ion-label *ngFor="let list of list" class="card">
         <ion-item button (click)="view_review_insurance(list)">
