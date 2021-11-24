@@ -151,6 +151,10 @@ const routes: Routes = [
     path: 'patient-to-lab-partner-feedback',
     loadChildren: () => import('./patient-to-lab-partner-feedback/patient-to-lab-partner-feedback.module').then( m => m.PatientToLabPartnerFeedbackPageModule)
   },
+  {
+    path: 'patient-delete-account',
+    loadChildren: () => import('./patient-delete-account/patient-delete-account.module').then( m => m.PatientDeleteAccountPageModule)
+  },
 
 
 

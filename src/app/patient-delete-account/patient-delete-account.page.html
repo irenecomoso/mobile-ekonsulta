@@ -1,0 +1,31 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="//patient-edit-profile"></ion-back-button>
+    </ion-buttons>
+    <ion-title>Account Deletion</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <div class="block-center">
+    <ion-card>
+      <ion-card-content style="text-align: left;">
+        <ion-item>
+          <ion-avatar slot="start">
+            <img src="/">
+          </ion-avatar>
+          <ion-label class="name">Name Lastname</ion-label><br>
+        </ion-item><br>
+        <p>This is permanent. When you delete this account, you won't be able to retrieve the content or information.
+          Your chat,  transactions and medical records will also be deleted.</p><br>
+        <p><b>Are you sure you want to delete your account?</b></p>
+        <br><br><br>
+        <div class="buttons">
+          <ion-button  id="btn1" color="rgb(28,54,94)" expand="block" routerLink="/patient-edit-profile"> Cancel</ion-button>
+          <ion-button  id="btn2" color="rgb(28,54,94)" expand="block" routerLink="/">Delete Account</ion-button>
+        </div>
+      </ion-card-content>
+    </ion-card>
+  </div>
+</ion-content>
