@@ -7,13 +7,13 @@
 <ion-header class="ion-no-border">
   <ion-toolbar style="text-align:center;">
     <ion-segment value="consultations" [(ngModel)]="selectTabs">
-      <ion-segment-button value="medRecords">
+      <ion-segment-button value="medRecords" (click)="medicalRecords()">
         <ion-label>Medical<br>Records</ion-label>
       </ion-segment-button>
       <ion-segment-button value="labResults">
         <ion-label style="text-align: center;">Lab Results</ion-label>
       </ion-segment-button>
-      <ion-segment-button value="prescriptions">
+      <ion-segment-button value="prescriptions" (click)="prescription()">
         <ion-label>Prescriptions</ion-label>
       </ion-segment-button>
     </ion-segment>
@@ -23,7 +23,29 @@
 
 <ion-content>
   <div *ngIf="selectTabs==='medRecords'">
-    <ion-list>
+    <div *ngIf="medicalrecords">
+      <table class="table table-info table-bordered">
+        <thead>
+          <tr>
+            <th>File Name</th>
+            <th>Date</th>
+            <th>From</th>
+            <th>Action</th>
+          </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let list of list">
+              <td>{{list.filename}}</td>
+              <td>{{list.createdAt}}</td>
+              <td>{{list.from}}</td>
+              <td>
+                <button (click)="viewFile(list.file)" class="btn btn-success">View</button>
+              </td>
+            </tr>
+        </tbody>
+    </table>
+    </div>
+    <!--<ion-list>
        <ion-item button>
         <ion-label>
           <h2>Finn</h2>
@@ -96,7 +118,7 @@
           <p>Listen, I've had a pretty messed up day...</p>
         </ion-label>
        </ion-item>
-    </ion-list>
+    </ion-list>-->
   </div>
 
   <div *ngIf="selectTabs==='labResults'">
@@ -130,12 +152,26 @@
 
   <div *ngIf="selectTabs==='prescriptions'">
     <ion-list>
-      <ion-item button>
-        <ion-label>
-          <h2>Han</h2>
-          <p>I've got enough on my plate as it is, and I...</p>
-        </ion-label>
-      </ion-item>
+        <div *ngIf="presc">
+          <table class="table table-bordered mt-3">
+            <thead>
+              <tr>
+                <th>Date</th>
+                <th>File Name</th>
+                <th>Action</th>
+              </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let list of presList">
+                  <td>{{list.createdAt}}</td>
+                  <td>{{list.filename}}</td>
+                  <td>
+                    <ion-button (click)="viewFile(list.file)" class="view" >View </ion-button>
+                  </td>
+                </tr>
+            </tbody>
+        </table>
+        </div>
     </ion-list>
   </div>
 </ion-content>

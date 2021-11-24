@@ -1,31 +1,35 @@
-/* eslint-disable @typescript-eslint/no-inferrable-types */
-/* eslint-disable @typescript-eslint/quotes */
-import { SharedDataService } from './../services/shared-data.service';
 /* eslint-disable @typescript-eslint/no-shadow */
-/* eslint-disable @typescript-eslint/semi */
-/* eslint-disable eqeqeq */
-/* eslint-disable no-var */
 /* eslint-disable curly */
-/* eslint-disable @typescript-eslint/naming-convention */
 import { Router } from '@angular/router';
+/* eslint-disable one-var */
+/* eslint-disable no-var */
+/* eslint-disable @typescript-eslint/semi */
+/* eslint-disable @typescript-eslint/no-inferrable-types */
+/* eslint-disable @typescript-eslint/member-ordering */
+import { AuthService } from 'src/app/services/auth.service';
 import { UserService } from './../services/user.service';
+import { SharedDataService } from './../services/shared-data.service';
+/* eslint-disable @typescript-eslint/type-annotation-spacing */
+/* eslint-disable @typescript-eslint/naming-convention */
+/* eslint-disable @typescript-eslint/quotes */
+/* eslint-disable eqeqeq */
 import { Component, OnInit } from '@angular/core';
-import { CommonModule } from '@angular/common';
 
 @Component({
-  selector: 'app-patient-doctors-list',
-  templateUrl: './patient-doctors-list.page.html',
-  styleUrls: ['./patient-doctors-list.page.scss'],
+  selector: 'app-patient-to-doctor-feedback',
+  templateUrl: './patient-to-doctor-feedback.page.html',
+  styleUrls: ['./patient-to-doctor-feedback.page.scss'],
 })
-export class PatientDoctorsListPage implements OnInit {
+export class PatientToDoctorFeedbackPage implements OnInit {
   list: any = [];
   spList: any = [];
 
-  searchName: string = "";
-  selectTabs = 'Doctors';
+  searchNamedoc: string = "";
+
   constructor(public userservice: UserService,public router: Router,public share: SharedDataService) { }
   ngOnInit(): void {
 
+    localStorage.removeItem('data');
     this.doctor_list();
 
     var data;
@@ -41,7 +45,7 @@ export class PatientDoctorsListPage implements OnInit {
     console.log(this.spList);
 
   }
-  view_review(e)
+  view_review_doc(e)
   {
     this.share.set_list(e);
     this.router.navigate(['/patient-doctorfeedback']);
@@ -61,13 +65,14 @@ export class PatientDoctorsListPage implements OnInit {
         }).then(()=>{
           this.list = tempArray.filter(e=>{
             if(e.fullname != undefined)
-            return e.fullname.toLocaleLowerCase().match(this.searchName.toLocaleLowerCase());
+            return e.fullname.toLocaleLowerCase().match(this.searchNamedoc.toLocaleLowerCase());
           });
         })
       })
-      //console.log(this.list)
     })
   }
-
+  back(){
+    localStorage.removeItem('data');
+    this.router.navigate(['/patient-choosefeedback']);
+  }
 }
-

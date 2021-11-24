@@ -1,0 +1,29 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>patient-edit-insurance</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-list lines="full" class="ion-no-margin">
+    <form #form='ngForm'>
+      <ion-item>
+        <ion-label>Health Insurance</ion-label>
+        <ion-select [(ngModel)]="health_insurance" name="health_insurance" value="{{info.health_insurance}}">
+          <ion-select-option *ngFor="let list of insList" value="{{list.uid}}">{{list.name}}</ion-select-option>
+        </ion-select>
+      </ion-item>
+      <ion-item>
+        <ion-label>Health Insurance ID</ion-label>
+        <ion-input type="text" [(ngModel)]="member_ID" value="{{info.member_ID}}" name="member_ID"></ion-input>
+      </ion-item>
+      <div style="text-align:center;">
+        <ion-button display="center" id="btn1" type="submit" routerLink="/patient-profile">Save Changes</ion-button>
+      </div><br>
+    </form>
+    </ion-list>
+    <div class="form-group">
+      <p *ngIf="error.message.length > 0" class="text-danger">
+          {{error.message}} </p>
+    </div>
+</ion-content>

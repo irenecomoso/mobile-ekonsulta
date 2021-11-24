@@ -1,3 +1,4 @@
+import { Router } from '@angular/router';
 /* eslint-disable no-var */
 /* eslint-disable one-var */
 /* eslint-disable eqeqeq */
@@ -25,7 +26,7 @@ export class PatientLabfeedbackPage implements OnInit {
   feedback: string = "";
 
   replyList: any = [];
-  constructor(public userservice: UserService, public afu: AuthService, public share: SharedDataService) { }
+  constructor(public userservice: UserService, public afu: AuthService, public share: SharedDataService,public router: Router) { }
 
   ngOnInit(): void {
     //getting information from list of laboratory
@@ -101,5 +102,9 @@ export class PatientLabfeedbackPage implements OnInit {
       })
     })
     this.list = tempArray;
+  }
+  back(){
+    localStorage.removeItem('data');
+    this.router.navigate(['/patient-to-lab-partner-feedback']);
   }
 }

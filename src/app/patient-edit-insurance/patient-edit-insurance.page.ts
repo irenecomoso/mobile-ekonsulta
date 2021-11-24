@@ -1,39 +1,26 @@
-/* eslint-disable @typescript-eslint/no-inferrable-types */
-/* eslint-disable @typescript-eslint/quotes */
-import { Router } from '@angular/router';
 /* eslint-disable @typescript-eslint/dot-notation */
-/* eslint-disable prefer-const */
-import { AuthService } from './../services/auth.service';
-import { UserService } from './../services/user.service';
-/* eslint-disable no-var */
 /* eslint-disable curly */
-/* eslint-disable @typescript-eslint/semi */
+/* eslint-disable @typescript-eslint/quotes */
+/* eslint-disable @typescript-eslint/no-inferrable-types */
+/* eslint-disable prefer-const */
+/* eslint-disable no-var */
 /* eslint-disable @typescript-eslint/naming-convention */
+/* eslint-disable @typescript-eslint/semi */
+import { Router } from '@angular/router';
+import { UserService } from './../services/user.service';
+import { AuthService } from './../services/auth.service';
 import { Component, OnInit } from '@angular/core';
-import { AngularFireAuth } from '@angular/fire/auth';
-export class PatientInfo
-{
-  email: string;
-  fullname: string;
-  dob: string;
-  password: string;
-  contact_number: string;
-  address: string;
-}
 
 @Component({
-  selector: 'app-patient-edit-profile',
-  templateUrl: './patient-edit-profile.page.html',
-  styleUrls: ['./patient-edit-profile.page.scss'],
+  selector: 'app-patient-edit-insurance',
+  templateUrl: './patient-edit-insurance.page.html',
+  styleUrls: ['./patient-edit-insurance.page.scss'],
 })
-export class PatientEditProfilePage implements OnInit {
-  model = new PatientInfo();
-
+export class PatientEditInsurancePage implements OnInit {
   userID: string = "";
   imgUrl: any;
   info: any = [];
   insList: any = [];
-  file: any;
 
   insurance_info: any = [];
 
@@ -46,7 +33,6 @@ export class PatientEditProfilePage implements OnInit {
   constructor(public afu: AuthService, public userservice: UserService, public router: Router) { }
 
   ngOnInit(): void {
-    localStorage.removeItem('data');
     this.userID = this.afu.get_UID();
 
     this.userservice.get_avatar(this.userID).then(e =>{
@@ -91,16 +77,6 @@ export class PatientEditProfilePage implements OnInit {
     this.insList = tempArray;
     console.log(this.insList);
   }
-
-  choosefile(e)
-  {
-    this.file = e.target.files[0];
-    console.log(this.file);
-  }
-  uploadImage()
-  {
-    this.userservice.upload_avatar(this.file,this.userID);
-  }
   update_insurance()
   {
     let record = {}
@@ -119,21 +95,13 @@ export class PatientEditProfilePage implements OnInit {
       this.ngOnInit();
     })
   }
-  update(frm)
+  /*update(frm)
   {
-      this.userservice.update_user(this.userID,frm).then(()=>{
+      //this.userservice.update_user(this.userID,frm).then(()=>{
       console.log(frm);
       console.log('patient Updated!');
       this.ngOnInit();
       this.router.navigate(['/patient-profile']);
-    })
-  }
-  data(frm){
-console.log(frm);
-  }
-  goback(){
-    localStorage.removeItem('data');
-    this.router.navigate(['/patient-profile']);
-  }
+  }*/
 
 }

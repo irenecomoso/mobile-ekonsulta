@@ -1,3 +1,4 @@
+import { AngularFirestore, AngularFirestoreModule } from '@angular/fire/firestore';
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { RouteReuseStrategy } from '@angular/router';
@@ -16,7 +17,7 @@ import { environment } from 'src/environments/environment';
   declarations: [AppComponent],
   entryComponents: [],
   imports: [BrowserModule, IonicModule.forRoot(), AppRoutingModule,
-            FormsModule,ReactiveFormsModule,AngularFireDatabaseModule,
+            FormsModule,ReactiveFormsModule,AngularFireDatabaseModule,AngularFirestoreModule,
             AngularFireModule.initializeApp(environment.firebaseConfig)],
   providers: [{ provide: RouteReuseStrategy, useClass: IonicRouteStrategy }],
   bootstrap: [AppComponent],

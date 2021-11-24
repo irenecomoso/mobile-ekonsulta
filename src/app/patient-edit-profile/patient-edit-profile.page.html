@@ -1,7 +1,7 @@
 <ion-header>
   <ion-toolbar>
     <ion-buttons slot="start">
-      <ion-back-button routerLink="/patient-profile"></ion-back-button>
+      <ion-button (click)="goback()"><ion-icon name="arrow-back-outline"></ion-icon></ion-button>
     </ion-buttons>
     <ion-title>Edit Profile</ion-title>
   </ion-toolbar>
@@ -19,10 +19,6 @@
   </div>
   <ion-list lines="full" class="ion-no-margin">
     <form #form='ngForm' (ngSubmit)="update(form.value)">
-      <!--<ion-item>
-        <ion-label>Patient ID:</ion-label>
-        <ion-input type="text"  name="email" value="{{userID}}" readonly></ion-input>
-      </ion-item>-->
       <ion-item>
         <ion-label>Email:</ion-label>
         <ion-input type="text"[(ngModel)]="model.email" name="email" value="{{info.email}}" readonly></ion-input>

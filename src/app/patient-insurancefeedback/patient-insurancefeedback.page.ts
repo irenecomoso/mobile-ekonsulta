@@ -1,3 +1,4 @@
+import { Router } from '@angular/router';
 /* eslint-disable @typescript-eslint/no-inferrable-types */
 /* eslint-disable no-var */
 /* eslint-disable one-var */
@@ -28,7 +29,7 @@ export class PatientInsurancefeedbackPage implements OnInit {
 
   feedback: string = "";
 
-  constructor(public userservice: UserService, public share: SharedDataService, public afu: AuthService) { }
+  constructor(public userservice: UserService, public share: SharedDataService, public afu: AuthService,public router: Router) { }
 
   ngOnInit(): void {
     //getting Current User ID
@@ -109,5 +110,9 @@ export class PatientInsurancefeedbackPage implements OnInit {
      })
    })
    this.flist= tempArray;
+  }
+  back(){
+    localStorage.removeItem('data');
+    this.router.navigate(['/patient-to-insurance-feedback']);
   }
 }

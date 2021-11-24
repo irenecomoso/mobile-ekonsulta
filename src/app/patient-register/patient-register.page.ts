@@ -61,5 +61,10 @@ export class PatientRegisterPage implements OnInit {
   {
     this.error = {name : '', message : ''};
   }
+  updateValues(values: any) {
+    if(values) {
+      this.model.dob = values.year() + '-' + values.day() + '-' + values.month();
+    }
+  }
 
 }

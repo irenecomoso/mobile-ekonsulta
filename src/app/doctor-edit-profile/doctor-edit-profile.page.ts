@@ -61,6 +61,7 @@ export class DoctorEditProfilePage implements OnInit {
         tempArray.push(data);
       })
     })
+    this.spList = tempArray;
   }
   update(frm){
       this.userservice.update_user(this.userId,frm).then(()=>{

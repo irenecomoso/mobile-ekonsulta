@@ -135,6 +135,22 @@ const routes: Routes = [
     path: 'patient-insurancefeedback',
     loadChildren: () => import('./patient-insurancefeedback/patient-insurancefeedback.module').then( m => m.PatientInsurancefeedbackPageModule)
   },
+  {
+    path: 'patient-edit-insurance',
+    loadChildren: () => import('./patient-edit-insurance/patient-edit-insurance.module').then( m => m.PatientEditInsurancePageModule)
+  },
+  {
+    path: 'patient-to-doctor-feedback',
+    loadChildren: () => import('./patient-to-doctor-feedback/patient-to-doctor-feedback.module').then( m => m.PatientToDoctorFeedbackPageModule)
+  },
+  {
+    path: 'patient-to-insurance-feedback',
+    loadChildren: () => import('./patient-to-insurance-feedback/patient-to-insurance-feedback.module').then( m => m.PatientToInsuranceFeedbackPageModule)
+  },
+  {
+    path: 'patient-to-lab-partner-feedback',
+    loadChildren: () => import('./patient-to-lab-partner-feedback/patient-to-lab-partner-feedback.module').then( m => m.PatientToLabPartnerFeedbackPageModule)
+  },
 
 
 

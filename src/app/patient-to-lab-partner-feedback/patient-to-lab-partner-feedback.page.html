@@ -1,0 +1,28 @@
+<ion-header class="ion-no-border">
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-button (click)="back()"><ion-icon name="arrow-back-outline"></ion-icon></ion-button>
+    </ion-buttons>
+    <ion-title style="text-align:center;" id="fixed">Lab Partners Feedback</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <div class="lab">
+    <ion-searchbar animated [(ngModel)]="searchNamelab" (input)="get_labList()" placeholder="Search Lab Partners"></ion-searchbar>
+    <ion-list>
+      <ion-label *ngFor="let list of list" class="card">
+        <ion-item button (click)="view_review_lab(list)">
+          <ion-avatar slot="start">
+            <img src="{{list.image}}">
+          </ion-avatar>
+          <ion-label>
+            <h2>{{list.name}}</h2>
+            <h2>{{list.address}}</h2>
+          </ion-label>
+        </ion-item>
+      </ion-label>
+    </ion-list>
+  </div>
+
+</ion-content>

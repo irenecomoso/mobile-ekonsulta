@@ -182,4 +182,20 @@ export class UserService {
     return this.db.firestore.collection('Laboratory_Partner').doc(id).collection('reviews').doc(review_id)
     .collection('reply').get();
   }
+  get_doctor_upcoming(doc_id)
+  {
+    return this.db.firestore.collection('upcoming').where('doctor_id','==',doc_id);
+  }
+  get_labInfo(id)
+  {
+    return this.db.collection('Laboratory_Partner').doc(id).get();
+  }
+  get_Lab_Results_Patient(email)
+  {
+    return this.db.firestore.collection('Laboratory_Results').where('email','==',email).get();
+  }
+  get_patient_LOA(patient_id)
+  {
+    return this.db.firestore.collection('Insurance_LOA').where('patient_id','==',patient_id).get();
+  }
 }

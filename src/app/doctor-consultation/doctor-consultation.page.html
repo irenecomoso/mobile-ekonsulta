@@ -7,11 +7,11 @@
 <ion-header class="ion-no-border">
   <ion-toolbar style="text-align:center;">
     <ion-segment value="consultations" [(ngModel)]="selectTabs">
-      <ion-segment-button value="upcoming">
+      <ion-segment-button value="upcoming" (click)="upcomingFunction()">
         <ion-icon name="today"></ion-icon>
         <ion-label>Upcoming</ion-label>
       </ion-segment-button>
-      <ion-segment-button value="done">
+      <ion-segment-button value="done" (click)="doneFunction()">
         <ion-icon name="checkmark-done-circle"></ion-icon>
         <ion-label>Done</ion-label>
       </ion-segment-button>
@@ -21,9 +21,22 @@
 
 <ion-content>
   <div *ngIf="selectTabs==='upcoming'">
+    <div *ngFor="let list of userList">
     <ion-list>
       <ion-item button routerLink="/doctor-patient-chat">
-       <ion-label>
+        <a (click)="chat(list)" class="list-group-item list-group-item-action">
+          {{list.fullname}}
+          <div class="container">
+            <div *ngIf="list.upcoming_status === 'pending'">
+               <button id="btnUpcoming" class="btn btn-warning col" >Accept</button>
+               <button id="btnSched" class="btn btn-dark">Schedule | {{list.schedule}}</button>
+            </div>
+            <div *ngIf="list.upcoming_status === 'ongoing'">
+              <button id="btnUpcoming" class="btn btn-success col" >Join now</button>
+              <button id="btnSched" class="btn btn-dark">Schedule | {{list.schedule}}</button>
+            </div>
+        </div>
+      </a><!--<ion-label>
          <h2>Finn</h2>
          <p>Listen, I've had a pretty messed up day...</p>
        </ion-label>
@@ -32,7 +45,7 @@
        <ion-label>
          <h2>Finn</h2>
          <p>Listen, I've had a pretty messed up day...</p>
-       </ion-label>
+       </ion-label>-->
       </ion-item>
       <ion-item button>
         <ion-label>
@@ -113,6 +126,7 @@
         </ion-label>
        </ion-item>
     </ion-list>
+    </div>
   </div>
 
   <div *ngIf="selectTabs==='done'">

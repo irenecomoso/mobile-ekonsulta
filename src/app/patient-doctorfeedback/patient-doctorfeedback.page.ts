@@ -1,3 +1,4 @@
+import { Router } from '@angular/router';
 /* eslint-disable @typescript-eslint/naming-convention */
 /* eslint-disable one-var */
 /* eslint-disable no-var */
@@ -25,7 +26,7 @@ export class PatientDoctorfeedbackPage implements OnInit {
   replyList: any = [];
 
   feedback: string;
-  constructor(public share: SharedDataService,public userservice: UserService, public afu: AuthService) { }
+  constructor(public share: SharedDataService,public userservice: UserService, public afu: AuthService, public router: Router) { }
 
   ngOnInit(): void {
 
@@ -105,6 +106,10 @@ export class PatientDoctorfeedbackPage implements OnInit {
     })
     this.flist = tempArray;
     //console.log(this.flist);
+  }
+  back(){
+    localStorage.removeItem('data');
+    this.router.navigate(['/patient-to-doctor-feedback']);
   }
 
 }
