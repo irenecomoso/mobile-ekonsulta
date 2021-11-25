@@ -155,6 +155,10 @@ const routes: Routes = [
     path: 'patient-delete-account',
     loadChildren: () => import('./patient-delete-account/patient-delete-account.module').then( m => m.PatientDeleteAccountPageModule)
   },
+  {
+    path: 'doctor-delete-account',
+    loadChildren: () => import('./doctor-delete-account/doctor-delete-account.module').then( m => m.DoctorDeleteAccountPageModule)
+  },
 
 
 

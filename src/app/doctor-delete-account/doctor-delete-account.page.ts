@@ -4,11 +4,11 @@ import { Router } from '@angular/router';
 import { ToastController } from '@ionic/angular';
 
 @Component({
-  selector: 'app-patient-delete-account',
-  templateUrl: './patient-delete-account.page.html',
-  styleUrls: ['./patient-delete-account.page.scss'],
+  selector: 'app-doctor-delete-account',
+  templateUrl: './doctor-delete-account.page.html',
+  styleUrls: ['./doctor-delete-account.page.scss'],
 })
-export class PatientDeleteAccountPage implements OnInit {
+export class DoctorDeleteAccountPage implements OnInit {
 
   constructor(public alertCtrl: AlertController, private router: Router, public toast: ToastController) { }
   async showAlert() {

@@ -1,0 +1,33 @@
+.block-center{
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  margin-right: -50%;
+  transform: translate(-50%, -50%);
+}
+
+ion-card{
+  display: flex;
+  flex-direction: column;
+  margin: 0 !important;
+  width: 300px;
+}
+
+.buttons{
+  display: inline-flex;
+  margin-top: 15px;
+}
+
+#btn1{
+  background-color:rgb(28,54,94);
+  border-radius: 4px;
+}
+
+#btn2{
+  background-color:rgb(126, 15, 15);
+  width: fit-content;
+  border-radius: 4px;
+}
