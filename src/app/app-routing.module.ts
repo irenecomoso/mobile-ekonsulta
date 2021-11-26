@@ -159,6 +159,10 @@ const routes: Routes = [
     path: 'doctor-delete-account',
     loadChildren: () => import('./doctor-delete-account/doctor-delete-account.module').then( m => m.DoctorDeleteAccountPageModule)
   },
+  {
+    path: 'terms-and-conditions',
+    loadChildren: () => import('./terms-and-conditions/terms-and-conditions.module').then( m => m.TermsAndConditionsPageModule)
+  },
 
 
 

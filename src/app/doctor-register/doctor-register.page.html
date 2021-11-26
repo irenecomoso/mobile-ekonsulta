@@ -1,5 +1,8 @@
 <ion-header>
   <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button routerLink="/login"></ion-back-button>
+    </ion-buttons>
     <ion-title>doctor-register</ion-title>
   </ion-toolbar>
 </ion-header>
@@ -49,7 +52,7 @@
     </ion-list>
     <div class="check">
       <ion-checkbox checked="false" color="secondary"></ion-checkbox>
-      <ion-label>&nbsp;I agree with the <u>Terms and Coditions</u></ion-label>
+      <ion-label>&nbsp;I agree with the <a routerLink="/terms-and-conditions">Terms and Coditions</a></ion-label>
     </div>
     <div style="text-align:center;">
       <ion-button display="center" id="btn1" color="rgb(28,54,94)" type="submit">Sign Up</ion-button>
