@@ -4,24 +4,27 @@
   </ion-toolbar>
 </ion-header>
 
-<ion-header class="ion-no-border">
-  <ion-toolbar style="text-align:center;">
-    <ion-segment value="consultations">
-      <ion-segment-button value="Doctors" (click)="doc()">
+<ion-content>
+  <div class class="block-center">
+    <ion-button (click)="doc()" class="btn">
+      <div>
         <ion-icon name="person"></ion-icon>
         <ion-label>Doctors</ion-label>
-      </ion-segment-button>
-      <ion-segment-button value="Lab" (click)="lab()">
-        <ion-icon name="business"></ion-icon>
-        <ion-label>Lab<br> Partners</ion-label>
-      </ion-segment-button>
-      <ion-segment-button value="Insurance" (click)="insurance()">
-        <ion-icon name="heart"></ion-icon>
-        <ion-label>Health<br> Insurance</ion-label>
-      </ion-segment-button>
-    </ion-segment>
-  </ion-toolbar>
-</ion-header>
+      </div>
+    </ion-button>
 
-<ion-content>
+    <ion-button (click)="lab()"  class="btn">
+      <div>
+        <ion-icon name="business" ></ion-icon>
+      <ion-label>Lab Partners</ion-label>
+      </div>
+    </ion-button>
+
+    <ion-button (click)="insurance()"  class="btn">
+      <div>
+        <ion-icon name="heart"></ion-icon>
+        <ion-label>Health Insurance</ion-label>
+      </div>
+    </ion-button>
+  </div>
 </ion-content>

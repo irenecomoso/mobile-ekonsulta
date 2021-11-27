@@ -33,10 +33,6 @@ const routes: Routes = [
     loadChildren: () => import('./register-choice/register-choice.module').then( m => m.RegisterChoicePageModule)
   },
   {
-    path: 'menu',
-    loadChildren: () => import('./menu/menu.module').then( m => m.MenuPageModule)
-  },
-  {
     path: 'patient-chat-info',
     loadChildren: () => import('./patient-chat-info/patient-chat-info.module').then( m => m.PatientChatInfoPageModule)
   },
@@ -81,20 +77,12 @@ const routes: Routes = [
     loadChildren: () => import('./doctor-chat-info/doctor-chat-info.module').then( m => m.DoctorChatInfoPageModule)
   },
   {
-    path: 'doctor-landing',
-    loadChildren: () => import('./doctor-landing/doctor-landing.module').then( m => m.DoctorLandingPageModule)
-  },
-  {
     path: 'doctor-notifications',
     loadChildren: () => import('./doctor-notifications/doctor-notifications.module').then( m => m.DoctorNotificationsPageModule)
   },
   {
     path: 'patient-edit-profile',
     loadChildren: () => import('./patient-edit-profile/patient-edit-profile.module').then( m => m.PatientEditProfilePageModule)
-  },
-  {
-    path: 'patient-landing',
-    loadChildren: () => import('./patient-landing/patient-landing.module').then( m => m.PatientLandingPageModule)
   },
   {
     path: 'doctor-transactionhistory',
@@ -123,7 +111,8 @@ const routes: Routes = [
   {
     path: 'patient-choosefeedback',
     loadChildren: () => import('./patient-choosefeedback/patient-choosefeedback.module').then( m => m.PatientChoosefeedbackPageModule)
-  },  {
+  },
+  {
     path: 'patient-doctorfeedback',
     loadChildren: () => import('./patient-doctorfeedback/patient-doctorfeedback.module').then( m => m.PatientDoctorfeedbackPageModule)
   },
