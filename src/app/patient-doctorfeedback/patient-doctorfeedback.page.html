@@ -21,38 +21,50 @@
       </ion-label>
     </ion-item>
   </ion-list>
-  <div class="lower-part">
+  <div class="content">
     <div>
-      <button class='submit' type="submit" data-bs-toggle="modal" data-bs-target="#toReply">Add feedback</button>
+      <ion-list *ngFor="let list of flist">
+        <ion-item lines="none" id="feedback">
+          <ion-avatar slot="start">
+            <img src="{{list.image}}">
+          </ion-avatar>
+          <ion-label>
+            <h2>{{list.fullname}}</h2>
+            <h3>{{list.feedback}}</h3>
+            <p>{{list.createdAt}}</p>
+          </ion-label>
+        </ion-item>
+      </ion-list>
+      <!--Replies-->
+    <div id="replies">
+      <ion-list *ngFor="let reply of replyList">
+        <ion-icon name="return-down-forward-outline"></ion-icon>
+        <ion-item lines="none" id="feedback">
+          <ion-avatar slot="start">
+            <img src="{{info2.image}}">
+          </ion-avatar>
+          <ion-label>
+            <h2>{{reply.fullname}}</h2>
+            <h3>{{reply.feedback}}</h3>
+            <p>{{reply.createdAt}}</p>
+          </ion-label>
+        </ion-item>
+      </ion-list>
+     </div>
     </div>
-    <ul class="list-group py-2 whole-trans">
-      <li *ngFor="let list of flist" class="list-group-item flex-column align-items-start">
-        <div class="d-flex w-100 justify-content-between">
-          <h5 class="mb-1"><span><img src="{{list.image}}" alt="" width="25" height="25" class="cute-pic"></span>{{list.fullname}}</h5>
-          <small>{{list.createdAt}}</small>
-        </div>
-        <div>
-          <p class="mb-1">{{list.feedback}}</p>
-        </div>
-        <div *ngFor="let reply of replyList">
-          <div *ngIf="list.from === reply.sent_to" class="reply-to">
-              <h5 class="mb-1"><span> <img src="{{info2.image}}" alt="" class="cute-pic" width="16px" height="16px"></span>{{reply.fullname}}</h5>
-              <p class="ureply">{{reply.feedback}}</p>
-          </div>
-        </div>
-       <!-- <small>Transaction ID</small>-->
-      </li>
-    </ul>
   </div>
-        <div class="modal-header">
-          <h5 class="modal-title" id="addSpclLabel">Add feedback</h5>
-          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="close"></button>
-        </div>
-          <div class="modal-body">
-            <textarea [(ngModel)]="feedback" name="feedback" id="" cols="50" rows="5" placeholder="..."></textarea>
-          </div>
-          <div class="modal-footer">
-            <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Cancel</button>
-            <button (click)="add_feedback()" type="submit" class="btn btn-info" data-bs-dismiss="modal">Add</button>
-          </div>
+
 </ion-content>
+
+<ion-footer>
+  <ion-toolbar>
+    <ion-item>
+      <ion-textarea [(ngModel)]="feedback" name="feedback"  placeholder="Add feedback"></ion-textarea>
+    </ion-item>
+    <ion-buttons slot="end">
+      <ion-button (click)="add_feedback()" type="submit" id="add">Add
+        <ion-icon name="add"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-footer>
