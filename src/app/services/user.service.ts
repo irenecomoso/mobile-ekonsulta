@@ -198,4 +198,8 @@ export class UserService {
   {
     return this.db.firestore.collection('Insurance_LOA').where('patient_id','==',patient_id).get();
   }
+  get_patient_medical(patient_id)
+  {
+    return this.db.firestore.collection('Medical_Records').where('patient_id','==',patient_id).get();
+  }
 }

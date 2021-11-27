@@ -1,3 +1,4 @@
+import * as firebase from 'firebase/app';
 /* eslint-disable @typescript-eslint/quotes */
 /* eslint-disable @typescript-eslint/semi */
 /* eslint-disable object-shorthand */
@@ -6,7 +7,6 @@ import { AngularFirestore } from '@angular/fire/firestore';
 import { Injectable } from '@angular/core';
 import { FirebaseApp } from '@angular/fire';
 import { formatDate } from '@angular/common';
-//import { firestore } from 'firebase/app';
 
 @Injectable({
   providedIn: 'root'
@@ -35,7 +35,7 @@ export class ChatService {
         createdAt: formatDate(new Date(),'MM/dd/yyyy','en')
       }
     return this.db.firestore.collection('Chats').doc(chatid).update({
-        //messages: firestore.FieldValue.arrayUnion(data)
+        messages: firebase.default.firestore.FieldValue.arrayUnion(data)
       })
     }
 

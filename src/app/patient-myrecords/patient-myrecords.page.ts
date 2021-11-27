@@ -21,6 +21,7 @@ export class PatientMyrecordsPage implements OnInit {
 
   loaList: any = [];
   presList: any = [];
+  medicalList: any = [];
   constructor(public userservice: UserService, public afu: AuthService) { }
 
   /** set to false so that when loading the user analytics page, content of that function is not displayed */
@@ -61,6 +62,7 @@ export class PatientMyrecordsPage implements OnInit {
     this.userID = this.afu.get_UID();
     this.lab_Result();
     this.insurance_LOA();
+    this.medical_record();
   }
 
   lab_Result()
@@ -77,8 +79,9 @@ export class PatientMyrecordsPage implements OnInit {
             this.userservice.get_labInfo(item.data().diagnostic_center)
             .forEach(res=>{
               data = item.data();
-              data.from = res.data();// data.from = res.data().name;
+             //data.from = res.data();// data.from = res.data().name;
               tempArray.push(data);
+              console.log(data);
             })
           }
         })
@@ -108,6 +111,23 @@ export class PatientMyrecordsPage implements OnInit {
   viewFile(e)
   {
     window.open(e);
+  }
+  medical_record()
+  {
+    var data;
+    var tempArray = [];
+    this.userservice.get_patient_medical(this.userID).then(e=>{
+      e.forEach(item=>{
+        this.userservice.get_UserInfo(this.userID).then(res=>{
+          data = item.data();
+          data.uid = item.id;
+          data.fullname = res.data().fullname;
+          tempArray.push(data)
+        })
+      })
+    })
+    this.medicalList = tempArray;
+    console.log(this.medicalList);
   }
 
 }

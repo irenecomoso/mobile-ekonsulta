@@ -23,130 +23,52 @@
 
 <ion-content>
   <div *ngIf="selectTabs==='medRecords'">
-    <div *ngIf="medicalrecords">
-      <table class="table table-info table-bordered">
-        <thead>
-          <tr>
-            <th>File Name</th>
-            <th>Date</th>
-            <th>From</th>
-            <th>Action</th>
-          </tr>
-        </thead>
-        <tbody>
-            <tr *ngFor="let list of list">
-              <td>{{list.filename}}</td>
-              <td>{{list.createdAt}}</td>
-              <td>{{list.from}}</td>
-              <td>
-                <button (click)="viewFile(list.file)" class="btn btn-success">View</button>
-              </td>
-            </tr>
-        </tbody>
-    </table>
-    </div>
-    <!--<ion-list>
-       <ion-item button>
+    <ion-list>
+       <ion-item button *ngFor="let list of medicalList" (click)="viewFile(list.file)">
         <ion-label>
-          <h2>Finn</h2>
-          <p>Listen, I've had a pretty messed up day...</p>
-        </ion-label>
-       </ion-item><ion-item button>
-        <ion-label>
-          <h2>Finn</h2>
-          <p>Listen, I've had a pretty messed up day...</p>
+          <h2>{{list.from}}</h2>
+          <p>{{list.filename}}</p>
+          <p>{{list.createdAt}}</p>
         </ion-label>
        </ion-item>
-       <ion-item button>
+    </ion-list>
+  </div>
+  <div *ngIf="selectTabs==='labRecords'">
+    <ion-list>
+       <ion-item button *ngFor="let list2 of list" (click)="viewFile(list2.file)">
         <ion-label>
-          <h2>Finn</h2>
-          <p>Listen, I've had a pretty messed up day...</p>
-        </ion-label>
-       </ion-item><ion-item button>
-        <ion-label>
-          <h2>Finn</h2>
-          <p>Listen, I've had a pretty messed up day...</p>
-        </ion-label>
-       </ion-item>
-       <ion-item button>
-        <ion-label>
-          <h2>Finn</h2>
-          <p>Listen, I've had a pretty messed up day...</p>
-        </ion-label>
-       </ion-item><ion-item button>
-        <ion-label>
-          <h2>Finn</h2>
-          <p>Listen, I've had a pretty messed up day...</p>
+          <h2>{{list2.from}}}</h2>
+          <p>{{list2.filename}}</p>
+          <p>{{list2.createdAt}}</p>
         </ion-label>
        </ion-item>
-       <ion-item button>
-        <ion-label>
-          <h2>Finn</h2>
-          <p>Listen, I've had a pretty messed up day...</p>
-        </ion-label>
-       </ion-item><ion-item button>
-        <ion-label>
-          <h2>Finn</h2>
-          <p>Listen, I've had a pretty messed up day...</p>
-        </ion-label>
-       </ion-item>
-       <ion-item button>
-        <ion-label>
-          <h2>Finn</h2>
-          <p>Listen, I've had a pretty messed up day...</p>
-        </ion-label>
-       </ion-item><ion-item button>
-        <ion-label>
-          <h2>Finn</h2>
-          <p>Listen, I've had a pretty messed up day...</p>
-        </ion-label>
-       </ion-item>
-       <ion-item button>
-        <ion-label>
-          <h2>Finn</h2>
-          <p>Listen, I've had a pretty messed up day...</p>
-        </ion-label>
-       </ion-item><ion-item button>
-        <ion-label>
-          <h2>Finn</h2>
-          <p>Listen, I've had a pretty messed up day...</p>
-        </ion-label>
-       </ion-item>
-       <ion-item button>
-        <ion-label>
-          <h2>Finn</h2>
-          <p>Listen, I've had a pretty messed up day...</p>
-        </ion-label>
-       </ion-item>
-    </ion-list>-->
+    </ion-list>
   </div>
 
-  <div *ngIf="selectTabs==='labResults'">
+  <!--<div *ngIf="selectTabs==='labResults'">
     <ion-list>
-      <ion-item button>
-       <ion-label>
-        <h2>Han</h2>
-        <p>I've got enough on my plate as it is, and I...</p>
-       </ion-label>
-      </ion-item>
-      <ion-item button>
-       <ion-label>
-        <h2>Han</h2>
-        <p>I've got enough on my plate as it is, and I...</p>
-       </ion-label>
-      </ion-item>
-      <ion-item button>
-       <ion-label>
-        <h2>Han</h2>
-        <p>I've got enough on my plate as it is, and I...</p>
-       </ion-label>
-      </ion-item>
-      <ion-item button>
-       <ion-label>
-        <h2>Han</h2>
-        <p>I've got enough on my plate as it is, and I...</p>
-       </ion-label>
-      </ion-item>
+      <div *ngIf="labresult">
+        <table class="table table-striped mt-3">
+          <thead>
+            <tr>
+              <th>File Name</th>
+              <th>Date</th>
+              <th>From</th>
+              <th>Action</th>
+            </tr>
+          </thead>
+          <tbody>
+              <tr *ngFor="let list of list">
+                <td>{{list.filename}}</td>
+                <td>{{list.createdAt}}</td>
+                <td>{{list.from}}</td>
+                <td>
+                  <button (click)="viewFile(list.file)" class="btn btn-success">View</button>
+                </td>
+              </tr>
+          </tbody>
+      </table>
+      </div>
     </ion-list>
   </div>
 
@@ -173,5 +95,5 @@
         </table>
         </div>
     </ion-list>
-  </div>
+  </div>-->
 </ion-content>
