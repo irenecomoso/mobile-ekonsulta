@@ -7,6 +7,8 @@
 #feedback{
   border-radius: 50px;
   --ion-background-color: #f0f0f0!important;
+  word-wrap: break-word;
+  word-break: break-all;
 }
 
 #replies{
@@ -17,3 +19,8 @@
   padding-left: 10px;
   padding-right: 10px;
 }
+
+ion-label{
+  white-space: normal!important;
+}
+
