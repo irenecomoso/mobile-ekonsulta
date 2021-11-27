@@ -7,13 +7,13 @@
 <ion-header class="ion-no-border">
   <ion-toolbar style="text-align:center;">
     <ion-segment value="consultations" [(ngModel)]="selectTabs">
-      <ion-segment-button value="medRecords" (click)="medicalRecords()">
+      <ion-segment-button value="medRecords">
         <ion-label>Medical<br>Records</ion-label>
       </ion-segment-button>
       <ion-segment-button value="labResults">
         <ion-label style="text-align: center;">Lab Results</ion-label>
       </ion-segment-button>
-      <ion-segment-button value="prescriptions" (click)="prescription()">
+      <ion-segment-button value="prescriptions">
         <ion-label>Prescriptions</ion-label>
       </ion-segment-button>
     </ion-segment>
@@ -33,13 +33,24 @@
        </ion-item>
     </ion-list>
   </div>
-  <div *ngIf="selectTabs==='labRecords'">
+  <div *ngIf="selectTabs==='labResults'">
     <ion-list>
        <ion-item button *ngFor="let list2 of list" (click)="viewFile(list2.file)">
         <ion-label>
-          <h2>{{list2.from}}}</h2>
+          <h2>{{list2.from}}</h2>
           <p>{{list2.filename}}</p>
           <p>{{list2.createdAt}}</p>
+        </ion-label>
+       </ion-item>
+    </ion-list>
+  </div>
+  <div *ngIf="selectTabs==='prescriptions'">
+    <ion-list>
+       <ion-item button *ngFor="let list3 of presList" (click)="viewFile(list3.file)">
+        <ion-label>
+          <h2>{{list3.from}}</h2>
+          <p>{{list3.filename}}</p>
+          <p>{{list3.createdAt}}</p>
         </ion-label>
        </ion-item>
     </ion-list>

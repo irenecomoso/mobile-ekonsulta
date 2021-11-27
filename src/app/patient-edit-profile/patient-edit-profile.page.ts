@@ -10,7 +10,7 @@ import { UserService } from './../services/user.service';
 /* eslint-disable @typescript-eslint/semi */
 /* eslint-disable @typescript-eslint/naming-convention */
 import { Component, OnInit } from '@angular/core';
-import { AngularFireAuth } from '@angular/fire/auth';
+
 export class PatientInfo
 {
   email: string;

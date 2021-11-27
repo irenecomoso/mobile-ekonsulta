@@ -202,4 +202,8 @@ export class UserService {
   {
     return this.db.firestore.collection('Medical_Records').where('patient_id','==',patient_id).get();
   }
+  get_patient_prescription(patient_id)
+  {
+    return this.db.firestore.collection('Prescription').where('patient_id','==',patient_id).get();
+  }
 }
