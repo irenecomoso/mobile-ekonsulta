@@ -33,7 +33,6 @@ export class PatientProfilePage implements OnInit {
   member_ID: string;
   insurance_info: any = [];
   constructor(public userservice: UserService,public afu: AuthService) { }
-
   ngOnInit() {
     this.userID = this.afu.get_UID();
     this.userservice.get_avatar(this.userID).then(e =>{
@@ -78,5 +77,4 @@ export class PatientProfilePage implements OnInit {
   logout(){
     this.afu.signout();
   }
-
 }

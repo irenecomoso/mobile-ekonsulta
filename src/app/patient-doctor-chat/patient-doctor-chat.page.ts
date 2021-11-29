@@ -1,3 +1,6 @@
+import { UserService } from './../services/user.service';
+import { AuthService } from 'src/app/services/auth.service';
+import { ChatService } from './../services/chat.service';
 /* eslint-disable eqeqeq */
 /* eslint-disable @typescript-eslint/semi */
 /* eslint-disable arrow-body-style */
@@ -5,9 +8,6 @@
 /* eslint-disable @typescript-eslint/naming-convention */
 /* eslint-disable @typescript-eslint/quotes */
 /* eslint-disable @typescript-eslint/no-inferrable-types */
-import { UserService } from './../services/user.service';
-import { AuthService } from 'src/app/services/auth.service';
-import { ChatService } from './../services/chat.service';
 import { Component, OnInit } from '@angular/core';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
@@ -28,14 +28,56 @@ export class PatientDoctorChatPage implements OnInit {
 
   imgUrl: any;
 
+  /** set to false so that when loading the user analytics page, content of that function is not displayed */
+  medicalrecords = true;
+  labresult = false;
+  presc =  false;
+  medcertificate1 = false;
+  insurance_loa = false;
 
   constructor(
     public chats: ChatService,
     public afu: AuthService,
     public userservice: UserService
-
   ) { }
+  medicalRecords(){
+    this.medicalrecords = true;
+    this.labresult = false;
+    this.presc = false;
+    this.medcertificate1 = false;
+    this.insurance_loa = false;
+  }
 
+  labResult(){
+    this.medicalrecords = false;
+    this.labresult = true;
+    this.medcertificate1 = false;
+    this.presc = false;
+    this.insurance_loa = false;
+  }
+
+  prescription(){
+    this.medicalrecords = false;
+    this.labresult = false;
+    this.presc = true;
+    this.medcertificate1 = false;
+    this.insurance_loa = false;
+  }
+  medCertificate(){
+    this.medicalrecords = false;
+    this.labresult = false;
+    this.presc = false;
+    this.medcertificate1 = true;
+    this.insurance_loa = false;
+  }
+  insuranceLOA()
+  {
+    this.medicalrecords = false;
+    this.labresult = false;
+    this.presc = false;
+    this.medcertificate1 = false;
+    this.insurance_loa = true;
+  }
   ngOnInit(): void {
     this.userid = this.afu.get_UID();
     console.log(this.userid);

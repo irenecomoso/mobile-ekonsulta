@@ -43,6 +43,7 @@ export class PatientEditProfilePage implements OnInit {
   health_insurance: string = "";
   member_ID: string = "";
   error: { name: string;message: string } = { name: '', message: ''};
+  profile_changed: boolean = false;
   constructor(public afu: AuthService, public userservice: UserService, public router: Router) { }
 
   ngOnInit(): void {
@@ -96,10 +97,21 @@ export class PatientEditProfilePage implements OnInit {
   {
     this.file = e.target.files[0];
     console.log(this.file);
+    if(this.file)
+    {
+      this.uploadImage();
+    }
   }
   uploadImage()
   {
-    this.userservice.upload_avatar(this.file,this.userID);
+    this.userservice.upload_avatar(this.file,this.userID)
+    .then(()=>{
+      this.ngOnInit();
+      this.profile_changed = true;
+      setTimeout(() => {
+        this.profile_changed = false;
+      }, 5000);
+    });
   }
   update_insurance()
   {

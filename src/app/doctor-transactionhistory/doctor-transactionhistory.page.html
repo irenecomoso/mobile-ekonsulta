@@ -11,84 +11,16 @@
 </ion-header>
 
 <ion-content>
- <ion-list>
-   <ion-item button>
-    <ion-label>
-      <h2>Finn</h2>
-      <p>Listen, I've had a pretty messed up day...</p>
-    </ion-label>
-   </ion-item>
-   <ion-item button>
-    <ion-label>
-      <h2>Finn</h2>
-      <p>Listen, I've had a pretty messed up day...</p>
-    </ion-label>
-   </ion-item>
-   <ion-item button>
-    <ion-label>
-      <h2>Finn</h2>
-      <p>Listen, I've had a pretty messed up day...</p>
-    </ion-label>
-   </ion-item>
-   <ion-item button>
-    <ion-label>
-      <h2>Finn</h2>
-      <p>Listen, I've had a pretty messed up day...</p>
-    </ion-label>
-   </ion-item>
-   <ion-item button>
-    <ion-label>
-      <h2>Finn</h2>
-      <p>Listen, I've had a pretty messed up day...</p>
-    </ion-label>
-   </ion-item>
-   <ion-item button>
-    <ion-label>
-      <h2>Finn</h2>
-      <p>Listen, I've had a pretty messed up day...</p>
-    </ion-label>
-   </ion-item>
-   <ion-item button>
-    <ion-label>
-      <h2>Finn</h2>
-      <p>Listen, I've had a pretty messed up day...</p>
-    </ion-label>
-   </ion-item>
-   <ion-item button>
-    <ion-label>
-      <h2>Finn</h2>
-      <p>Listen, I've had a pretty messed up day...</p>
-    </ion-label>
-   </ion-item>
-   <ion-item button>
-    <ion-label>
-      <h2>Finn</h2>
-      <p>Listen, I've had a pretty messed up day...</p>
-    </ion-label>
-   </ion-item>
-   <ion-item button>
-    <ion-label>
-      <h2>Finn</h2>
-      <p>Listen, I've had a pretty messed up day...</p>
-    </ion-label>
-   </ion-item>
-   <ion-item button>
-    <ion-label>
-      <h2>Finn</h2>
-      <p>Listen, I've had a pretty messed up day...</p>
-    </ion-label>
-   </ion-item>
-   <ion-item button>
-    <ion-label>
-      <h2>Finn</h2>
-      <p>Listen, I've had a pretty messed up day...</p>
-    </ion-label>
-   </ion-item>
-   <ion-item button>
-    <ion-label>
-      <h2>Finn</h2>
-      <p>Listen, I've had a pretty messed up day...</p>
-    </ion-label>
+ <ion-list *ngFor="let list of tranList">
+   <ion-item>
+      <h5 mb-1>{{list.patient_name}}</h5>
+      <small>{{list.updatedAt}}</small>
+      <p>{{list.patient_name}} paid an amount of {{list.Amount}} as a payment for one consultation.</p>
+      <p>Consultation Schedule: {{list.Schedule}}</p>
+      <p>Amount: {{list.Amount}}</p>
+      <p>Deduction(s): {{list.total_dec}}</p>
+      <p>Net Income:{{list.net_income}}</p>
+      <small>Transaction ID:{{list.uid}}</small>
    </ion-item>
  </ion-list>
 </ion-content>
