@@ -1,0 +1,30 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>doctor-user-analytics</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <div class="col mt-4">
+    <h5 class="usr">Patients Analytics</h5>
+    <div class="column">
+      <div class="card">
+        <h6 class="daily">Today</h6>
+        <div class="card-body">
+          <small>Total Users</small>
+          <p class="card-text">{{today}}</p>
+        </div>
+      </div>
+    </div>
+    <div class="column">
+      <div class="card">
+        <h6 class="total">Total Consultations</h6>
+        <div class="card-body">
+          <small style="visibility: hidden;">Total Users</small>
+          <p class="card-text">{{total}}</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</ion-content>

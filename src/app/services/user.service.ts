@@ -238,4 +238,13 @@ export class UserService {
     return this.db.firestore.collection('Schedule').doc(sched_id).collection('Time').doc(time_id)
     .collection('Reservation').get();
   }
+  get_consultation(doctor_id)
+  {
+    return this.db.firestore.collection('Consultation').where('doctor_id','==',doctor_id).get();
+  }
+  get_today_consultation(doctor_id)
+  {
+    return this.db.firestore.collection('Consultation').where('doctor_id','==',doctor_id)
+    .where('createdAt','==',formatDate(new Date(),'MM/dd/yyyy','en')).get();
+  }
 }
