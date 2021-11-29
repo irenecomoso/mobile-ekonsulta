@@ -88,7 +88,6 @@ export class PatientConsultationPage implements OnInit {
       })
     })
     this.docList = tempArray;
-     console.log(this.docList);
   }
   get_done()
   {
@@ -104,7 +103,6 @@ export class PatientConsultationPage implements OnInit {
       })
     })
     this.doneList = tempArray;
-    console.log(this.doneList);
   }
 
 }

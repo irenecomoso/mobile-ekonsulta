@@ -247,4 +247,32 @@ export class UserService {
     return this.db.firestore.collection('Consultation').where('doctor_id','==',doctor_id)
     .where('createdAt','==',formatDate(new Date(),'MM/dd/yyyy','en')).get();
   }
+  create_transaction(record)
+  {
+    return this.db.firestore.collection('Transaction').add(record);
+  }
+  patient_book_schedule(sched_id,time_id,userId)
+  {
+    return this.db.firestore.collection('Schedule').doc(sched_id).collection('Time').doc(time_id)
+    .collection('Reservation').add({
+      patient_id : userId,
+      createdAt: formatDate(new Date(),'MM/dd/yyyy','en')
+    })
+  }
+  create_doctor_upcoming(data)
+  {
+    return this.db.firestore.collection('upcoming')
+    .add({
+      createdAt: formatDate(new Date(),'MM/dd/yyyy','en'),
+      patient_id: data.patient_id,
+      doctor_id: data.doctor_id,
+      status: "pending",
+      schedule: data.schedule,
+      time : data.schedtime
+    })
+  }
+  get_scheduleInfo(sched_id)
+  {
+    return this.db.firestore.collection('Schedule').doc(sched_id).get();
+  }
 }

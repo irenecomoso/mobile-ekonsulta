@@ -142,6 +142,7 @@ console.log(frm);
   }
   goback(){
     localStorage.removeItem('data');
+    //window.location.reload();
     this.router.navigate(['/patient-profile']);
   }
 
