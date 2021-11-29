@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { MenuController } from '@ionic/angular';
 
 @Component({
   selector: 'app-patient-transactionhistory',
@@ -7,9 +8,15 @@ import { Component, OnInit } from '@angular/core';
 })
 export class PatientTransactionhistoryPage implements OnInit {
 
-  constructor() { }
+  constructor(private menu: MenuController) { }
+
+  patientMenu() {
+    this.menu.enable(true, 'first');
+  }
 
   ngOnInit() {
+    console.log("Transaction TEST");
+    this.patientMenu();
   }
 
 }

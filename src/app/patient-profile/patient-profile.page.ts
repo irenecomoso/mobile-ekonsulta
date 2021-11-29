@@ -5,6 +5,7 @@ import { UserService } from './../services/user.service';
 /* eslint-disable @typescript-eslint/naming-convention */
 import { Component, OnInit } from '@angular/core';
 import { AuthService } from 'src/app/services/auth.service';
+import { MenuController } from '@ionic/angular';
 export class PatientInfo
 {
   email: string;
@@ -32,9 +33,14 @@ export class PatientProfilePage implements OnInit {
   health_insurance: string;
   member_ID: string;
   insurance_info: any = [];
-  constructor(public userservice: UserService,public afu: AuthService) { }
+  constructor(public userservice: UserService,public afu: AuthService,private menu: MenuController) { }
 
+  patientMenu() {
+    this.menu.enable(true, 'first');
+  }
   ngOnInit() {
+    console.log("TEST");
+    this.patientMenu();
     this.userID = this.afu.get_UID();
     this.userservice.get_avatar(this.userID).then(e =>{
       if(e.data().image)

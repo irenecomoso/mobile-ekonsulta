@@ -1,5 +1,6 @@
 import { Router } from '@angular/router';
 import { Component, OnInit } from '@angular/core';
+import { MenuController } from '@ionic/angular';
 
 @Component({
   selector: 'app-patient-choosefeedback',
@@ -8,8 +9,15 @@ import { Component, OnInit } from '@angular/core';
 })
 export class PatientChoosefeedbackPage implements OnInit {
 
-  constructor(public router: Router) { }
+  constructor(public router: Router,private menu: MenuController) { }
+
+  patientMenu() {
+    this.menu.enable(true, 'first');
+  }
+
   ngOnInit() {
+    console.log("TEST");
+    this.patientMenu();
   }
   doc(){
     this.router.navigate(['/patient-to-doctor-feedback']);

@@ -151,7 +151,8 @@ const routes: Routes = [
   {
     path: 'terms-and-conditions',
     loadChildren: () => import('./terms-and-conditions/terms-and-conditions.module').then( m => m.TermsAndConditionsPageModule)
-  },
+  }
+
 
 
 

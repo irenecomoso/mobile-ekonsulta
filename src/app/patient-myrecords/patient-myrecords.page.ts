@@ -7,6 +7,7 @@ import { UserService } from './../services/user.service';
 /* eslint-disable @typescript-eslint/semi */
 /* eslint-disable @typescript-eslint/naming-convention */
 import { Component, OnInit } from '@angular/core';
+import { MenuController } from '@ionic/angular';
 
 @Component({
   selector: 'app-patient-myrecords',
@@ -22,13 +23,17 @@ export class PatientMyrecordsPage implements OnInit {
   loaList: any = [];
   presList: any = [];
   medicalList: any = [];
-  constructor(public userservice: UserService, public afu: AuthService) { }
+  constructor(public userservice: UserService, public afu: AuthService,private menu: MenuController) { }
 
   /** set to false so that when loading the user analytics page, content of that function is not displayed */
   medicalrecords = false;
   labresult = false;
   presc =  false;
   insurance_loa = false;
+
+  patientMenu() {
+    this.menu.enable(true, 'first');
+  }
 
   medicalRecords(){
     this.medicalrecords = true;
@@ -59,6 +64,8 @@ export class PatientMyrecordsPage implements OnInit {
   }
 
   ngOnInit(): void {
+    console.log("TEST");
+    this.patientMenu();
     this.userID = this.afu.get_UID();
     this.lab_Result();
     this.insurance_LOA();

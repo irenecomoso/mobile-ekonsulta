@@ -1,3 +1,47 @@
 <ion-app>
-  <ion-router-outlet></ion-router-outlet>
+  <ion-menu side="start" menuId="first" contentId="content1">
+    <ion-header style="text-align: center;">
+      <ion-toolbar id="tbar">
+        <br>
+        <ion-button class="acct" (click)="click()">
+          <div>
+            <ion-icon name="person-circle" id="usr"></ion-icon>
+            <ion-label>My Account</ion-label>
+          </div>
+        </ion-button><br>
+      </ion-toolbar>
+    </ion-header>
+      <ion-content>
+        <ion-list *ngFor="let pages of appPages">
+        <ion-menu-toggle auto-hide="true">
+          <ion-item [routerLink]="pages.url" routerDirection="root">
+              <ion-icon [name]="pages.icon" slot="start" class="icons"></ion-icon>
+                 {{pages.title}}
+          </ion-item>
+        </ion-menu-toggle>
+        </ion-list>
+      </ion-content>
+      <ion-footer>
+        <p>&nbsp; &nbsp;<a (click)="patientLinkClick()">Terms and Conditions</a></p>
+      </ion-footer>
+    </ion-menu>
+
+    <ion-menu side="start" menuId="second" contentId="content1">
+      <ion-header>
+        <ion-toolbar>
+          <ion-title>Navigate</ion-title>
+        </ion-toolbar>
+      </ion-header>
+      <ion-content>
+        <ion-list *ngFor="let pages of navigate">
+        <ion-menu-toggle auto-hide="true">
+          <ion-item [routerLink]="pages.url" routerDirection="forward">
+              <ion-icon [name]="pages.icon" slot="start"></ion-icon>
+                 {{pages.title}}
+          </ion-item>
+        </ion-menu-toggle>
+        </ion-list>
+      </ion-content>
+    </ion-menu>
+<ion-router-outlet id="content1"></ion-router-outlet>
 </ion-app>

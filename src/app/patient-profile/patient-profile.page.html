@@ -1,5 +1,12 @@
 <ion-header>
-  <ion-toolbar>
+  <ion-toolbar style="padding-right: 8px;">
+    <ion-buttons slot="start">
+      <ion-menu-button color="dark"></ion-menu-button>
+    </ion-buttons>
+    <ion-title>E-konsulta</ion-title>
+    <ion-buttons slot="end" routerLink="/patient-notifications">
+      <ion-icon slot="icon-only" name="notifications-outline"></ion-icon>
+      <ion-badge hidden="true" color="danger" style="position: absolute; right: 2px; bottom: 15px; border-radius:100px; height:9px; width:1px;">.</ion-badge></ion-buttons>
   </ion-toolbar>
 </ion-header>
 

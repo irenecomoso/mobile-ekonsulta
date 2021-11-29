@@ -1,0 +1,23 @@
+.acct{
+  --background: #16c2d5 ;
+  width:90%;
+  height: 50px;
+  display: block;
+  flex-flow: column;
+  --border-radius: 50px!important;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+#usr{
+  width: 25px;
+  height: 25px;
+}
+
+ion-label{
+  display: block;
+}
+
+.icons{
+  color:rgb(28,54,94)!important;
+}
