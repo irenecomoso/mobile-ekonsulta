@@ -220,4 +220,22 @@ export class UserService {
   {
     return this.db.firestore.collection('upcoming').where('patient_id','==',patient_id);
   }
+  get_schedule(doc_id)
+  {
+    return this.db.firestore.collection('Schedule').where('doctor_id','==',doc_id)
+    .orderBy('priority','asc').get();
+  }
+  get_schedule_time(sched_id)
+  {
+    return this.db.firestore.collection('Schedule').doc(sched_id).collection('Time').get();
+  }
+  get_timeInfo(sched_id,time_id)
+  {
+    return this.db.firestore.collection('Schedule').doc(sched_id).collection('Time').doc(time_id).get();
+  }
+  reservationChecker(sched_id,time_id)
+  {
+    return this.db.firestore.collection('Schedule').doc(sched_id).collection('Time').doc(time_id)
+    .collection('Reservation').get();
+  }
 }

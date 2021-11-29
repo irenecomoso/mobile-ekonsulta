@@ -6,29 +6,27 @@
 
 <ion-header class="ion-no-border">
   <ion-toolbar style="text-align:center;">
-    <ion-searchbar animated [(ngModel)]="searchName" (input)="doctor_list()" name="searchName" placeholder="Search Doctor"></ion-searchbar>
-    <ion-item>
+    <ion-searchbar animated [(ngModel)]="searchName" (input)="get_doctorList()" name="searchName" placeholder="Search Doctor"></ion-searchbar>
+    <!--<ion-item>
       <ion-label>Specialization</ion-label>
       <ion-select interface="popover" value="All" name="specialization">
         <ion-select-option *ngFor="let list of spList" value="{{list.name}}">{{list.name}}</ion-select-option>
       </ion-select>
-    </ion-item>
+    </ion-item>-->
   </ion-toolbar>
 </ion-header>
 
 
 <ion-content>
   <ion-list>
-    <ion-label *ngFor="let list of list" class="card">
-      <ion-item button (click)="view_review(list)">
+    <ion-label *ngFor="let list of docList" class="card">
+      <ion-item button (click)="book_doctor_view(list)">
         <ion-avatar slot="start">
           <img src="{{list.image}}">
         </ion-avatar>
         <ion-label>
           <h2>{{list.fullname}}</h2>
-          <div *ngFor="let spList of spList">
-            <p *ngIf="list.specialization === spList.uid" class="card-text mb-1">{{spList.name}}</p>
-          </div>
+          <p>{{list.ins}}</p>
         </ion-label>
       </ion-item>
     </ion-label>

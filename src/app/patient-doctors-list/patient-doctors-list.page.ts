@@ -1,6 +1,5 @@
 /* eslint-disable @typescript-eslint/no-inferrable-types */
 /* eslint-disable @typescript-eslint/quotes */
-import { SharedDataService } from './../services/shared-data.service';
 /* eslint-disable @typescript-eslint/no-shadow */
 /* eslint-disable @typescript-eslint/semi */
 /* eslint-disable eqeqeq */
@@ -10,7 +9,6 @@ import { SharedDataService } from './../services/shared-data.service';
 import { Router } from '@angular/router';
 import { UserService } from './../services/user.service';
 import { Component, OnInit } from '@angular/core';
-import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-patient-doctors-list',
@@ -18,54 +16,53 @@ import { CommonModule } from '@angular/common';
   styleUrls: ['./patient-doctors-list.page.scss'],
 })
 export class PatientDoctorsListPage implements OnInit {
-  list: any = [];
-  spList: any = [];
-
+  docList: any = [];
   searchName: string = "";
   selectTabs = 'Doctors';
-  constructor(public userservice: UserService,public router: Router,public share: SharedDataService) { }
+
+  constructor(
+    public userservice: UserService,
+    public router: Router
+    ) { }
+
   ngOnInit(): void {
 
-    this.doctor_list();
+    localStorage.removeItem('data');
 
-    var data;
-    var tempArray = [];
-    this.userservice.get_Speciaalization().then(e=>{
-      e.forEach(res=>{
-        data = res.data();
-        data.uid = res.id;
-        tempArray.push(data);
-      })
-    })
-    this.spList = tempArray;
-    console.log(this.spList);
+    this.get_doctorList();
 
   }
-  view_review(e)
+
+  book_doctor_view(info)
   {
-    this.share.set_list(e);
-    this.router.navigate(['/patient-doctorfeedback']);
+    if(localStorage.getItem('data') == null)
+      localStorage.setItem('data',JSON.stringify(info));
+
+    this.router.navigate(['patient-doctors-list-view']);
   }
 
-  doctor_list()
+  get_doctorList()
   {
     var data;
     var tempArray = [];
     this.userservice.get_doctorList().then(e=>{
       e.forEach(item=>{
+        if(item.data().isVerified == "verified") //only verified will show
         this.userservice.get_avatar(item.id).then(res=>{
-          data = item.data();
-          data.uid = item.id;
-          data.image = res.data().image;
-          tempArray.push(data);
-        }).then(()=>{
-          this.list = tempArray.filter(e=>{
-            if(e.fullname != undefined)
-            return e.fullname.toLocaleLowerCase().match(this.searchName.toLocaleLowerCase());
-          });
+          this.userservice.get_specializationInfo(item.data().specialization).then(a=>{
+            data = item.data();
+            data.uid = item.id;
+            data.ins = a.data().name;
+            data.image = res.data().image;
+            tempArray.push(data);
+          }).then(()=>{
+            this.docList = tempArray.filter(e=>{
+              if(e.fullname != undefined)
+              return e.fullname.toLocaleLowerCase().match(this.searchName.toLocaleLowerCase());
+            });
+          })
         })
       })
-      //console.log(this.list)
     })
   }
 
