@@ -1,3 +1,4 @@
+/* eslint-disable @angular-eslint/use-lifecycle-interface */
 /* eslint-disable curly */
 /* eslint-disable @typescript-eslint/semi */
 /* eslint-disable no-var */
