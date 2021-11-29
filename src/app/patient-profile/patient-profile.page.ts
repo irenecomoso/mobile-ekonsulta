@@ -72,7 +72,6 @@ export class PatientProfilePage implements OnInit {
       });
     })
     this.insList = tempArray;
-    console.log(this.insList);
   }
   logout(){
     this.afu.signout();

@@ -16,12 +16,17 @@
       <ion-segment-button value="prescriptions">
         <ion-label>Prescriptions</ion-label>
       </ion-segment-button>
+      <ion-segment-button value="insuranceLOA">
+        <ion-label>Insurance LOA</ion-label>
+      </ion-segment-button>
     </ion-segment>
   </ion-toolbar>
 </ion-header>
 
 
 <ion-content>
+  <p>Date</p>
+  <p>Filename</p>
   <div *ngIf="selectTabs==='medRecords'">
     <ion-list>
        <ion-item button *ngFor="let list of medicalList" (click)="viewFile(list.file)">
@@ -51,6 +56,17 @@
           <h2>{{list3.from}}</h2>
           <p>{{list3.filename}}</p>
           <p>{{list3.createdAt}}</p>
+        </ion-label>
+       </ion-item>
+    </ion-list>
+  </div>
+  <div *ngIf="selectTabs==='insuranceLOA'">
+    <ion-list>
+       <ion-item button *ngFor="let list of loaList" (click)="viewFile(list.file)">
+        <ion-label>
+          <h2>{{list.from}}</h2>
+          <p>{{list.filename}}</p>
+          <p>{{list.createdAt}}</p>
         </ion-label>
        </ion-item>
     </ion-list>

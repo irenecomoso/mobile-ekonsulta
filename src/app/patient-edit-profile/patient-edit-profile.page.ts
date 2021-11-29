@@ -90,13 +90,11 @@ export class PatientEditProfilePage implements OnInit {
       })
     })
     this.insList = tempArray;
-    console.log(this.insList);
   }
 
   choosefile(e)
   {
     this.file = e.target.files[0];
-    console.log(this.file);
     if(this.file)
     {
       this.uploadImage();
@@ -134,7 +132,6 @@ export class PatientEditProfilePage implements OnInit {
   update(frm)
   {
       this.userservice.update_user(this.userID,frm).then(()=>{
-      console.log(frm);
       console.log('patient Updated!');
       this.ngOnInit();
       this.router.navigate(['/patient-profile']);
