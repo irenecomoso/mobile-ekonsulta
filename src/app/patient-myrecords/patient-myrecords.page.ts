@@ -70,6 +70,7 @@ export class PatientMyrecordsPage implements OnInit {
     this.lab_Result();
     this.insurance_LOA();
     this.medical_record();
+    this.prescription_record();
   }
 
   lab_Result()
@@ -88,7 +89,7 @@ export class PatientMyrecordsPage implements OnInit {
               data = item.data();
              //data.from = res.data();// data.from = res.data().name;
               tempArray.push(data);
-              console.log(data);
+              //console.log(data);
             })
           }
         })
@@ -134,7 +135,21 @@ export class PatientMyrecordsPage implements OnInit {
       })
     })
     this.medicalList = tempArray;
-    console.log(this.medicalList);
+    //console.log(this.medicalList);
+  }
+  prescription_record()
+  {
+    var data;
+    var tempArray = [];
+    this.userservice.get_patient_prescription(this.userID).then(e=>{
+      e.forEach(item=>{
+        console.log(item.data());
+        data = item.data();
+        data.id = item.id;
+        tempArray.push(data);
+      })
+    })
+    this.presList = tempArray;
   }
 
 }

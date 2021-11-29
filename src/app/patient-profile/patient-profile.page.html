@@ -11,7 +11,7 @@
 </ion-header>
 
 <ion-content>
-  <form >
+  <form>
     <div class="block-center">
       <ion-card>
         <ion-card-content>
@@ -33,7 +33,7 @@
           </ion-item><br><br><br><br><br>
           <div class="buttons">
             <ion-button  id="btn1" color="rgb(28,54,94)" expand="block" routerLink="/patient-edit-profile"><ion-icon name="create"></ion-icon> Edit</ion-button>
-            <ion-button  id="btn2" color="rgb(28,54,94)" routerLink="/login"><ion-icon name="exit"></ion-icon> Logout</ion-button>
+            <ion-button  id="btn2" color="rgb(28,54,94)" (click)="logout()"><ion-icon name="exit"></ion-icon> Logout</ion-button>
           </div>
         </ion-card-content>
       </ion-card>

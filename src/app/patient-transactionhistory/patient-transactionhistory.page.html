@@ -14,84 +14,16 @@
 </ion-header>
 
 <ion-content>
- <ion-list>
-   <ion-item button>
-    <ion-label>
-      <h2>Finn</h2>
-      <p>Listen, I've had a pretty messed up day...</p>
-    </ion-label>
-   </ion-item>
-   <ion-item button>
-    <ion-label>
-      <h2>Finn</h2>
-      <p>Listen, I've had a pretty messed up day...</p>
-    </ion-label>
-   </ion-item>
-   <ion-item button>
-    <ion-label>
-      <h2>Finn</h2>
-      <p>Listen, I've had a pretty messed up day...</p>
-    </ion-label>
-   </ion-item>
-   <ion-item button>
-    <ion-label>
-      <h2>Finn</h2>
-      <p>Listen, I've had a pretty messed up day...</p>
-    </ion-label>
-   </ion-item>
-   <ion-item button>
-    <ion-label>
-      <h2>Finn</h2>
-      <p>Listen, I've had a pretty messed up day...</p>
-    </ion-label>
-   </ion-item>
-   <ion-item button>
-    <ion-label>
-      <h2>Finn</h2>
-      <p>Listen, I've had a pretty messed up day...</p>
-    </ion-label>
-   </ion-item>
-   <ion-item button>
-    <ion-label>
-      <h2>Finn</h2>
-      <p>Listen, I've had a pretty messed up day...</p>
-    </ion-label>
-   </ion-item>
-   <ion-item button>
-    <ion-label>
-      <h2>Finn</h2>
-      <p>Listen, I've had a pretty messed up day...</p>
-    </ion-label>
-   </ion-item>
-   <ion-item button>
-    <ion-label>
-      <h2>Finn</h2>
-      <p>Listen, I've had a pretty messed up day...</p>
-    </ion-label>
-   </ion-item>
-   <ion-item button>
-    <ion-label>
-      <h2>Finn</h2>
-      <p>Listen, I've had a pretty messed up day...</p>
-    </ion-label>
-   </ion-item>
-   <ion-item button>
-    <ion-label>
-      <h2>Finn</h2>
-      <p>Listen, I've had a pretty messed up day...</p>
-    </ion-label>
-   </ion-item>
-   <ion-item button>
-    <ion-label>
-      <h2>Finn</h2>
-      <p>Listen, I've had a pretty messed up day...</p>
-    </ion-label>
-   </ion-item>
-   <ion-item button>
-    <ion-label>
-      <h2>Finn</h2>
-      <p>Listen, I've had a pretty messed up day...</p>
-    </ion-label>
+ <ion-list *ngFor="let list of transList">
+   <ion-item >
+     <div>
+      <h5>{{userInfo.fullname}}</h5>
+      <small>{{list.createdAt}}</small>
+     </div>
+      <p>Paid an amount of {{list.Amount}} USD as a payment for one consultation.</p>
+      <p>Schedule: {{list.Schedule}}</p>
+      <p>{{list.Specialization}}: {{list.doctor_name}}</p>
+    <small>Transaction ID: {{list.uid}}</small>
    </ion-item>
  </ion-list>
 </ion-content>

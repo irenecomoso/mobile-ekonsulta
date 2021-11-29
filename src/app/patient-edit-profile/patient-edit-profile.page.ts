@@ -10,7 +10,7 @@ import { UserService } from './../services/user.service';
 /* eslint-disable @typescript-eslint/semi */
 /* eslint-disable @typescript-eslint/naming-convention */
 import { Component, OnInit } from '@angular/core';
-import { AngularFireAuth } from '@angular/fire/auth';
+
 export class PatientInfo
 {
   email: string;
@@ -43,6 +43,7 @@ export class PatientEditProfilePage implements OnInit {
   health_insurance: string = "";
   member_ID: string = "";
   error: { name: string;message: string } = { name: '', message: ''};
+  profile_changed: boolean = false;
   constructor(public afu: AuthService, public userservice: UserService, public router: Router) { }
 
   ngOnInit(): void {
@@ -89,17 +90,26 @@ export class PatientEditProfilePage implements OnInit {
       })
     })
     this.insList = tempArray;
-    console.log(this.insList);
   }
 
   choosefile(e)
   {
     this.file = e.target.files[0];
-    console.log(this.file);
+    if(this.file)
+    {
+      this.uploadImage();
+    }
   }
   uploadImage()
   {
-    this.userservice.upload_avatar(this.file,this.userID);
+    this.userservice.upload_avatar(this.file,this.userID)
+    .then(()=>{
+      this.ngOnInit();
+      this.profile_changed = true;
+      setTimeout(() => {
+        this.profile_changed = false;
+      }, 5000);
+    });
   }
   update_insurance()
   {
@@ -122,7 +132,6 @@ export class PatientEditProfilePage implements OnInit {
   update(frm)
   {
       this.userservice.update_user(this.userID,frm).then(()=>{
-      console.log(frm);
       console.log('patient Updated!');
       this.ngOnInit();
       this.router.navigate(['/patient-profile']);
@@ -133,6 +142,7 @@ console.log(frm);
   }
   goback(){
     localStorage.removeItem('data');
+    //window.location.reload();
     this.router.navigate(['/patient-profile']);
   }
 

@@ -1,3 +1,4 @@
+/* eslint-disable @angular-eslint/use-lifecycle-interface */
 /* eslint-disable curly */
 /* eslint-disable @typescript-eslint/semi */
 /* eslint-disable no-var */
@@ -33,12 +34,13 @@ export class PatientProfilePage implements OnInit {
   health_insurance: string;
   member_ID: string;
   insurance_info: any = [];
-  constructor(public userservice: UserService,public afu: AuthService,private menu: MenuController) { }
+
 
   patientMenu() {
     this.menu.enable(true, 'first');
   }
-  ngOnInit() {
+  constructor(public userservice: UserService,public afu: AuthService,private menu: MenuController) { }
+    ngOnInit() {
     console.log("TEST");
     this.patientMenu();
     this.userID = this.afu.get_UID();
@@ -79,7 +81,8 @@ export class PatientProfilePage implements OnInit {
       });
     })
     this.insList = tempArray;
-    console.log(this.insList);
   }
-
+  logout(){
+    this.afu.signout();
+  }
 }

@@ -67,19 +67,16 @@ export class UserService {
   upload_avatar(a, user_id)
   {
     //Uploading image into fireStorage
-    this.store.ref('Users/' + user_id + '/profile.jpg').put(a).then(res =>{
+    return this.store.ref('Users/' + user_id + '/profile.jpg').put(a).then(res =>{
       console.log('successfully uploaded!');
 
       //getting image URL and pass it into fireStore avatar
-      this.afau.onAuthStateChanged(user => {
-      if(user)
-      this.store.storage.ref('Users/' + user_id + '/profile.jpg').getDownloadURL().then(e =>{
+    return this.store.storage.ref('Users/' + user_id + '/profile.jpg').getDownloadURL().then(e =>{
           this.db.collection('avatar').doc(user_id).set({
             image : e
           })
           console.log('Profile Changed!');
         })
-      })
     }).catch(error => {
       console.log(error.message);
     })
@@ -201,5 +198,81 @@ export class UserService {
   get_patient_medical(patient_id)
   {
     return this.db.firestore.collection('Medical_Records').where('patient_id','==',patient_id).get();
+  }
+  get_patient_prescription(patient_id)
+  {
+    return this.db.firestore.collection('Prescription').where('patient_id','==',patient_id).get();
+  }
+  get_patient_transaction(patient_id)
+  {
+    return this.db.firestore.collection('Transaction').where('patient_id','==',patient_id).get();
+  }
+  get_transaction_doctor(doctor_id)
+  {
+    return this.db.firestore.collection('Transaction').where('doctor_id','==',doctor_id)
+    .where('status','==','sent').get();
+  }
+  get_patient_consultation(patient_id)
+  {
+    return this.db.firestore.collection('Consultation').where('patient_id','==',patient_id).get();
+  }
+  get_patient_upcoming(patient_id)
+  {
+    return this.db.firestore.collection('upcoming').where('patient_id','==',patient_id);
+  }
+  get_schedule(doc_id)
+  {
+    return this.db.firestore.collection('Schedule').where('doctor_id','==',doc_id)
+    .orderBy('priority','asc').get();
+  }
+  get_schedule_time(sched_id)
+  {
+    return this.db.firestore.collection('Schedule').doc(sched_id).collection('Time').get();
+  }
+  get_timeInfo(sched_id,time_id)
+  {
+    return this.db.firestore.collection('Schedule').doc(sched_id).collection('Time').doc(time_id).get();
+  }
+  reservationChecker(sched_id,time_id)
+  {
+    return this.db.firestore.collection('Schedule').doc(sched_id).collection('Time').doc(time_id)
+    .collection('Reservation').get();
+  }
+  get_consultation(doctor_id)
+  {
+    return this.db.firestore.collection('Consultation').where('doctor_id','==',doctor_id).get();
+  }
+  get_today_consultation(doctor_id)
+  {
+    return this.db.firestore.collection('Consultation').where('doctor_id','==',doctor_id)
+    .where('createdAt','==',formatDate(new Date(),'MM/dd/yyyy','en')).get();
+  }
+  create_transaction(record)
+  {
+    return this.db.firestore.collection('Transaction').add(record);
+  }
+  patient_book_schedule(sched_id,time_id,userId)
+  {
+    return this.db.firestore.collection('Schedule').doc(sched_id).collection('Time').doc(time_id)
+    .collection('Reservation').add({
+      patient_id : userId,
+      createdAt: formatDate(new Date(),'MM/dd/yyyy','en')
+    })
+  }
+  create_doctor_upcoming(data)
+  {
+    return this.db.firestore.collection('upcoming')
+    .add({
+      createdAt: formatDate(new Date(),'MM/dd/yyyy','en'),
+      patient_id: data.patient_id,
+      doctor_id: data.doctor_id,
+      status: "pending",
+      schedule: data.schedule,
+      time : data.schedtime
+    })
+  }
+  get_scheduleInfo(sched_id)
+  {
+    return this.db.firestore.collection('Schedule').doc(sched_id).get();
   }
 }

@@ -151,7 +151,15 @@ const routes: Routes = [
   {
     path: 'terms-and-conditions',
     loadChildren: () => import('./terms-and-conditions/terms-and-conditions.module').then( m => m.TermsAndConditionsPageModule)
-  }
+  },
+  {
+    path: 'patient-doctors-list-view',
+    loadChildren: () => import('./patient-doctors-list-view/patient-doctors-list-view.module').then( m => m.PatientDoctorsListViewPageModule)
+  },
+  {
+    path: 'doctor-user-analytics',
+    loadChildren: () => import('./doctor-user-analytics/doctor-user-analytics.module').then( m => m.DoctorUserAnalyticsPageModule)
+  },
 
 
 

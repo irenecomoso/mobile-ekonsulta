@@ -124,4 +124,11 @@ export class AuthService {
       this.router.navigate(['/login']);
     }
     }
+  signout(): void
+  {
+    this.afu.signOut();
+    localStorage.removeItem('Users');
+    localStorage.removeItem('data');
+    this.router.navigate(['/login']);
+  }
 }

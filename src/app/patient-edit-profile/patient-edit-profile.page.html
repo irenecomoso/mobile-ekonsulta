@@ -18,7 +18,7 @@
       <img src="{{imgUrl}}" id="pic">
       <div class="inner">
         <input class="inputfile" (change)="choosefile($event)" type="file" name="pic" accept="image/*">
-        <label><ion-icon name="cloud-upload-outline" (click)="uploadImage()"></ion-icon></label>
+        <label><ion-icon name="cloud-upload-outline"></ion-icon></label>
       </div>
     </div>
   </div>
@@ -59,7 +59,7 @@
         <ion-input placeholder="(+63)" [(ngModel)]="model.contact_number" name="contact_number" value="{{info.contact_number}}"></ion-input>
       </ion-item>
       <div style="text-align:center;">
-        <ion-button display="center" id="btn1" color="rgb(28,54,94)" type="submit" >Save Changes</ion-button>
+        <ion-button display="center" id="btn1" color="rgb(28,54,94)" type="submit" routerDirection="root" >Save Changes</ion-button>
       </div><br>
     </form>
   </ion-list>

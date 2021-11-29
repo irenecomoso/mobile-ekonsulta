@@ -1,0 +1,62 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>patient-doctors-list-view</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <form>
+    <div>
+      <div>
+        Doctor: {{docInfo.fullname}}
+        <p>Specialization: {{docInfo.ins}}</p>
+      </div>
+    </div>
+    <form #form="ngForm" (ngSubmit)="submit(form.value)">
+      <div>
+        <div>Select Schedule</div>
+        <div>
+          <label>
+            Please fill in required fields
+            <small>*</small>
+          </label>
+        </div>
+        <div>
+          <div>
+              <label>Scheduled Date</label>
+              <small>*</small>
+              <div>
+                <select [(ngModel)]="schedule" name="schedule" #date (change)="get_time(date.value)">
+                    <option value="" selected>Select Date</option>
+                    <option *ngFor="let list of scheduleList" value="{{list.uid}}">{{list.date}}</option>
+                </select>
+              </div>
+            </div>
+          </div>
+          <div>
+              <label>Scheduled Time</label>
+              <small>*</small>
+              <select [(ngModel)]="time" name="time">
+                <option value="" selected>Select Time</option>
+                <option *ngFor="let list of timeList" value="{{list.uid}}">
+                  {{list.time}}
+                  <span *ngIf="list.status!=='full'">
+                      notfull
+                  </span>
+                  <span *ngIf="list.status==='full'">
+                      full
+                </span>
+                </option>
+              </select>
+            </div>
+        </div>
+        <div *ngIf="error_schedule.length > 0" >
+          {{error_schedule}}
+        </div>
+        <div class="row mt-4">
+            <button type="submit">Continue</button>
+        </div>
+    </form>
+  </form>
+
+</ion-content>
