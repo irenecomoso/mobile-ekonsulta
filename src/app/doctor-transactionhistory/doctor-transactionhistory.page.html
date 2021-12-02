@@ -12,15 +12,17 @@
 
 <ion-content>
  <ion-list *ngFor="let list of tranList">
-   <ion-item>
-      <h5 mb-1>{{list.patient_name}}</h5>
-      <small>{{list.updatedAt}}</small>
-      <p>{{list.patient_name}} paid an amount of {{list.Amount}} as a payment for one consultation.</p>
-      <p>Consultation Schedule: {{list.Schedule}}</p>
-      <p>Amount: {{list.Amount}}</p>
+   <ion-item id="list">
+     <ion-label lines="full">
+      <h3>{{list.updatedAt}}</h3>
+      <h2><b>{{list.patient_name}}</b> paid an amount of &#36;{{list.Amount}} as a payment
+        for one consultation.</h2>
+      <p>Schedule: {{list.Schedule}}</p>
+      <p>Gross Amount: {{list.Amount}}</p>
       <p>Deduction(s): {{list.total_dec}}</p>
       <p>Net Income:{{list.net_income}}</p>
-      <small>Transaction ID:{{list.uid}}</small>
+      <p style="color: rgb(28,54,94);">Transaction ID:{{list.uid}}</p>
+     </ion-label>
    </ion-item>
  </ion-list>
 </ion-content>

@@ -39,6 +39,7 @@ export class PatientProfilePage implements OnInit {
   patientMenu() {
     this.menu.enable(true, 'first');
   }
+
   constructor(public userservice: UserService,public afu: AuthService,private menu: MenuController) { }
     ngOnInit() {
     console.log("TEST");
