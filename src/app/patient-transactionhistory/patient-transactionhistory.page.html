@@ -15,15 +15,15 @@
 
 <ion-content>
  <ion-list *ngFor="let list of transList">
-   <ion-item >
-     <div>
-      <h5>{{userInfo.fullname}}</h5>
-      <small>{{list.createdAt}}</small>
-     </div>
-      <p>Paid an amount of {{list.Amount}} USD as a payment for one consultation.</p>
+   <ion-item id="list">
+     <ion-label lines="full">
+      <h3>{{list.createdAt}}</h3>
+      <h2><b>{{userInfo.fullname}}</b> paid an amount of &#36;{{list.Amount}} as a
+        payment for one consultation.</h2>
       <p>Schedule: {{list.Schedule}}</p>
-      <p>{{list.Specialization}}: {{list.doctor_name}}</p>
-    <small>Transaction ID: {{list.uid}}</small>
+      <p>Physician: {{list.doctor_name}} - {{list.Specialization}}</p>
+      <p style="color: rgb(28,54,94);">Transaction ID: {{list.uid}}</p>
+     </ion-label>
    </ion-item>
  </ion-list>
 </ion-content>

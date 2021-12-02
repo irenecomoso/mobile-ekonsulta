@@ -36,9 +36,7 @@ export class PatientProfilePage implements OnInit {
   insurance_info: any = [];
 
   constructor(public userservice: UserService,public afu: AuthService,private menu: MenuController) { }
-  patientMenu() {
-    this.menu.enable(true, 'first');
-  }ngOnInit() {
+  ngOnInit() {
     this.patientMenu();
     this.userID = this.afu.get_UID();
     this.userservice.get_avatar(this.userID).then(e =>{
@@ -66,6 +64,9 @@ export class PatientProfilePage implements OnInit {
       })
     })
     this.insurance_list();
+  }
+  patientMenu() {
+    this.menu.enable(true, 'first');
   }
   insurance_list(){
     var data;
