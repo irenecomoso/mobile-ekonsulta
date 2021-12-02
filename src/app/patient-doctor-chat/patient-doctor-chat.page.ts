@@ -121,4 +121,8 @@ export class PatientDoctorChatPage implements OnInit {
       console.log("Empty!");
     }
   }
+  video_call()
+  {
+    window.open('/patient-video-call','location=yes,height=570,width=2000,scrollbars=yes,status=yes');
+  }
 }

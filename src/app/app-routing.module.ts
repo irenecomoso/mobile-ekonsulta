@@ -159,7 +159,11 @@ const routes: Routes = [
   {
     path: 'doctor-user-analytics',
     loadChildren: () => import('./doctor-user-analytics/doctor-user-analytics.module').then( m => m.DoctorUserAnalyticsPageModule)
+  },  {
+    path: 'patient-video-call',
+    loadChildren: () => import('./patient-video-call/patient-video-call.module').then( m => m.PatientVideoCallPageModule)
   },
+
 
 
 

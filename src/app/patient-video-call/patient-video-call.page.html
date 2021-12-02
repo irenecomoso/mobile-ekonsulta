@@ -1,0 +1,31 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>patient-video-call</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <div class>
+    <div >
+      <p >Patient's Name</p>
+      <video #local_video [autoplay]="true" [muted]="true"></video>
+    </div>
+    <div>
+      <p >Doctor's Name</p>
+      <video #received_video [autoplay]="true"></video>
+    </div>
+  </div>
+
+  <div>
+    <div>
+      <button><ion-icon name="videocam-outline"></ion-icon></button>
+      <button class="stop-local" title="Camera/Mic off">
+        <ion-icon name="videocam-off-outline"></ion-icon>
+        <ion-icon name="mic-off-outline"></ion-icon>
+      </button>
+      <button (click)="answerCall()"><ion-icon name="call-outline"></ion-icon></button>
+    </div>
+  </div>
+
+
+</ion-content>

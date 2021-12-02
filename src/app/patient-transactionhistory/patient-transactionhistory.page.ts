@@ -18,17 +18,15 @@ export class PatientTransactionhistoryPage implements OnInit {
   userId: string = "";
   transList: any = [];
 
-
-
-  patientMenu() {
-    this.menu.enable(true, 'first');
-  }
-
   constructor(
     public userservice: UserService,
     public afu: AuthService,
     private menu: MenuController
   ) { }
+
+  patientMenu() {
+    this.menu.enable(true, 'first');
+  }
 
   ngOnInit(): void {
     console.log("Transaction TEST");
