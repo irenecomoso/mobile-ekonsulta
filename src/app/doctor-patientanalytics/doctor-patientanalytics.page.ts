@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { MenuController } from '@ionic/angular';
 
 @Component({
   selector: 'app-doctor-patientanalytics',
@@ -7,9 +8,14 @@ import { Component, OnInit } from '@angular/core';
 })
 export class DoctorPatientanalyticsPage implements OnInit {
   selectTabs= 'Daily';
-  constructor() { }
+  constructor(private menu: MenuController) { }
+
+  doctorMenu() {
+    this.menu.enable(true, 'second');
+  }
 
   ngOnInit() {
+    this.doctorMenu();
   }
 
 }

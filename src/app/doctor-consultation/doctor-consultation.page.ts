@@ -14,6 +14,7 @@ import { UserService } from './../services/user.service';
 /* eslint-disable @typescript-eslint/type-annotation-spacing */
 import { Component, OnInit } from '@angular/core';
 import { Observable } from 'rxjs';
+import { MenuController } from '@ionic/angular';
 
 @Component({
   selector: 'app-doctor-consultation',
@@ -27,11 +28,15 @@ export class DoctorConsultationPage implements OnInit {
   userList2$: Observable<any>;
   userId : string = "";
 
-  constructor(public userservice : UserService,public router: Router,public afu : AuthService,public chats : ChatService
-  ) { }
+  constructor(public userservice : UserService,public router: Router,public afu : AuthService,public chats : ChatService,
+    private menu: MenuController) { }
    /** set to false so that when loading the patient's page, content of that function is not displayed */
    upcoming = false;
    done = false;
+
+  doctorMenu() {
+    this.menu.enable(true, 'second');
+  }
 
   upcomingFunction(){
     this.upcoming = true;
@@ -42,7 +47,7 @@ export class DoctorConsultationPage implements OnInit {
    this.done = true;
   }
   ngOnInit(): void {
-
+    this.doctorMenu();
     this.userId = this.afu.get_UID();
     localStorage.removeItem('data');
     this.get_userInfo();

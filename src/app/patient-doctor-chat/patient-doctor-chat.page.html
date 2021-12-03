@@ -1,16 +1,11 @@
-<ion-header>
-  <ion-toolbar>
-    <ion-title>E-konsulta</ion-title>
-  </ion-toolbar>
-</ion-header>
 
 <ion-header class="ion-no-border">
   <ion-toolbar id="fixed">
     <ion-buttons slot="start">
       <ion-back-button routerLink="/patient-consultation"></ion-back-button>
     </ion-buttons>
-    <ion-avatar slot="start">
-      <img src="{{docInfo.image}}}" id="pic">
+    <ion-avatar slot="start" id="icon">
+      <img src="{{docInfo.image}}" id="pic">
     </ion-avatar>
     <ion-buttons slot="end" class="right">
       <ion-button class="right" (click)="video_call()">
@@ -20,55 +15,43 @@
         <ion-icon name="information-circle"></ion-icon>
       </ion-button>
     </ion-buttons>
-    <ion-title style="text-align:left;">Finn Noynay</ion-title>
+    <ion-title style="text-align:left;">{{docInfo.fullname}}</ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content>
-  <div class="row flex-nowrap second">
-    <div class="col">
-      <div class="d-flex justify-content-between border-bottom patient-center">
-        <h4 class="user mx-2"><img src="{{docInfo.image}}" alt="" width="40" height="40">&nbsp; {{docInfo.fullname}}</h4>
-        <div class=" d-flex ">
-          <button id="btn"><i class="bi bi-camera-video-fill"></i></button>
-        </div>
-      </div>
-      <!--THIS SECTION IS FOR THE CHAT-->
-      <div *ngIf="chat$ | async as chat">
-        <div *ngFor="let msg of chat.messages">
-          <div *ngIf="msg.uid === userid">
-            {{msg.content}}
-            <img  *ngIf="msg.uid === userid" class="to" src="{{imgUrl}}" width="15" height="15">
-          </div>
-          <div *ngIf="msg.uid === docInfo.uid">
-            <img  *ngIf="msg.uid === docInfo.uid" src="{{docInfo.image}}" width="15px" height="15px">
-            {{msg.content}}
-          </div>
-        </div>
-      </div>
-      <div class="below">
+  <div *ngIf="chat$ | async as chat">
+    <ion-list *ngFor="let msg of chat.messages">
+      <ion-item *ngIf="msg.uid === userid">
+        <h3>{{msg.content}}</h3>
+        <ion-avatar slot="end">
+          <img src="{{imgUrl}}">
+        </ion-avatar>
+      </ion-item>
+      <ion-item *ngIf="msg.uid === docInfo.uid">
+        <ion-avatar slot="start">
+          <img src="{{docInfo.image}}">
+        </ion-avatar>
+        <h3>{{msg.content}}</h3>
+      </ion-item>
+    </ion-list>
+  </div>
+   <!--<div class="below">
         <div class="image-upload">
           <label for="file-input" class="mt-1">
             <i class="bi bi-plus-circle-fill"></i>
           </label>
           <input id="file-input" type="file"/>
         </div>
-        <div class="right">
-          <input [(ngModel)]="content" type="text" class="chat-type">
-          <button (click)="send_message()" class="chat-send"><i class="bi bi-send-fill"></i></button>
-        </div>
-        <!--<button (click)="send_message()" class="chat-send">Send</button> -->
-      </div>
+      </div>-->
+  <!--<div >
+    <h1 class="left-profile"><img src="{{docInfo.image}}" alt="" width="40" height="40"></h1>
+    <h4 >{{docInfo.fullname}}</h4>
+    <div >
+      <a>Payment</a>
+      <a>Shared Files</a>
     </div>
-  </div>
-  <div >
-        <h1 class="left-profile"><img src="{{docInfo.image}}" alt="" width="40" height="40"></h1>
-        <h4 >{{docInfo.fullname}}</h4>
-        <div >
-          <a>Payment</a>
-          <a>Shared Files</a>
-        </div>
-  </div>
+  </div>-->
  </ion-content>
 
 <ion-footer>

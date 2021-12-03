@@ -12,36 +12,66 @@
       </ion-toolbar>
     </ion-header>
       <ion-content>
-        <ion-list *ngFor="let pages of appPages">
+        <ion-list *ngFor="let pages of patientPages">
         <ion-menu-toggle auto-hide="true">
-          <ion-item [routerLink]="pages.url" routerDirection="root">
-              <ion-icon [name]="pages.icon" slot="start" class="icons"></ion-icon>
-                 {{pages.title}}
+          <ion-item [routerLink]="pages.url" routerDirection="root" lines=full>
+            <ion-icon [name]="pages.icon" slot="start" class="icons"></ion-icon>{{pages.title}}
           </ion-item>
         </ion-menu-toggle>
         </ion-list>
       </ion-content>
       <ion-footer>
-        <p>&nbsp; &nbsp;<a (click)="patientLinkClick()">Terms and Conditions</a></p>
+        <p>&nbsp; &nbsp;<a (click)="LinkClick()">Terms and Conditions</a></p>
       </ion-footer>
     </ion-menu>
 
     <ion-menu side="start" menuId="second" contentId="content1">
       <ion-header>
         <ion-toolbar>
-          <ion-title>Navigate</ion-title>
+          <br>
+          <ion-button class="acct" (click)="click2()">
+            <div>
+              <ion-icon name="person-circle" id="usr"></ion-icon>
+              <ion-label>My Account</ion-label>
+            </div>
+          </ion-button><br>
         </ion-toolbar>
       </ion-header>
       <ion-content>
-        <ion-list *ngFor="let pages of navigate">
-        <ion-menu-toggle auto-hide="true">
-          <ion-item [routerLink]="pages.url" routerDirection="forward">
-              <ion-icon [name]="pages.icon" slot="start"></ion-icon>
-                 {{pages.title}}
+        <ion-list>
+       <ion-menu-toggle auto-hide="true">
+         <ion-item routerLink="/doctor-consultation" routerDirection="root" lines=full>
+            <ion-icon name="people-outline" slot="start" class="icons"></ion-icon>Patients
+          </ion-item>
+        </ion-menu-toggle>
+        <ion-item (click)="menuItemHandler()"  menuClose="false" lines=full>
+          <ion-icon name="documents-outline" slot="start" class="icons"></ion-icon>Reports
+          <ion-icon name="caret-down-outline" slot="end"  [hidden]="down"></ion-icon>
+          <ion-icon name="caret-up-outline" slot="end"  [hidden]="up"></ion-icon>
+        </ion-item>
+        <ion-item-group submenu [class.visible]="showSubmenu">
+          <ion-menu-toggle>
+            <ion-item submenu-item lines=full id="one" routerLink="/doctor-patientanalytics" routerDirection="root">&nbsp;
+              &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+              Patient Analytics</ion-item>
+            <ion-item submenu-item lines=full id="two" routerLink="/doctor-transactionhistory" routerDirection="root">&nbsp;
+              &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+              Transaction History</ion-item>
+          </ion-menu-toggle>
+        </ion-item-group>
+        <ion-menu-toggle>
+          <ion-item routerLink="/doctor-reviews" routerDirection="root" lines=full>
+            <ion-icon name="chatbubble-ellipses-outline" slot="start" class="icons"></ion-icon>Reviews
+          </ion-item>
+          <ion-item routerLink="/doctor-reviews" routerDirection="root" lines=full>
+            <ion-icon name="calendar-outline" slot="start" class="icons"></ion-icon>Schedule
           </ion-item>
         </ion-menu-toggle>
         </ion-list>
       </ion-content>
+      <ion-footer>
+        <p>&nbsp; &nbsp;<a (click)="LinkClick()">Terms and Conditions</a></p>
+      </ion-footer>
     </ion-menu>
 
 

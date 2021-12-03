@@ -1,6 +1,9 @@
 <ion-header>
   <ion-toolbar>
-    <ion-title>E-konsulta</ion-title>
+    <ion-buttons slot="start">
+      <ion-menu-button color="dark"></ion-menu-button>
+    </ion-buttons>
+    <ion-title><b>E-KONSULTA</b></ion-title>
   </ion-toolbar>
 </ion-header>
 
@@ -23,8 +26,8 @@
   <div *ngIf="selectTabs==='upcoming'">
     <div *ngFor="let list of userList">
     <ion-list>
-      <ion-item button routerLink="/doctor-patient-chat">
-        <a (click)="chat(list)" class="list-group-item list-group-item-action">
+      <ion-item button (click)="chat(list)">
+        <a  class="list-group-item list-group-item-action">
           {{list.fullname}}
           <div class="container">
             <div *ngIf="list.upcoming_status === 'pending'">

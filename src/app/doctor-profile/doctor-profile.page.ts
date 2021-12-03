@@ -4,6 +4,7 @@
 import { UserService } from './../services/user.service';
 import { Component, OnInit } from '@angular/core';
 import { AuthService } from '../services/auth.service';
+import { MenuController } from '@ionic/angular';
 export class DoctorInfo
 {
   fullname: string;
@@ -30,9 +31,10 @@ export class DoctorProfilePage implements OnInit {
   imgUrl: any;
   file: any;
 
-  constructor(public userservice: UserService,public afu: AuthService) { }
+  constructor(public userservice: UserService,public afu: AuthService,private menu: MenuController) { }
 
   ngOnInit(): void {
+    this.doctorMenu();
     this.userId = this.afu.get_UID();
     this.userservice.get_patientInfo(this.userId).then(e=>{
      // console.log(e.data());
@@ -57,5 +59,9 @@ export class DoctorProfilePage implements OnInit {
       })
     })
     this.spList = tempArray;
+  }
+
+  doctorMenu() {
+    this.menu.enable(true, 'second');
   }
 }

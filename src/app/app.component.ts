@@ -9,20 +9,39 @@ import { MenuController } from '@ionic/angular';
 })
 export class AppComponent {
   navigate: any;
-
+  showSubmenu: boolean = false;
+  down: boolean=false;
+  up: boolean=true;
   constructor(private router: Router,private menu: MenuController) {}
 
   click(){
     window.location.href='/patient-profile';
-
     this.menu.close();
   }
 
-  patientLinkClick(){
+  click2(){
+    window.location.href='/doctor-profile';
+    this.menu.close();
+  }
+
+  LinkClick(){
     this.router.navigateByUrl('/terms-and-conditions');
     this.menu.close();
   }
-  public appPages = [
+
+  menuItemHandler(): void {
+    this.showSubmenu = !this.showSubmenu;
+    if(this.showSubmenu==true){
+      this.down=!this.down;
+      this.up=!this.up;
+    }
+    else{
+      this.down=!this.down;
+      this.up=!this.up;
+    }
+  }
+
+  public patientPages = [
     {
       title: 'Consultation',
       url: '/patient-consultation',

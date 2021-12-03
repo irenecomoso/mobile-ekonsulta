@@ -6,6 +6,7 @@
 import { AuthService } from 'src/app/services/auth.service';
 import { UserService } from './../services/user.service';
 import { Component, OnInit } from '@angular/core';
+import { MenuController } from '@ionic/angular';
 
 @Component({
   selector: 'app-doctor-transactionhistory',
@@ -18,10 +19,16 @@ export class DoctorTransactionhistoryPage implements OnInit {
 
   constructor(
     public userservice: UserService,
-    public afu: AuthService
+    public afu: AuthService,
+    private menu: MenuController
   ) { }
 
+  doctorMenu() {
+    this.menu.enable(true, 'second');
+  }
+
   ngOnInit(): void {
+    this.doctorMenu();
     this.userId = this.afu.get_UID();
     this.get_transaction();
   }

@@ -8,11 +8,13 @@ import { AuthService } from './../services/auth.service';
 import { UserService } from './../services/user.service';
 /* eslint-disable @typescript-eslint/naming-convention */
 import { Component, OnInit } from '@angular/core';
+import { MenuController } from '@ionic/angular';
 
 @Component({
   selector: 'app-doctor-reviews',
   templateUrl: './doctor-reviews.page.html',
   styleUrls: ['./doctor-reviews.page.scss'],
+
 })
 export class DoctorReviewsPage implements OnInit {
   userId: string;
@@ -25,10 +27,14 @@ export class DoctorReviewsPage implements OnInit {
 
   reviewId: string = "";
   sent_to: string = "";
-  constructor(public userservice: UserService, public afu: AuthService) { }
+  constructor(public userservice: UserService, public afu: AuthService,private menu: MenuController) { }
+
+  doctorMenu() {
+    this.menu.enable(true, 'second');
+  }
 
   ngOnInit(): void {
-
+    this.doctorMenu();
     this.userId = this.afu.get_UID();
     this.userservice.get_patientInfo(this.userId).then(e=>{
       this.info = e.data();
