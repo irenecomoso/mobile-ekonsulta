@@ -163,6 +163,14 @@ const routes: Routes = [
     path: 'patient-video-call',
     loadChildren: () => import('./patient-video-call/patient-video-call.module').then( m => m.PatientVideoCallPageModule)
   },
+  {
+    path: 'video-call',
+    loadChildren: () => import('./video-call/video-call.module').then( m => m.VideoCallPageModule)
+  },
+  {
+    path: 'doctor-medical-certificate',
+    loadChildren: () => import('./doctor-medical-certificate/doctor-medical-certificate.module').then( m => m.DoctorMedicalCertificatePageModule)
+  },
 
 
 

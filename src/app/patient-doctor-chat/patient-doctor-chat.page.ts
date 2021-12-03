@@ -40,36 +40,6 @@ export class PatientDoctorChatPage implements OnInit {
     public afu: AuthService,
     public userservice: UserService
   ) { }
-  medicalRecords(){
-    this.medicalrecords = true;
-    this.labresult = false;
-    this.presc = false;
-    this.medcertificate1 = false;
-    this.insurance_loa = false;
-  }
-
-  labResult(){
-    this.medicalrecords = false;
-    this.labresult = true;
-    this.medcertificate1 = false;
-    this.presc = false;
-    this.insurance_loa = false;
-  }
-
-  prescription(){
-    this.medicalrecords = false;
-    this.labresult = false;
-    this.presc = true;
-    this.medcertificate1 = false;
-    this.insurance_loa = false;
-  }
-  medCertificate(){
-    this.medicalrecords = false;
-    this.labresult = false;
-    this.presc = false;
-    this.medcertificate1 = true;
-    this.insurance_loa = false;
-  }
   insuranceLOA()
   {
     this.medicalrecords = false;

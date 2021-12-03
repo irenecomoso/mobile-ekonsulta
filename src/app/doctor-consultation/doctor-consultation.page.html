@@ -27,135 +27,29 @@
     <div *ngFor="let list of userList">
     <ion-list>
       <ion-item button (click)="chat(list)">
-        <a  class="list-group-item list-group-item-action">
-          {{list.fullname}}
-          <div class="container">
+        <ion-label>
+          <h2>{{list.fullname}}</h2>
             <div *ngIf="list.upcoming_status === 'pending'">
-               <button id="btnUpcoming" class="btn btn-warning col" >Accept</button>
-               <button id="btnSched" class="btn btn-dark">Schedule | {{list.schedule}}</button>
+               <ion-button>Accept</ion-button>
+               <ion-button>Schedule | {{list.schedule}} | {{list.schedtime}}</ion-button>
             </div>
             <div *ngIf="list.upcoming_status === 'ongoing'">
-              <button id="btnUpcoming" class="btn btn-success col" >Join now</button>
-              <button id="btnSched" class="btn btn-dark">Schedule | {{list.schedule}}</button>
+              <ion-button>Join now</ion-button>
+              <ion-button>Schedule | {{list.schedule}} | {{list.schedtime}}</ion-button>
             </div>
-        </div>
-      </a><!--<ion-label>
-         <h2>Finn</h2>
-         <p>Listen, I've had a pretty messed up day...</p>
-       </ion-label>
+      </ion-label>
       </ion-item>
-      <ion-item button>
-       <ion-label>
-         <h2>Finn</h2>
-         <p>Listen, I've had a pretty messed up day...</p>
-       </ion-label>-->
-      </ion-item>
-      <ion-item button>
-        <ion-label>
-          <h2>Finn</h2>
-          <p>Listen, I've had a pretty messed up day...</p>
-        </ion-label>
-       </ion-item>
-       <ion-item button>
-        <ion-label>
-          <h2>Finn</h2>
-          <p>Listen, I've had a pretty messed up day...</p>
-        </ion-label>
-       </ion-item><ion-item button>
-        <ion-label>
-          <h2>Finn</h2>
-          <p>Listen, I've had a pretty messed up day...</p>
-        </ion-label>
-       </ion-item>
-       <ion-item button>
-        <ion-label>
-          <h2>Finn</h2>
-          <p>Listen, I've had a pretty messed up day...</p>
-        </ion-label>
-       </ion-item><ion-item button>
-        <ion-label>
-          <h2>Finn</h2>
-          <p>Listen, I've had a pretty messed up day...</p>
-        </ion-label>
-       </ion-item>
-       <ion-item button>
-        <ion-label>
-          <h2>Finn</h2>
-          <p>Listen, I've had a pretty messed up day...</p>
-        </ion-label>
-       </ion-item><ion-item button>
-        <ion-label>
-          <h2>Finn</h2>
-          <p>Listen, I've had a pretty messed up day...</p>
-        </ion-label>
-       </ion-item>
-       <ion-item button>
-        <ion-label>
-          <h2>Finn</h2>
-          <p>Listen, I've had a pretty messed up day...</p>
-        </ion-label>
-       </ion-item><ion-item button>
-        <ion-label>
-          <h2>Finn</h2>
-          <p>Listen, I've had a pretty messed up day...</p>
-        </ion-label>
-       </ion-item>
-       <ion-item button>
-        <ion-label>
-          <h2>Finn</h2>
-          <p>Listen, I've had a pretty messed up day...</p>
-        </ion-label>
-       </ion-item><ion-item button>
-        <ion-label>
-          <h2>Finn</h2>
-          <p>Listen, I've had a pretty messed up day...</p>
-        </ion-label>
-       </ion-item>
-       <ion-item button>
-        <ion-label>
-          <h2>Finn</h2>
-          <p>Listen, I've had a pretty messed up day...</p>
-        </ion-label>
-       </ion-item><ion-item button>
-        <ion-label>
-          <h2>Finn</h2>
-          <p>Listen, I've had a pretty messed up day...</p>
-        </ion-label>
-       </ion-item>
-       <ion-item button>
-        <ion-label>
-          <h2>Finn</h2>
-          <p>Listen, I've had a pretty messed up day...</p>
-        </ion-label>
-       </ion-item>
     </ion-list>
     </div>
   </div>
 
   <div *ngIf="selectTabs==='done'">
     <ion-list>
-      <ion-item button>
+      <ion-item button *ngFor="let list of doneList">
        <ion-label>
-        <h2>Han</h2>
-        <p>I've got enough on my plate as it is, and I...</p>
-       </ion-label>
-      </ion-item>
-      <ion-item button>
-       <ion-label>
-        <h2>Han</h2>
-        <p>I've got enough on my plate as it is, and I...</p>
-       </ion-label>
-      </ion-item>
-      <ion-item button>
-       <ion-label>
-        <h2>Han</h2>
-        <p>I've got enough on my plate as it is, and I...</p>
-       </ion-label>
-      </ion-item>
-      <ion-item button>
-       <ion-label>
-        <h2>Han</h2>
-        <p>I've got enough on my plate as it is, and I...</p>
+        <h2>{{list.fullname}}</h2>
+            <ion-button>Done</ion-button>
+            <ion-button>{{list.consultation_schedule}} | {{list.schedule}} | {{list.schedtime}}</ion-button>
        </ion-label>
       </ion-item>
     </ion-list>

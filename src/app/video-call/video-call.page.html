@@ -1,0 +1,35 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>video-call</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <div class="bg-dark row">
+    <div class="col">
+      <p class="video-description text-center text-light">{{currentUser.displayName}}</p>
+      <video #local_video [autoplay]="true" [muted]="true"></video>
+    </div>
+    <div class="col">
+      <p class="video-description text-center text-light">{{remoteUser.fullname}}</p>
+      <video #received_video [autoplay]="true"></video>
+    </div>
+  </div>
+  <div class="bg-dark row">
+    <div class="options">
+      <button *ngIf="call_interval" class="start-local">{{timeLeft}}</button>
+      <button (click)="startLocalVideo()"title="Camera on"><ion-icon name="videocam-outline"></ion-icon></button>
+      <button (click)="pauseLocalVideo()" title="Camera/Mic off">
+        <ion-icon name="videocam-off-outline"></ion-icon>
+        <ion-icon name="mic-off-outline"></ion-icon>
+      </button>
+      <button [disabled]="call_interval" (click)="Call()" title="Call">
+        <ion-icon name="call-outline"></ion-icon>
+      </button>
+      <button (click)="end_call()" class="hangup"><span title="End Call"><ion-icon name="call-outline" color="red"></ion-icon></span></button>
+      <button (click)="start_record()" title="Record"><ion-icon name="record"></ion-icon></button>
+      <button (click)="stop_record()" title="Stop Recording"><ion-icon name="stop record" color="red"></ion-icon></button>
+    </div>
+  </div>
+
+</ion-content>

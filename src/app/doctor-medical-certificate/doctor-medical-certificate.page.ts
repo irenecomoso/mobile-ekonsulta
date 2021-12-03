@@ -1,26 +1,26 @@
 /* eslint-disable @typescript-eslint/no-unused-expressions */
+/* eslint-disable no-trailing-spaces */
 /* eslint-disable @typescript-eslint/dot-notation */
 /* eslint-disable prefer-const */
 /* eslint-disable eqeqeq */
 /* eslint-disable @typescript-eslint/semi */
-import { Observable } from 'rxjs';
-/* eslint-disable @typescript-eslint/naming-convention */
-/* eslint-disable @typescript-eslint/quotes */
-/* eslint-disable @typescript-eslint/no-inferrable-types */
 import { NotificationService } from './../services/notification.service';
 import { Router } from '@angular/router';
 import { UserService } from './../services/user.service';
 import { AuthService } from './../services/auth.service';
+import { Observable } from 'rxjs';
+/* eslint-disable @typescript-eslint/naming-convention */
+/* eslint-disable @typescript-eslint/quotes */
+/* eslint-disable @typescript-eslint/no-inferrable-types */
 import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { formatDate } from '@angular/common';
 
 @Component({
-  selector: 'app-doctor-patientprescription',
-  templateUrl: './doctor-patientprescription.page.html',
-  styleUrls: ['./doctor-patientprescription.page.scss'],
+  selector: 'app-doctor-medical-certificate',
+  templateUrl: './doctor-medical-certificate.page.html',
+  styleUrls: ['./doctor-medical-certificate.page.scss'],
 })
-export class DoctorPatientprescriptionPage implements OnInit {
-
+export class DoctorMedicalCertificatePage implements OnInit {
   @ViewChild('file') files: ElementRef;
   @ViewChild('file2') files2: ElementRef;
 
@@ -62,60 +62,7 @@ export class DoctorPatientprescriptionPage implements OnInit {
     })
     this.patientInfo = JSON.parse(localStorage.getItem('data'));
   }
-  choosefile(e,type)
-  {
-    if(type=="cs")
-    {
-      this.file1 = e.target.files[0];
-      console.log(e.target.files[0]);
-    }
-    else if(type=="prs")
-    {
-      this.file2 = e.target.files[0];
-      console.log(e.target.files[0]);
-    }
-  }
-
-  uploadFile()
-  {
-    console.log(this.filename);
-    if(this.filename != "" && this.filename2 != "")
-    {
-      this.userservice.send_medicalRecord(this.patientInfo.uid,this.userid,this.filename+".pdf",this.file1)
-      .catch(error=>{
-        console.log(error)
-      }).then(()=>{
-        console.log("Stored successfully!");
-      })
-      this.userservice.send_prescriptionRecord(this.patientInfo.uid,this.userid,this.filename2+".pdf",this.file2)
-      .catch(error=>{
-        console.log(error)
-      }).then(()=>{
-        console.log("Stored successfully2!");
-      })
-      this.success_message = "Files sent successfully!";
-
-      let record2 ={};
-      record2['title'] = "Medical Summary and Prescription"
-      record2['description'] = "The doctor sent your Medical Summary and your Prescription. Check your Records now!";
-      record2['createdAt'] = formatDate(new Date(),'short','en');
-      this.notif.send_patient(this.patientInfo.uid,record2);
-
-
-      setTimeout(() => {
-        this.success_message = "";
-      }, 5000);
-    }
-    else
-    {
-      this.error_message = "Make sure the fields are not empty!";
-      setTimeout(() => {
-        this.error_message = "";
-      }, 5000);
-    }
-    this.router.navigate[('/doctor-patient-chat')];
-  }
-  /*uploadMedical()
+  uploadMedical()
   {
     if(this.filename != "" && this.file1 != "")
     {
@@ -132,7 +79,7 @@ export class DoctorPatientprescriptionPage implements OnInit {
         record2['description'] = "A doctor sent a medical Certificate. Check your Records now!";
         record2['createdAt'] = formatDate(new Date(),'short','en');
         this.notif.send_patient(this.patientInfo.uid,record2);
-
+        this.router.navigate[('/patient-doctor-chat')];
         setTimeout(() => {
           this.success_message = "";
         }, 5000);
@@ -145,15 +92,10 @@ export class DoctorPatientprescriptionPage implements OnInit {
         this.error_message = "";
       }, 5000);
     }
-  }*/
+  }
   choosefile2(e)
   {
     this.file1 = e.target.files[0];
     console.log(this.file1);
   }
-  open(file)
-  {
-    window.open(file);
-  }
-
 }
