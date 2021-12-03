@@ -29,33 +29,36 @@
       <ion-icon name="add" id="add"></ion-icon>
     </ion-fab-button>
   </ion-fab>
-  <div *ngIf="selectTabs==='upcoming'">
-    <ion-list *ngFor="let list of docList">
-      <ion-item button (click)="chat(list)">
-        <div *ngIf="list.upcoming_status === 'pending'">
-          <span >{{list.fullname}}</span>
-          <ion-button >Pending</ion-button>
-          <ion-button >Schedule | {{list.schedule}} Time | {{list.schedtime}}</ion-button>
-        </div>
-        <div *ngIf="list.upcoming_status === 'ongoing'">
-          <span >{{list.fullname}}</span>
-          <ion-button >Join Now</ion-button>
-          <ion-button >Schedule | {{list.schedule}} Time | {{list.schedtime}}</ion-button>
-        </div>
-      </ion-item>
-    </ion-list>
-  </div>
 
-  <div *ngIf="selectTabs==='done'">
-    <div>
-    <ion-list *ngFor="let list of doneList">
-      <ion-item button>
-        <span>{{list.fullname}}</span>
-        <button>Done</button>
-        <button>Schedule | {{list.schedule}} Time | {{list.schedtime}}</button>
+  <div *ngIf="selectTabs==='upcoming'">
+    <div *ngFor="let list of docList">
+    <ion-list>
+      <ion-item button (click)="chat(list)">
+        <ion-label>
+          <h2>{{list.fullname}}</h2>
+            <div *ngIf="list.upcoming_status === 'pending'">
+               <ion-button>Pending</ion-button>
+               <ion-button>Schedule | {{list.schedule}} | {{list.schedtime}}</ion-button>
+            </div>
+            <div *ngIf="list.upcoming_status === 'ongoing'">
+              <ion-button>Join now</ion-button>
+              <ion-button>Schedule | {{list.schedule}} | {{list.schedtime}}</ion-button>
+            </div>
+      </ion-label>
       </ion-item>
     </ion-list>
     </div>
+  </div>
+  <div *ngIf="selectTabs==='done'">
+    <ion-list>
+      <ion-item button *ngFor="let list of doneList">
+       <ion-label>
+        <h2>{{list.fullname}}</h2>
+            <ion-button>Done</ion-button>
+            <ion-button>Schedule | {{list.consultation_schedule}} | {{list.schedule}} | {{list.schedtime}}</ion-button>
+       </ion-label>
+      </ion-item>
+    </ion-list>
   </div>
 </ion-content>
 

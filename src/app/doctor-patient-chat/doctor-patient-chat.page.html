@@ -10,31 +10,43 @@
       <ion-back-button routerLink="/doctor-consultation"></ion-back-button>
     </ion-buttons>
     <ion-avatar slot="start">
-      <img src="https://ionicframework.com/docs/demos/api/avatar/avatar.svg" id="pic">
+      <img src={{patientInfo.image}} id="pic">
     </ion-avatar>
     <ion-buttons slot="end" class="right">
-      <ion-button class="right">
+      <ion-button class="right" (click)="video_call()">
         <ion-icon name="videocam"></ion-icon>
       </ion-button>
       <ion-button class="right" routerLink="/doctor-chat-info">
         <ion-icon name="information-circle"></ion-icon>
       </ion-button>
     </ion-buttons>
-    <ion-title style="text-align:left;">Finn Noynay</ion-title>
+    <ion-title style="text-align:left;">{{patientInfo.fullname}}</ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content>
-
+<!--THIS SECTION IS FOR THE CHAT-->
+<ion-list *ngIf="chat$ | async as chat">
+  <ion-item *ngFor="let msg of chat.messages">
+    <ion-item *ngIf="msg.uid === userid">
+      <img src="{{imgUrl}}" width="15" height="15">
+      {{msg.content}}
+    </ion-item>
+    <div *ngIf="msg.uid === patientInfo.uid" >
+      <img src="{{patientInfo.image}}" width="15" height="15">
+      {{msg.content}}
+    </div>
+  </ion-item>
+</ion-list>
 </ion-content>
 
 <ion-footer>
   <ion-toolbar>
     <ion-item>
-      <ion-textarea placeholder="Type to chat"></ion-textarea>
+      <ion-textarea placeholder="Type to chat" [(ngModel)]="content"></ion-textarea>
     </ion-item>
     <ion-buttons slot="end">
-      <ion-button>
+      <ion-button (click)="send_message()">
         <ion-icon name="send" id="send"></ion-icon>
       </ion-button>
     </ion-buttons>

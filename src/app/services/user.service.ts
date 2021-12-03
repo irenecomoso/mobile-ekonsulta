@@ -275,4 +275,96 @@ export class UserService {
   {
     return this.db.firestore.collection('Schedule').doc(sched_id).get();
   }
+  check_upcoming(doc_id,pat_id)
+  {
+    return this.db.firestore.collection('upcoming').where('doctor_id','==',doc_id).where('patient_id','==',pat_id)
+    .get();
+  }
+  update_upcoming(upcoming_id)
+  {
+    return this.db.firestore.collection('upcoming').doc(upcoming_id).update({
+      status: "ongoing"
+    })
+  }
+  send_medicalRecord(patient_id,doc_id,filename,file)
+  {
+   return this.store.ref('Medical-Records/' + patient_id + '/Records/' + filename).put(file)
+    .then(()=>{
+      this.afau.onAuthStateChanged(user=>{
+        if(user)
+        {
+          this.store.storage.ref('Medical-Records/' + patient_id + '/Records/' + filename).getDownloadURL()
+          .then(e=>{
+            this.db.collection('Medical_Records').add({
+              filename : filename,
+              file : e,
+              doctor_id: doc_id,
+              patient_id: patient_id,
+              createdAt : formatDate(new Date(),'MM/dd/yyyy','en')
+            })
+          })
+        }
+      })
+    })
+  }
+  send_prescriptionRecord(patient_id,doc_id,filename,file)
+  {
+   return this.store.ref('Prescription-Records/' + patient_id + '/Records/' + filename).put(file)
+    .then(()=>{
+      this.afau.onAuthStateChanged(user=>{
+        if(user)
+        {
+          this.store.storage.ref('Prescription-Records/' + patient_id + '/Records/' + filename).getDownloadURL()
+          .then(e=>{
+            this.db.collection('Prescription').add({
+              filename : filename,
+              file : e,
+              doctor_id: doc_id,
+              patient_id: patient_id,
+              createdAt : formatDate(new Date(),'MM/dd/yyyy','en')
+            })
+          })
+        }
+      })
+    })
+  }
+  get_upcoming(upcoming_id)
+  {
+    return this.db.firestore.collection('upcoming').doc(upcoming_id).get();
+  }
+  remove_upcoming(upcoming_id)
+  {
+    return this.db.firestore.collection('upcoming').doc(upcoming_id).delete();
+  }
+  remove_share(doctor_id,patient_id)
+  {
+    return this.db.firestore.collection('Shared_Files').where('doctor_id','==',doctor_id)
+    .where('patient_id','==',patient_id).get().then(e=>{
+      e.forEach(item=>{
+        this.db.collection('Shared_Files').doc(item.id).delete();
+      })
+    }).then(()=>{
+      console.log('Deleted Shared Files!');
+    })
+  }
+  create_consultation(record){
+    return this.db.firestore.collection('Consultation').add(record);
+  }
+  get_sharedFile(doctor_id,patient_id)
+  {
+    return this.db.firestore.collection('Shared_Files').where('doctor_id','==',doctor_id)
+    .where('patient_id','==',patient_id);
+  }
+  get_medical_shared(id)
+  {
+    return this.db.firestore.collection('Medical_Records').doc(id).get();
+  }
+  get_lab_shared(id)
+  {
+    return this.db.firestore.collection('Laboratory_Results').doc(id).get();
+  }
+  get_prescription_shared(id)
+  {
+    return this.db.firestore.collection('Prescription').doc(id).get();
+  }
 }

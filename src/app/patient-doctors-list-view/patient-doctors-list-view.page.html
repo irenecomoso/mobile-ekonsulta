@@ -6,23 +6,20 @@
 
 <ion-content>
   <form>
-    <div>
-      <div>
-        Doctor: {{docInfo.fullname}}
-        <p>Specialization: {{docInfo.ins}}</p>
-      </div>
-    </div>
+    <ion-item>
+      <p>Doctor: {{docInfo.fullname}}</p>
+      <p>Specialization: {{docInfo.ins}}</p>
+    </ion-item>
     <form #form="ngForm" (ngSubmit)="submit(form.value)">
       <div>
-        <div>Select Schedule</div>
-        <div>
+        <h2>Select Schedule</h2>
+        <ion-item>
           <label>
             Please fill in required fields
             <small>*</small>
           </label>
-        </div>
+        </ion-item>
         <div>
-          <div>
               <label>Scheduled Date</label>
               <small>*</small>
               <div>
@@ -31,7 +28,6 @@
                     <option *ngFor="let list of scheduleList" value="{{list.uid}}">{{list.date}}</option>
                 </select>
               </div>
-            </div>
           </div>
           <div>
               <label>Scheduled Time</label>
@@ -49,13 +45,13 @@
                 </option>
               </select>
             </div>
-        </div>
+      </div>
         <div *ngIf="error_schedule.length > 0" >
           {{error_schedule}}
         </div>
-        <div class="row mt-4">
-            <button type="submit">Continue</button>
-        </div>
+        <ion-item class="row mt-4">
+            <ion-button type="submit">Continue</ion-button>
+        </ion-item>
     </form>
   </form>
 
