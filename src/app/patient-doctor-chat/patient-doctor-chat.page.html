@@ -1,4 +1,3 @@
-
 <ion-header class="ion-no-border">
   <ion-toolbar id="fixed">
     <ion-buttons slot="start">
@@ -20,19 +19,23 @@
 </ion-header>
 
 <ion-content>
-  <div *ngIf="chat$ | async as chat">
-    <ion-list *ngFor="let msg of chat.messages">
-      <ion-item *ngIf="msg.uid === userid">
-        <h3>{{msg.content}}</h3>
-        <ion-avatar slot="end">
-          <img src="{{imgUrl}}">
-        </ion-avatar>
+  <div *ngIf="chat$ | async as chat" class="content">
+    <ion-list *ngFor="let msg of chat.messages" class="msgbubble" no lines>
+      <ion-item *ngIf="msg.uid === userid" lines="none">
+        <ion-label>
+          <span class="innermsg right" style="white-space: normal!important;">
+            {{msg.content}}
+          </span>
+        </ion-label>
       </ion-item>
-      <ion-item *ngIf="msg.uid === docInfo.uid">
-        <ion-avatar slot="start">
+
+      <ion-item *ngIf="msg.uid === docInfo.uid" lines="none">
+        <ion-avatar slot="start" class="avtr">
           <img src="{{docInfo.image}}">
         </ion-avatar>
-        <h3>{{msg.content}}</h3>
+        <span  class="innermsg left"  style="white-space: normal!important;">
+          {{msg.content}}
+        </span>
       </ion-item>
     </ion-list>
   </div>
@@ -44,20 +47,17 @@
           <input id="file-input" type="file"/>
         </div>
       </div>-->
-  <!--<div >
-    <h1 class="left-profile"><img src="{{docInfo.image}}" alt="" width="40" height="40"></h1>
-    <h4 >{{docInfo.fullname}}</h4>
-    <div >
-      <a>Payment</a>
-      <a>Shared Files</a>
-    </div>
-  </div>-->
  </ion-content>
 
 <ion-footer>
   <ion-toolbar>
     <ion-item>
-      <ion-textarea placeholder="Type to chat" [(ngModel)]="content"></ion-textarea>
+      <ion-button slot="start" class="add" shape="round" color="primary">
+        <ion-icon name="document-attach" class="addicon"></ion-icon>
+      </ion-button>
+      <div>
+        <ion-input placeholder="Type to chat"></ion-input>
+      </div>
     </ion-item>
     <ion-buttons slot="end">
       <ion-button (click)="send_message()">

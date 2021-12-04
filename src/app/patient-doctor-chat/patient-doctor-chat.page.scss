@@ -26,3 +26,60 @@ ion-icon{
 #send{
   color:#1C365E !important;
 }
+
+
+.innermsg {
+  display: inline-block;
+  padding: 8px 10px;
+  margin-bottom:1px;
+  margin-top:1px;
+  font-weight: 500;
+  font-size: 18px;
+  border-radius: 20px;
+}
+
+.innermsg.left {
+  float: left;
+  background-color: #e7e7e7;
+  color: black;
+}
+
+.innermsg.right {
+  float: right;
+  background-color: #0084FF;
+  color: white;
+}
+
+.avtr{
+  width:30px;
+  height: 30px;
+}
+
+.content{
+  padding-left: 0px;
+  padding-right: 0px;
+}
+
+ion-list,ion-label,ion-content{
+  padding: 0px!important;
+}
+
+span{
+  margin: 0px;
+}
+
+ion-input{
+  border:solid;
+  border-color: darkgrey;
+  border-radius: 15px;
+  border-width:2px;
+
+}
+
+.addicon{
+  color: rgb(255, 255, 255) !important;;
+}
+
+.item-has-focus{
+  --highlight-background: #ffffff;
+}
