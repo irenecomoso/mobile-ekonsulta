@@ -1,15 +1,9 @@
-<ion-header>
-  <ion-toolbar>
-    <ion-title>E-konsulta</ion-title>
-  </ion-toolbar>
-</ion-header>
-
 <ion-header class="ion-no-border">
   <ion-toolbar id="fixed">
     <ion-buttons slot="start">
       <ion-back-button routerLink="/doctor-consultation"></ion-back-button>
     </ion-buttons>
-    <ion-avatar slot="start">
+    <ion-avatar slot="start" id="icon">
       <img src={{patientInfo.image}} id="pic">
     </ion-avatar>
     <ion-buttons slot="end" class="right">
@@ -25,25 +19,37 @@
 </ion-header>
 
 <ion-content>
-<!--THIS SECTION IS FOR THE CHAT-->
-<ion-list *ngIf="chat$ | async as chat">
-  <ion-item *ngFor="let msg of chat.messages">
-    <ion-item *ngIf="msg.uid === userid">
-      <img src="{{imgUrl}}" width="15" height="15">
-      {{msg.content}}
-    </ion-item>
-    <div *ngIf="msg.uid === patientInfo.uid" >
-      <img src="{{patientInfo.image}}" width="15" height="15">
-      {{msg.content}}
-    </div>
-  </ion-item>
-</ion-list>
+  <div *ngIf="chat$ | async as chat" class="content">
+    <ion-list *ngFor="let msg of chat.messages" class="msgbubble" no lines>
+      <ion-item *ngIf="msg.uid === userid" lines="none">
+        <ion-label>
+          <span class="innermsg right" style="white-space: normal!important;">
+            {{msg.content}}
+          </span>
+        </ion-label>
+      </ion-item>
+
+      <ion-item *ngIf="msg.uid === patientInfo.uid" lines="none">
+        <ion-avatar slot="start" class="avtr">
+          <img src="{{patientInfo.image}}">
+        </ion-avatar>
+        <span  class="innermsg left"  style="white-space: normal!important;">
+          {{msg.content}}
+        </span>
+      </ion-item>
+    </ion-list>
+  </div>
 </ion-content>
 
 <ion-footer>
   <ion-toolbar>
     <ion-item>
-      <ion-textarea placeholder="Type to chat" [(ngModel)]="content"></ion-textarea>
+      <ion-button slot="start" class="add" shape="round" color="primary">
+        <ion-icon name="document-attach" class="addicon"></ion-icon>
+      </ion-button>
+      <div>
+        <ion-input placeholder="Type to chat"></ion-input>
+      </div>
     </ion-item>
     <ion-buttons slot="end">
       <ion-button (click)="send_message()">
@@ -52,3 +58,4 @@
     </ion-buttons>
   </ion-toolbar>
 </ion-footer>
+
