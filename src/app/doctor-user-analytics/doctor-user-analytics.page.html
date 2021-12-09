@@ -1,30 +1,24 @@
 <ion-header>
   <ion-toolbar>
-    <ion-title>doctor-user-analytics</ion-title>
+    <ion-buttons slot="start">
+      <ion-menu-button color="dark"></ion-menu-button>
+    </ion-buttons>
+    <ion-title><b>E-KONSULTA</b></ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content>
-  <div class="col mt-4">
-    <h5 class="usr">Patients Analytics</h5>
-    <div class="column">
-      <div class="card">
-        <h6 class="daily">Today</h6>
-        <div class="card-body">
-          <small>Total Users</small>
-          <p class="card-text">{{today}}</p>
-        </div>
-      </div>
-    </div>
-    <div class="column">
-      <div class="card">
-        <h6 class="total">Total Consultations</h6>
-        <div class="card-body">
-          <small style="visibility: hidden;">Total Users</small>
-          <p class="card-text">{{total}}</p>
-        </div>
-      </div>
-    </div>
-  </div>
-
+  <ion-toolbar style="text-align:center;">
+    <h1>Patients Analytics</h1>
+    <ion-segment value="consultations" [(ngModel)]="selectTabs">
+      <ion-segment-button value="Today">
+        <ion-label>Today</ion-label>
+        <p>{{today}}</p>
+      </ion-segment-button>
+      <ion-segment-button value="Total">
+        <ion-label style="text-align: center;">Total Users</ion-label>
+        <p class="card-text">{{total}}</p>
+      </ion-segment-button>
+    </ion-segment>
+  </ion-toolbar>
 </ion-content>

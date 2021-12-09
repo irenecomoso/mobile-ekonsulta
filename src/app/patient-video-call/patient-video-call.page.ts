@@ -15,7 +15,7 @@ import { AngularFirestore } from '@angular/fire/firestore';
 import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 const mediaConstraints = {
   audio: true,
-  video: {width: 650, height: 400}
+  video: true
 };
 
 const servers = {

@@ -16,22 +16,21 @@ import { MenuController } from '@ionic/angular';
 export class DoctorTransactionhistoryPage implements OnInit {
   userId: string = "";
   tranList: any = [];
+  status: string = "";
+  month: string = "";
+  year: string = "";
 
   constructor(
     public userservice: UserService,
-    public afu: AuthService,
-    private menu: MenuController
+    public menu: MenuController,
+    public afu: AuthService
   ) { }
-
-  doctorMenu() {
-    this.menu.enable(true, 'second');
-  }
 
   ngOnInit(): void {
     this.doctorMenu();
     this.userId = this.afu.get_UID();
     this.get_transaction();
-  }
+ }
 
   get_transaction()
   {
@@ -53,6 +52,10 @@ export class DoctorTransactionhistoryPage implements OnInit {
     })
     this.tranList = tempArray;
     console.log(this.tranList);
+  }
+
+  doctorMenu() {
+    this.menu.enable(true, 'second');
   }
 
 }

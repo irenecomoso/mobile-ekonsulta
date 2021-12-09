@@ -31,12 +31,12 @@ export class DoctorRegisterPage implements OnInit {
       })
     })
     this.spList = tempArray;
-    console.log(this.spList)
+    //console.log(this.spList)
   }
   registerDoctor(frm){
-    console.log(frm);
+    //console.log(frm);
     this.clearErrorMessage();
-    this.afu.registerWithEmail_doctor(frm).then(()=>{
+    this.afu.registerWithEmail_Doctor(frm).then(()=>{
       this.router.navigate(['/login'])
     }).catch(_error=>{
       this.error =_error

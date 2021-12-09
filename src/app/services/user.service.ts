@@ -1,3 +1,4 @@
+/* eslint-disable arrow-body-style */
 /* eslint-disable object-shorthand */
 /* eslint-disable @typescript-eslint/quotes */
 /* eslint-disable curly */
@@ -19,7 +20,8 @@ import { formatDate } from '@angular/common';
 })
 export class UserService {
 
-  constructor(public db: AngularFirestore,public fireb: FirebaseApp, public afau: AngularFireAuth, public store: AngularFireStorage) { }
+  constructor(public db: AngularFirestore,public fireb: FirebaseApp, public afau: AngularFireAuth, public store: AngularFireStorage,
+    public router: Router) { }
   get_Speciaalization()
   {
     return this.db.firestore.collection('specialization').get();
@@ -367,4 +369,44 @@ export class UserService {
   {
     return this.db.firestore.collection('Prescription').doc(id).get();
   }
+  delete_user(id)
+  {
+   return this.db.collection('Users').doc(id).delete().then(()=>{
+      this.router.navigate(['/login']);
+      localStorage.removeItem('Users');
+      console.log('Firestore deleted')
+    })
+  }
+  send_labLOA(lab_id,patient_id,record)
+  {
+   return this.store.ref('Lab-LOA/' + lab_id + '/' + 'patients/' + patient_id + '/' + record.filename).put(record.file)
+    .then(()=>{
+    return  this.store.storage.ref('Lab-LOA/' + lab_id + '/' + 'patients/' + patient_id + '/' + record.filename).getDownloadURL()
+      .then(e=>{
+     return   this.db.firestore.collection('Lab-LOA').add({
+          patient_id: patient_id,
+          lab_id: lab_id,
+          file: e,
+          filename: record.filename,
+          status: 'pending',
+          createdAt: formatDate(new Date(),'MM/dd/yyyy','en'),
+        })
+      })
+    })
+  }
+  check_LOA(ins_id,pat_id,nowDate)
+  {
+    return this.db.firestore.collection('Health_Insurance').doc(ins_id).collection('Insurance_LOA_Request')
+    .where('patient_id','==',pat_id).where('createdAt','==',nowDate).get();
+  }
+  request_LOA(ins_id,pat_id)
+  {
+    return this.db.firestore.collection('Health_Insurance').doc(ins_id).collection('Insurance_LOA_Request')
+    .add({
+      patient_id: pat_id,
+      createdAt: formatDate(new Date(),'MM/dd/yyyy','en'),
+      status: 'pending'
+    })
+  }
+
 }

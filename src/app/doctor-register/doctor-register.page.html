@@ -1,7 +1,9 @@
 <ion-header>
   <ion-toolbar>
     <ion-buttons slot="start">
-      <ion-back-button routerLink="/login"></ion-back-button>
+      <ion-back-button routerLink="/login">
+        <ion-icon name="arrow-back-outline"></ion-icon>
+      </ion-back-button>
     </ion-buttons>
     <ion-title>doctor-register</ion-title>
   </ion-toolbar>
@@ -24,12 +26,13 @@
       </ion-item>
       <ion-item>
         <ion-label>License Number</ion-label>
-        <ion-input type="text"[(ngModel)]="model.licenseNumber" name="licenseNumber"></ion-input>
+        <ion-input type="text" [(ngModel)]="model.licenseNumber" name="licenseNumber"></ion-input>
       </ion-item>
       <ion-item>
         <ion-label>Specialization</ion-label>
         <ion-select [(ngModel)]="model.specialization" name="specialization">
-        <ion-select-option *ngFor="let list of spList" value="list.id">{{list.name}}</ion-select-option>
+          <ion-select-option value="default">--SELECT SPECIALIZATION--</ion-select-option>
+          <ion-select-option *ngFor="let list of spList" value="{{list.id}}">{{list.name}}</ion-select-option>
         </ion-select>
       </ion-item>
       <ion-item>

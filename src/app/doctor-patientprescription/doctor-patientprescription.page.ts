@@ -51,7 +51,7 @@ export class DoctorPatientprescriptionPage implements OnInit {
     public afu: AuthService,
     public userservice: UserService,
     public router: Router,
-    public notif: NotificationService
+    //public notif: NotificationService
   ) { }
 
   ngOnInit(): void {
@@ -99,7 +99,7 @@ export class DoctorPatientprescriptionPage implements OnInit {
       record2['title'] = "Medical Summary and Prescription"
       record2['description'] = "The doctor sent your Medical Summary and your Prescription. Check your Records now!";
       record2['createdAt'] = formatDate(new Date(),'short','en');
-      this.notif.send_patient(this.patientInfo.uid,record2);
+      //this.notif.send_patient(this.patientInfo.uid,record2);
 
 
       setTimeout(() => {

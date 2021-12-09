@@ -1,3 +1,4 @@
+/* eslint-disable eqeqeq */
 /* eslint-disable @typescript-eslint/dot-notation */
 /* eslint-disable curly */
 /* eslint-disable @typescript-eslint/quotes */
@@ -10,6 +11,7 @@ import { Router } from '@angular/router';
 import { UserService } from './../services/user.service';
 import { AuthService } from './../services/auth.service';
 import { Component, OnInit } from '@angular/core';
+import { formatDate } from '@angular/common';
 
 @Component({
   selector: 'app-patient-edit-insurance',
@@ -21,11 +23,22 @@ export class PatientEditInsurancePage implements OnInit {
   imgUrl: any;
   info: any = [];
   insList: any = [];
+  file: any;
+  filename: string = "";
 
   insurance_info: any = [];
 
-  request_error: string = "";
+  request_error: string="";
   request_sent: string = "";
+
+  verified_message: string = "";
+  verification_sent: string = "";
+
+  labList: any = [];
+  lab_id: string = "";
+  empty_field: string = "";
+  lab_message: string = "";
+
 
   health_insurance: string = "";
   member_ID: string = "";
@@ -63,6 +76,11 @@ export class PatientEditInsurancePage implements OnInit {
     })
     this.insurance_list();
   }
+  choosefile(e)
+  {
+    this.file = e.target.files[0];
+    console.log(this.file);
+  }
   insurance_list()
   {
     var data;
@@ -80,28 +98,121 @@ export class PatientEditInsurancePage implements OnInit {
   update_insurance()
   {
     let record = {}
-    if(this.info.isVerified === 'verified' && this.info.health_insurance === this.health_insurance)
+    if(this.info.isVerified == 'verified' && this.info.health_insurance == this.health_insurance)
     {
-      record['isVerified'] = 'verified';
+      console.log('Already Verified!');
+      this.verified_message = "Already Verified!";
+      setTimeout(() => {
+        this.verified_message = "";
+      }, 5000);
     }
     else
     {
       record['isVerified'] = 'pending';
+      record['health_insurance'] = this.health_insurance;
+      record['member_ID'] = this.member_ID;
+      this.userservice.update_patient_insurance(this.userID,record).then(()=>{
+        this.verification_sent = "Verification Sent!";
+
+        let record2 = {};
+        record2['createdAt'] = formatDate(new Date(),'short','en');
+        record2['title'] = "Patient Verification";
+        record2['description'] = "Go to Verification and verify the Patient whether He/She is in your service";
+        //this.notif.send_insurance(this.info.health_insurance,record2)
+
+        setTimeout(() => {
+          this.verification_sent = "";
+        }, 5000);
+        this.ngOnInit();
+      })
     }
-    record['health_insurance'] = this.health_insurance;
-    record['member_ID'] = this.member_ID;
-    this.userservice.update_patient_insurance(this.userID,record).then(()=>{
-      console.log('Sent!');
-      this.ngOnInit();
-    })
   }
-  /*update(frm)
+  send_labLOA()
   {
-      //this.userservice.update_user(this.userID,frm).then(()=>{
-      console.log(frm);
-      console.log('patient Updated!');
-      this.ngOnInit();
-      this.router.navigate(['/patient-profile']);
-  }*/
+    if(this.file && this.filename && this.lab_id)
+    {
+      let record = {};
+      record['file'] = this.file;
+      record['filename'] = this.filename;
+      this.userservice.send_labLOA(this.lab_id,this.userID,record)
+      .then(()=>{
+        console.log('added!');
+
+        let record2 = {};
+        record2['createdAt'] = formatDate(new Date(),'short','en');
+        record2['title'] = "LOA";
+        record2['description'] = "A patient sent an LOA. Check your LOA list";
+        //this.notif.send_lab(this.info.health_insurance,record2)
+
+        this.lab_message = "File sent!";
+        this.file = "";
+        setTimeout(() => {
+          this.lab_message = "";
+        }, 5000);
+      })
+    }
+    else
+    {
+      console.log('Empty fields!');
+      this.empty_field = "Empty Fields!";
+      setTimeout(() => {
+        this.empty_field = "";
+      }, 3000);
+    }
+  }
+  get_lab()
+  {
+    var data;
+    var tempArray = [];
+    this.userservice.get_labPartner().forEach(e=>{
+      e.forEach(item=>{
+        data = item.data();
+        data.uid = item.id;
+        tempArray.push(data);
+      })
+    })
+    this.labList = tempArray;
+  }
+  request_LOA()
+  {
+    console.log(this.info.isVerified)
+    if(this.info.isVerified != 'pending' && this.info.isVerified != 'declined')
+    {
+      //Check if the user already sent a request within the Day
+      this.userservice.check_LOA(this.info.health_insurance,this.userID,formatDate(new Date(),'MM/dd/yyyy','en'))
+      .then(e=>{
+        if(e.empty)
+        {
+          this.userservice.request_LOA(this.info.health_insurance,this.userID)
+            .then(()=>{
+              this.request_sent = "Request Sent!";
+              setTimeout(() => {
+                this.request_sent = "";
+              }, 3000);
+              let record = {};
+              record['createdAt'] = formatDate(new Date(),'short','en');
+              record['title'] = "LOA request";
+              record['description'] = "A patient requested for LOA";
+              //this.notif.send_insurance(this.info.health_insurance,record)
+
+            })
+        }
+        else
+        {
+          this.request_error = "Wait after 24hours to request again";
+          setTimeout(() => {
+            this.request_error = "";
+          }, 3000);
+        }
+      })
+    }
+    else
+    {
+      this.request_error = "Your insurance is not yet verified.";
+          setTimeout(() => {
+            this.request_error = "";
+          }, 3000);
+    }
+  }
 
 }

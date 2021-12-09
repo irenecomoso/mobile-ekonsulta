@@ -41,7 +41,7 @@ export class DoctorChatInfoPage implements OnInit {
     public afu: AuthService,
     public userservice: UserService,
     public router: Router,
-    public notif: NotificationService
+    //public notif: NotificationService
   ) { }
 
   ngOnInit(): void {

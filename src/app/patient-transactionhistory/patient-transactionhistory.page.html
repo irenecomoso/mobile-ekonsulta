@@ -14,8 +14,37 @@
 </ion-header>
 
 <ion-content>
+    <ion-item>
+      <ion-input [(ngModel)]="doc_name" (input)="get_transaction()" type="text"placeholder="Search DoctorName"></ion-input>
+     </ion-item>
+     <ion-item>
+       <ion-select [(ngModel)]="status" (change)="get_transaction()">
+          <ion-select-option value="">Select Status</ion-select-option>
+          <ion-select-option value="successful">Successful</ion-select-option>
+          <ion-select-option value="refund">Cancelled</ion-select-option>
+       </ion-select>
+     </ion-item>
+     <ion-item>
+       <ion-select [(ngModel)]="year" (change)="get_transaction()">
+          <ion-select-option value="">Select Year</ion-select-option>
+          <ion-select-option *ngFor="let list of getYears()" value="{{list}}">{{list}}</ion-select-option>
+       </ion-select>
+     </ion-item>
+     <ion-item>
+       <ion-select [(ngModel)]="month" (change)="get_transaction()">
+         <ion-select-option value="">Select Month</ion-select-option>
+         <ion-select-option *ngFor="let list of getMonth()" value="{{list}}">{{list}}</ion-select-option>
+       </ion-select>
+     </ion-item>
+     <ion-item>
+       <p> Date</p>
+       <p>Doctor</p>
+       <p>Schedule</p>
+       <p>Fee</p>
+       <p>Transaction ID</p>
+       <p>Status</p>
+     </ion-item>
  <ion-list *ngFor="let list of transList">
-   <ion-item id="list">
      <ion-label lines="full">
       <h3>{{list.createdAt}}</h3>
       <h2><b>{{userInfo.fullname}}</b> paid an amount of &#36;{{list.Amount}} as a
@@ -24,6 +53,5 @@
       <p>Physician: {{list.doctor_name}} - {{list.Specialization}}</p>
       <p style="color: rgb(28,54,94);">Transaction ID: {{list.uid}}</p>
      </ion-label>
-   </ion-item>
  </ion-list>
 </ion-content>

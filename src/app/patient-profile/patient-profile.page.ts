@@ -80,6 +80,13 @@ export class PatientProfilePage implements OnInit {
     })
     this.insList = tempArray;
   }
+  delete_account()
+  {
+    this.afu.delete_user().then(()=>{
+      console.log('authentication deleted!');
+    });
+    this.userservice.delete_user(this.userID);
+  }
   logout(){
     this.afu.signout();
   }

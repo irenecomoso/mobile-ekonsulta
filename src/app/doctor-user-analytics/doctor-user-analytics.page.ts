@@ -1,3 +1,4 @@
+import { MenuController } from '@ionic/angular';
 /* eslint-disable @typescript-eslint/semi */
 /* eslint-disable @typescript-eslint/naming-convention */
 /* eslint-disable @typescript-eslint/no-inferrable-types */
@@ -12,6 +13,7 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./doctor-user-analytics.page.scss'],
 })
 export class DoctorUserAnalyticsPage implements OnInit {
+  selectTabs= 'today';
   userId: string = "";
 
   total: number = 0;
@@ -19,13 +21,18 @@ export class DoctorUserAnalyticsPage implements OnInit {
 
   constructor(
     public userservice: UserService,
-    public afu: AuthService
+    public afu: AuthService,
+    private menu: MenuController
   ) { }
 
   ngOnInit(): void {
+    this.doctorMenu();
     this.userId = this.afu.get_UID();
     this.get_consultations();
     this.get_today();
+  }
+  doctorMenu() {
+    this.menu.enable(true, 'second');
   }
 
   get_consultations()

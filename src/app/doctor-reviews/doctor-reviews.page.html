@@ -21,10 +21,31 @@
       </ion-label>
     </ion-item>
   </ion-list>
+    <!--<ion-item>
+      <ion-list *ngFor="let list of fList">
+        <ion-item>
+          <h5><ion-img src="{{list.image}}"></ion-img>{{list.fullname}}</h5>
+          <small>{{list.createdAt}}</small>
+          <p>{{list.feedback}}</p>
+        </ion-item>
+        <ion-item *ngFor="let reply of replyList">
+          <ion-item *ngIf="list.from === reply.sent_to">
+            <h5><span> <img src="{{imgUrl}}" alt="" width="16px" height="16px"></span>{{reply.fullname}}</h5>
+            <p>{{reply.feedback}}</p>
+          </ion-item>
+          <ion-button (click)="reply_button(list)">Reply</ion-button>
+        </ion-item>
+      </ion-list>
+    </ion-item>
+    <form #form="ngForm" (ngSubmit)="reply_user(form.value)" >
+      <ion-item>
+        <h5>Add a reply</h5>
+        <textarea [(ngModel)]="reply" cols="50" rows="5" placeholder="Reply..."></textarea>
+          <ion-button>Cancel</ion-button>
+          <ion-button type="submit">Add</ion-button>
+      </ion-item>
+    </form>-->
   <div class="lower-part">
-    <div>
-      <button class='submit' type="submit" data-bs-toggle="modal" data-bs-target="#toReply">Add feedback</button>
-    </div>
     <ul class="list-group py-2 whole-trans">
       <li *ngFor="let list of fList" class="list-group-item flex-column align-items-start">
         <div class="d-flex w-100 justify-content-between">
@@ -41,25 +62,24 @@
           </div>
         </div>
         <div>
-          <button (click)="reply_button(list)" class='submit' type="button" data-bs-toggle="modal" data-bs-target="#toReply">Reply</button>
+          <ion-button (click)="reply_button(list)" class='submit' type="button" data-bs-toggle="modal" data-bs-target="#toReply">Add a reply</ion-button>
         </div>
-       <!-- <small>Transaction ID</small>-->
-      </li>
+       <!--<small>Transaction ID</small>-->
+       <form #form="ngForm" (ngSubmit)="reply_user(form.value)" >
+        <div class="modal-content">
+          <div class="modal-header">
+            <!--<ion-button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="close"></ion-button>-->
+          </div>
+            <div class="modal-body">
+              <textarea [(ngModel)]="reply" name="reply" id="" cols="50" rows="5" placeholder="Reply..."></textarea>
+            </div>
+            <div class="modal-footer">
+              <ion-button type="button">Cancel</ion-button>
+              <ion-button type="submit"><ion-icon name="navigate-outline"></ion-icon></ion-button>
+            </div>
+        </div>
+      </form>
+     </li>
     </ul>
   </div>
-  <form #form="ngForm" (ngSubmit)="reply_user(form.value)" >
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id="addSpclLabel">Add a reply</h5>
-        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="close"></button>
-      </div>
-        <div class="modal-body">
-          <textarea [(ngModel)]="reply" name="reply" id="" cols="50" rows="5" placeholder="Reply..."></textarea>
-        </div>
-        <div class="modal-footer">
-          <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Cancel</button>
-          <button type="submit" class="btn btn-info" data-bs-dismiss="modal">Add</button>
-        </div>
-    </div>
-  </form>
 </ion-content>

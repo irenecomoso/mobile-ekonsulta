@@ -51,7 +51,7 @@ export class DoctorMedicalCertificatePage implements OnInit {
     public afu: AuthService,
     public userservice: UserService,
     public router: Router,
-    public notif: NotificationService
+    //public notif: NotificationService
   ) { }
 
   ngOnInit(): void {
@@ -78,7 +78,7 @@ export class DoctorMedicalCertificatePage implements OnInit {
         record2['title'] = "Medical Certificate"
         record2['description'] = "A doctor sent a medical Certificate. Check your Records now!";
         record2['createdAt'] = formatDate(new Date(),'short','en');
-        this.notif.send_patient(this.patientInfo.uid,record2);
+        //this.notif.send_patient(this.patientInfo.uid,record2);
         this.router.navigate[('/patient-doctor-chat')];
         setTimeout(() => {
           this.success_message = "";

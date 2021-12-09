@@ -34,7 +34,9 @@ export class DoctorConsultationPage implements OnInit {
   doneList : any = [];
 
   constructor(public userservice : UserService,public router: Router,public afu : AuthService,public chats : ChatService,
-    public notif : NotificationService,private menu: MenuController) { }
+    private menu: MenuController
+    //public notif : NotificationService
+    ) { }
 
    /** set to false so that when loading the patient's page, content of that function is not displayed */
    upcoming = false;
@@ -72,7 +74,7 @@ export class DoctorConsultationPage implements OnInit {
           record['title'] = "Consultation accepted!";
           record['description'] = "Your consultation has been accepted Join Now!";
           record['createdAt'] = formatDate(new Date(),'short','en');
-          this.notif.send_patient(info.uid,record)
+          //this.notif.send_patient(info.uid,record)
 
           if(localStorage.getItem('data')==null)
           {

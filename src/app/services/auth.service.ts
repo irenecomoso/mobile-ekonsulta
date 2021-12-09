@@ -1,3 +1,5 @@
+/* eslint-disable @typescript-eslint/type-annotation-spacing */
+import { FirebaseApp } from '@angular/fire';
 /* eslint-disable curly */
 /* eslint-disable @typescript-eslint/no-shadow */
 /* eslint-disable @typescript-eslint/naming-convention */
@@ -17,7 +19,8 @@ export class AuthService {
   newUser: any;
   authState: any = null;
 
-  constructor(private afu: AngularFireAuth, private router: Router, private db: AngularFirestore, public store: AngularFireStorage) {}
+  constructor(private afu: AngularFireAuth, private router: Router, private db: AngularFirestore, public store: AngularFireStorage,
+    public fireb : FirebaseApp) {}
    //Get user Data
   get_userData()
   {
@@ -76,25 +79,29 @@ export class AuthService {
       disabled: 'false'
     })
   }
-    registerWithEmail_doctor(user){
-      return this.afu.createUserWithEmailAndPassword(user.email,user.password)
-    .then((userCredential)=>{
-      this.newUser = user;
-      console.log(this.newUser);
-      this.insertUserData_doctor(userCredential)
-      this.afu.onAuthStateChanged(user => {
-        if(user)
-        this.store.storage.ref('Users/' + 'default' + '/profile.jpg').getDownloadURL()
-        .then(e=>{
-          this.db.collection('avatar').doc(userCredential.user.uid).set({
-            image: e
+  registerWithEmail_Doctor(user) {
+      return this.afu.createUserWithEmailAndPassword(user.email, user.password)
+        .then((userCredential) => {
+          this.newUser = user;
+          console.log(this.newUser);
+          userCredential.user.updateProfile( {
+            displayName: user.fullname
+          });
+            this.insertUserData_doctor(userCredential)
+
+            this.afu.onAuthStateChanged(user => {
+              if(user)
+              this.store.storage.ref('Users/' + 'default' + '/profile.jpg').getDownloadURL().then(e =>{
+                this.db.collection('avatar').doc(userCredential.user.uid).set({
+                  image : e
+                })
+              })
           })
         })
-      })
-    }).catch(error =>{
-      console.log(error)
-      throw error
-    })
+        .catch(error => {
+          console.log(error)
+          throw error
+        });
     }
     insertUserData_doctor(userCredential: firebase.default.auth.UserCredential): Promise<any>{
       return this.db.collection('Users').doc(userCredential.user.uid).set({
@@ -103,9 +110,10 @@ export class AuthService {
         fullname: this.newUser.fullname,
         dob: this.newUser.dob,
         address : this.newUser.address,
-        licenceNumber: this.newUser.licenseNumber,
+        licenceNumber: this.newUser.license_number,
         specialization: this.newUser.specialization,
-        contactNumber: this.newUser.contactNumber,
+        contactNumber: this.newUser.contact_number,
+        consultation_fee : 0,
         createdAt: formatDate(new Date(), 'MM/dd/yyyy', 'en'),
         updatedAt: formatDate(new Date(), 'MM/dd/yyyy', 'en'),
         role: 'doctor',
@@ -130,5 +138,11 @@ export class AuthService {
     localStorage.removeItem('Users');
     localStorage.removeItem('data');
     this.router.navigate(['/login']);
+  }
+  delete_user()
+  {
+    return this.fireb.auth().currentUser.delete().catch(error=>{
+      throw error;
+    })
   }
 }
