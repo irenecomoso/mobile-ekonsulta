@@ -87,6 +87,10 @@ export class UserService {
   {
     return this.db.collection('Users').doc(user_id).update(record);
   }
+  get_admin()
+  {
+    return this.db.firestore.collection('Users').where('role','==','admin').get();
+  }
   get_doctorList()
   {
     return this.db.firestore.collection('Users').where("role", "==", "doctor").get();
@@ -220,7 +224,8 @@ export class UserService {
   }
   get_patient_upcoming(patient_id)
   {
-    return this.db.firestore.collection('upcoming').where('patient_id','==',patient_id);
+    return this.db.firestore.collection('upcoming').where('patient_id','==',patient_id)
+    .orderBy('id','asc');
   }
   get_schedule(doc_id)
   {
@@ -253,11 +258,12 @@ export class UserService {
   {
     return this.db.firestore.collection('Transaction').add(record);
   }
-  patient_book_schedule(sched_id,time_id,userId)
+  patient_book_schedule(record)
   {
-    return this.db.firestore.collection('Schedule').doc(sched_id).collection('Time').doc(time_id)
+    return this.db.firestore.collection('Schedule').doc(record.schedule_id).collection('Time').doc(record.time_id)
     .collection('Reservation').add({
-      patient_id : userId,
+      patient_id : record.patient_id,
+      consultation_schedule: record.consultation_schedule,
       createdAt: formatDate(new Date(),'MM/dd/yyyy','en')
     })
   }
@@ -327,6 +333,15 @@ export class UserService {
             })
           })
         }
+      })
+    })
+  }
+  cancel_consultation(info)
+  {
+   return this.db.collection('upcoming').doc(info.upcoming_id).delete().then(()=>{
+      console.log('Upcoming Deleted!');
+     return this.db.collection('Transaction').doc(info.transaction_id).update({
+        status: "cancel"
       })
     })
   }
@@ -408,5 +423,14 @@ export class UserService {
       status: 'pending'
     })
   }
-
+  get_patient_insurance(id)
+  {
+    return this.db.firestore.collection('Users').doc(id).collection('Insurance_Info')
+    .get();
+  }
+  pay_insurance(id,record)
+  {
+    return this.db.firestore.collection('Users').doc(id).collection('Insurance_Info').doc(record.id)
+    .update(record);
+  }
 }

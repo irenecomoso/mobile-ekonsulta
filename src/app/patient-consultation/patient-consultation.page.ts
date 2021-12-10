@@ -1,3 +1,6 @@
+import { AlertController } from '@ionic/angular';
+/* eslint-disable @typescript-eslint/no-shadow */
+/* eslint-disable @typescript-eslint/dot-notation */
 /* eslint-disable curly */
 /* eslint-disable prefer-const */
 /* eslint-disable no-var */
@@ -10,8 +13,9 @@ import { AuthService } from 'src/app/services/auth.service';
 import { UserService } from './../services/user.service';
 /* eslint-disable @typescript-eslint/no-inferrable-types */
 /* eslint-disable @typescript-eslint/naming-convention */
-import { Component, OnInit } from '@angular/core';
+import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { MenuController } from '@ionic/angular';
+import { formatDate } from '@angular/common';
 
 @Component({
   selector: 'app-patient-consultation',
@@ -19,12 +23,8 @@ import { MenuController } from '@ionic/angular';
   styleUrls: ['./patient-consultation.page.scss'],
 })
 export class PatientConsultationPage implements OnInit {
+  @ViewChild('paypal', {static: true}) paypalElement: ElementRef
   selectTabs= 'upcoming';
-
-
-  patientMenu() {
-    this.menu.enable(true, 'first');
-  }
 
   userid: any;
 
@@ -32,24 +32,55 @@ export class PatientConsultationPage implements OnInit {
   doneList: any = [];
 
   error_message: string = "";
+  info: any = [];
 
   constructor(
     public userservice: UserService,
     public afu: AuthService,
     public router: Router,
-    private menu: MenuController
+    private menu: MenuController,
+    private alertCtrl: AlertController
   ) { }
 
   ngOnInit(): void {
-    console.log("TEST");
+    //console.log("TEST");
     this.patientMenu();
     localStorage.removeItem('data');
 
     this.userid = this.afu.get_UID();
     this.get_upcoming();
     this.get_done();
+    this.paypalButton();
   }
-
+  patientMenu() {
+    this.menu.enable(true, 'first');
+  }
+  async showAlert(list) {
+    const alert = await this.alertCtrl.create({
+    header: 'Warning',
+    subHeader: 'Reimbursement of -20% from your payment upon cancelation ',
+    message: 'Continue Cancel Consultation?',
+    buttons: [
+      {
+        text: 'Discard',
+        handler: (data: any) => {
+          console.log('Canceled', data);
+        }
+      },
+      {
+        text: 'Continue',
+        handler: (data: any) => {
+          this.editCancel(list);
+          this.cancel();
+          //this.router.navigate(['/login'])
+        }
+      }
+    ]
+    });
+    await alert.present();
+    const result = await alert.onDidDismiss();
+    console.log(result);
+    }
   chat(info)
   {
     if(info.upcoming_status != 'pending')
@@ -69,6 +100,9 @@ export class PatientConsultationPage implements OnInit {
       }, 3000);
     }
   }
+  paypalButton()
+  {
+  }
 
   get_upcoming()
   {
@@ -83,6 +117,10 @@ export class PatientConsultationPage implements OnInit {
             data.upcoming_status = e.doc.data().status;
             data.schedule = e.doc.data().schedule;
             data.schedtime = e.doc.data().time;
+            data.upcoming_id = e.doc.id;
+            data.consultation_schedule = e.doc.data().consultation_schedule;
+            data.paymentType = e.doc.data().paymentType;
+            data.transaction_id = e.doc.data().transaction_id;
             data.image = img.data().image;
             data.uid = a.id;
             if(e.type == 'added')
@@ -97,6 +135,37 @@ export class PatientConsultationPage implements OnInit {
       })
     })
     this.docList = tempArray;
+  }
+  editCancel(info)
+  {
+    this.info = info;
+  }
+  cancel()
+  {
+    console.log(this.info);
+    let record = {};
+    record['patient_id'] = this.userid;
+    record['upcoming_id'] = this.info.upcoming_id;
+    record['transaction_id'] = this.info.transaction_id;
+    this.userservice.cancel_consultation(record)
+    .then(()=>{
+      //send notification for cancellation
+      let record = {};
+      record['title'] = "Cancelled Consultaion";
+      record['description'] = "A Patient want to cancel its consultation";
+      record['createdAt'] = formatDate(new Date(),'short','en');
+      record['id'] = new Date(formatDate(new Date(),'short','en')).getTime()
+      this.userservice.get_admin().then(e=>{
+        e.forEach(item=>{
+          //this.notif.send_admin(item.id,record);
+        })
+      })
+      record['description'] = "A Patient cancelled its consultation";
+      //this.notif.send_doctor(this.info.uid,record);
+      document.getElementById('closeModal').click();
+      this.info = [];
+      this.ngOnInit();
+    });
   }
   get_done()
   {

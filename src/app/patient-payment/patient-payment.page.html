@@ -8,13 +8,14 @@
   <ion-button routerLink="/patient-chat-info" id="back" icon-only fill clear shape="square">
     <ion-icon name="arrow-back-outline"></ion-icon>
   </ion-button>
-  <h4>Payment</h4>
+  <form action="">
+    <h4>Payment</h4>
   <ion-card>
     <ion-card-header>
       <ion-card-title>Add Payment</ion-card-title>
     </ion-card-header>
     <ion-card-content style="text-align: center;">
-      <ion-list id="skeleton">
+      <!-- <ion-list id="skeleton"> -->
         <div>
           <div class="pay">
             <div #paypal>
@@ -22,6 +23,27 @@
             </div>
           </div>
         </div>
+        <ion-item>
+          <ion-button (click)="insurance_pay()" class="insurance">
+            Insurance
+          </ion-button>
+        </ion-item>
+        <ion-item *ngIf="paidFor" class="alert alert-success">
+          Payment Successful! Click Submit Now!
+        </ion-item>
+        <ion-item>
+          <ion-item *ngIf="error_book.length > 0" class="alert alert-danger">
+            {{error_book}}
+          </ion-item>
+        </ion-item>
+        <ion-item class="row-md-4">
+          <ion-item class="col-md-8 mt-4">
+            <p class="note">*Cancellation of booking allows you to get a refund, subject to a 20% Cancellation Fee. </p>
+            <p class="note">*Inability to show up to a scheduled consultation without prior cancellation will not be eligible for refunds.
+            </p>
+            <p>By clicking "Submit", you agree to these terms.</p>
+          </ion-item>
+        </ion-item>
         <!--<ion-list-header>
           <ion-skeleton-text animated style="width: 80px"></ion-skeleton-text>
         </ion-list-header>
@@ -54,11 +76,12 @@
             </p>
           </ion-label>
         </ion-item>-->
-        </ion-list>
+        <!-- </ion-list> -->
         <div class="buttons">
-          <ion-button  id="btn2" color="rgb(28,54,94)" expand="block">Cancel</ion-button>
-          <ion-button  id="btn1" color="rgb(28,54,94)">Add Payment</ion-button>
+          <ion-button  id="btn2" color="rgb(28,54,94)" expand="block" routerLink="/patient-consultation">Cancel</ion-button>
+          <ion-button  id="btn1" color="rgb(28,54,94)" (click)="book()" >Submit</ion-button>
         </div>
     </ion-card-content>
   </ion-card>
+  </form>
 </ion-content>

@@ -33,32 +33,49 @@
   <div *ngIf="selectTabs==='upcoming'">
     <div *ngFor="let list of docList">
     <ion-list>
-      <ion-item button (click)="chat(list)">
+      <ion-item>
         <ion-label>
-          <h2>{{list.fullname}}</h2>
             <div *ngIf="list.upcoming_status === 'pending'">
+              <h2>{{list.fullname}}</h2>
                <ion-button>Pending</ion-button>
-               <ion-button>Schedule | {{list.schedule}} | {{list.schedtime}}</ion-button>
+               <label>{{list.consultation_schedule}} | {{list.schedule}} | {{list.schedtime}}</label>
+               <!-- <ion-button *ngIf="list.paymentType === 'paypal'" (click)="showAlert(list)" >Cancel Consultation</ion-button> -->
             </div>
             <div *ngIf="list.upcoming_status === 'ongoing'">
-              <ion-button>Join now</ion-button>
-              <ion-button>Schedule | {{list.schedule}} | {{list.schedtime}}</ion-button>
+              <h2>{{list.fullname}}</h2>
+              <ion-button (click)="chat(list)">Join now</ion-button>
+              <label>{{list.consultation_schedule}} | {{list.schedule}} | {{list.schedtime}}</label>
             </div>
       </ion-label>
       </ion-item>
     </ion-list>
+    <ion-item *ngIf="error_message.length>0" class="alert alert-danger" role="alert">
+      {{error_message}}
+    </ion-item>
     </div>
   </div>
-  <div *ngIf="selectTabs==='done'">
+  <ion-item *ngIf="selectTabs==='done'">
     <ion-list>
       <ion-item button *ngFor="let list of doneList">
        <ion-label>
         <h2>{{list.fullname}}</h2>
             <ion-button>Done</ion-button>
-            <ion-button>Schedule | {{list.consultation_schedule}} | {{list.schedule}} | {{list.schedtime}}</ion-button>
+            <ion-button>{{list.consultation_schedule}} | {{list.schedule}} | {{list.time}}</ion-button>
        </ion-label>
       </ion-item>
     </ion-list>
-  </div>
+  </ion-item>
+  <!-- <ion-item>
+    <ion-item class="modal-header">
+      <h5 class="modal-title" id="exampleModalLabel">Cancel Consultation</h5>
+    </ion-item>
+    <ion-item class="modal-body">
+      Add text here for cancellation
+    </ion-item>
+    <ion-item class="modal-footer">
+      <ion-button id="closeModal" type="button" class="btn btn-secondary" data-bs-dismiss="modal">Discard</ion-button>
+      <ion-button (click)="cancel()" type="button" class="btn btn-danger">Continue</ion-button>
+    </ion-item>
+  </ion-item> -->
 </ion-content>
 

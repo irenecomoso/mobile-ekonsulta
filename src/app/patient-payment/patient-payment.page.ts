@@ -1,3 +1,5 @@
+/* eslint-disable @typescript-eslint/no-shadow */
+/* eslint-disable max-len */
 /* eslint-disable no-var */
 /* eslint-disable curly */
 /* eslint-disable eqeqeq */
@@ -34,6 +36,12 @@ export class PatientPaymentPage implements OnInit {
 
   sched: string = "";
   schedTime: string = "";
+  userInfo: any = JSON.parse(localStorage.getItem('Users'));
+  spent: number = 0;
+
+  paymentType: string = "";
+
+  transaction_id: string = "";
 
   constructor(
     public userservice: UserService,
@@ -50,6 +58,7 @@ export class PatientPaymentPage implements OnInit {
     this.paypalButton();
     this.get_schedule();
 
+    console.log(this.userInfo.email)
   }
   paypalButton()
   {
@@ -59,7 +68,7 @@ export class PatientPaymentPage implements OnInit {
         return actions.order.create({
           purchase_units: [
             {
-              description: "Consultation",
+              description: this.userInfo.email + " paid $" + this.docInfo.consultation_fee + " as consultation fee for " + this.docInfo.email,
               amount: {
                 currency_code: 'USD',
                 value: this.docInfo.consultation_fee
@@ -71,22 +80,38 @@ export class PatientPaymentPage implements OnInit {
       onApprove: async (data, actions) =>{
         const order = await actions.order.capture();
         this.paidFor = true;
-        console.log(this.sched + this.schedTime);
+        this.paymentType = "paypal";
+
+        console.log(order);
         //record to be created in Transaction Collection
         let record = {};
         record['status'] = "pending";
         record['deduction'] = 10;
-        record['net_income'] = 0;
-        record['doctor_name'] = this.docInfo.fullname;
+        record['patient_id'] = this.userId;
         record['doctor_id'] = this.docInfo.uid;
         record['Specialization'] = this.docInfo.ins;
-        record['patient_id'] = this.userId;
+
+        record['paymentType'] = this.paymentType;
+        record['payer_email'] = order.payer.email_address;
+
         record['Schedule'] = this.sched + ' ' + this.schedTime;
+        record['consultation_schedule'] = this.schedInfo.consultation_schedule;
         record['Amount'] = order.purchase_units[0].amount.value;
-        record['createdAt'] = formatDate(new Date(),'short','en');
-        record['updatedAt'] = formatDate(new Date(),'short','en');
-        this.userservice.create_transaction(record).then(()=>{
+        //use for transaction Sorting
+        record['createdAt'] = formatDate(new Date(),'MM/dd/yyyy','en');
+        record['updatedAt'] = formatDate(new Date(),'MM/dd/yyyy, h:mm a','en');
+        record['id'] = new Date(formatDate(new Date(),'short','en')).getTime();
+
+        //use for transaction filtering
+        var data2 = new Date();
+        record['monthUpdated'] = data2.getMonth()+1;
+
+        this.userservice.create_transaction(record).then((e)=>{
           console.log('Added to transaction!');
+
+          //passing transaction ID for UPCOMING
+          this.transaction_id = e.id;
+
         });
       },
       onError: err => {
@@ -100,6 +125,64 @@ export class PatientPaymentPage implements OnInit {
     })
     .render(this.paypalElement.nativeElement);
   }
+  insurance_pay()
+  {
+    var balance;
+    let record = {};
+    this.userservice.get_UserInfo(this.userId)
+    .then(res=>{
+      if(res.data().isVerified != 'pending')
+      {
+        this.userservice.get_patient_insurance(this.userId)
+        .then(e=>{
+          if(!e.empty)
+          {
+            e.forEach(item=>{
+              balance = item.data().limit - item.data().spent;
+              if(balance >= this.docInfo.consultation_fee)
+              {
+                console.log('Can Pay!');
+                this.spent = parseFloat(item.data().spent)+ parseFloat(this.docInfo.consultation_fee);
+                console.log(this.spent);
+                record['spent'] = this.spent;
+                record['updatedAt'] = formatDate(new Date(),'MM/dd/yyyy','en');
+                record['id'] = item.id;
+                this.userservice.pay_insurance(this.userId,record).then(()=>{
+                  console.log('Paid!');
+                  this.paidFor = true;
+                  this.paymentType = "insurance";
+                })
+              }
+              else
+              {
+                console.log('Balance insufficient!');
+                this.error_book = "Insufficient balance!";
+                setTimeout(() => {
+                  this.error_book = "";
+                }, 5000);
+              }
+            })
+          }
+          else
+          {
+            console.log("Your Insurance Info has not been Updated yet");
+            this.error_book = "Your Insurance Info has not been Updated yet!";
+            setTimeout(() => {
+              this.error_book = "";
+            }, 5000);
+          }
+        })
+      }
+      else
+      {
+        console.log('Insurance is not yet Verified!');
+        this.error_book = "Insurance is not yet Verified!";
+        setTimeout(() => {
+          this.error_book = "";
+        }, 5000);
+      }
+    })
+  }
 
   book()
   {
@@ -112,15 +195,36 @@ export class PatientPaymentPage implements OnInit {
     }
     else
     {
-      this.userservice.patient_book_schedule(this.schedInfo.schedule,this.schedInfo.time,this.userId)
+      let record = {};
+      record['patient_id'] = this.userId;
+      record['schedule_id'] = this.schedInfo.schedule;
+      record['time_id'] = this.schedInfo.time;
+      record['consultation_schedule'] = this.schedInfo.consultation_schedule;
+
+      this.userservice.patient_book_schedule(record)
       .then(()=>{
         let record = {}
         record['doctor_id'] = this.docInfo.uid;
         record['patient_id'] = this.userId;
+        record['transaction_id'] = this.transaction_id;
+        record['id'] = new Date(formatDate(new Date(),this.schedInfo.consultation_schedule,'en')).getTime();
         record['schedule'] = this.sched;
-        record['schedtime'] = this.schedTime;
+        record['time'] = this.schedTime;
+        record['paymentType'] = this.paymentType;
+        record['consultation_schedule'] = this.schedInfo.consultation_schedule;
+        record['createdAt'] = formatDate(new Date(),'MM/dd/yyyy','en');
+        record['status'] = 'pending'
         this.userservice.create_doctor_upcoming(record).then(()=>{
           console.log('added upcoming!');
+
+          //Notification
+           let record2 = {};
+           record2['createdAt'] = formatDate(new Date(),'short','en');
+           record2['title'] = "Patient Booked";
+           record2['description'] = "A patient successfully booked! Check your Patients upcoming!";
+           record2['id'] = new Date(formatDate(new Date(),'short','en')).getTime()
+          // this.notif.send_doctor(this.docInfo.uid,record2)
+
           this.router.navigate(['patient-consultation']);
           this.create_chat();
         })

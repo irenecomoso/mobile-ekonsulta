@@ -65,7 +65,8 @@ export class PatientDeleteAccountPage implements OnInit {
           })
         })
       })
-    }  async showAlert() {
+    }
+    async showAlert() {
     const alert = await this.alertCtrl.create({
     header: 'Warning',
     subHeader: 'This action is irreversible. ',

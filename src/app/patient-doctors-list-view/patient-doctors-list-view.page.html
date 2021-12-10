@@ -25,6 +25,7 @@
               <div>
                 <select [(ngModel)]="schedule" name="schedule" #date (change)="get_time(date.value)">
                     <option value="" selected>Select Date</option>
+                    <!-- <ion-icon name="calendar-outline"></ion-icon> -->
                     <option *ngFor="let list of scheduleList" value="{{list.uid}}">{{list.date}}</option>
                 </select>
               </div>
@@ -32,9 +33,9 @@
           <div>
               <label>Scheduled Time</label>
               <small>*</small>
-              <select [(ngModel)]="time" name="time">
-                <option value="" selected>Select Time</option>
-                <option *ngFor="let list of timeList" value="{{list.uid}}">
+              <ion-select [(ngModel)]="time" name="time">
+                <ion-select-option value="" selected>Select Time</ion-select-option>
+                <ion-select-option *ngFor="let list of timeList" value="{{list.uid}}">
                   {{list.time}}
                   <span *ngIf="list.status!=='full'">
                       notfull
@@ -42,16 +43,14 @@
                   <span *ngIf="list.status==='full'">
                       full
                 </span>
-                </option>
-              </select>
+                </ion-select-option>
+              </ion-select>
             </div>
       </div>
         <div *ngIf="error_schedule.length > 0" >
           {{error_schedule}}
         </div>
-        <ion-item class="row mt-4">
             <ion-button type="submit">Continue</ion-button>
-        </ion-item>
     </form>
   </form>
 

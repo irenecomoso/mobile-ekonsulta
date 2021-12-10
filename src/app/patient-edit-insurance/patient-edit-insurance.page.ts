@@ -172,6 +172,7 @@ export class PatientEditInsurancePage implements OnInit {
       })
     })
     this.labList = tempArray;
+    console.log(this.labList);
   }
   request_LOA()
   {
