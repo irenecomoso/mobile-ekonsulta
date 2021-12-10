@@ -1,0 +1,19 @@
+.insurance_h, .insurance_no {
+    border: 1px solid #888;
+}
+
+.info_container {
+    display: flex;  
+    flex-direction: column;
+    height: 30vh;
+}
+
+.info_content {
+    display: flex;
+    flex-direction: column;
+}
+
+.laboratory_content {
+    display: flex;
+    flex-direction: column;
+}
