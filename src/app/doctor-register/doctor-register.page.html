@@ -1,7 +1,7 @@
 <ion-header>
   <ion-toolbar>
     <ion-buttons slot="start">
-      <ion-back-button routerLink="/login">
+      <ion-back-button routerLink="/">
         <ion-icon name="arrow-back-outline"></ion-icon>
       </ion-back-button>
     </ion-buttons>
@@ -18,38 +18,43 @@
       </ion-item>
       <ion-item>
         <ion-label>Date of Birth</ion-label>
-        <ion-datetime type="date" placeholder="Select Date"[(ngModel)]="model.dob" name="dob"></ion-datetime>
+        <!-- <ion-datetime type="date" placeholder="Select Date"[(ngModel)]="model.dob" name="dob"></ion-datetime> -->
+        <ion-input [(ngModel)]="model.dob" type="date" name="dob" placeholder="Date of Birth" required><ion-icon name="calendar-outline"></ion-icon></ion-input>
       </ion-item>
       <ion-item>
-        <ion-label>Contact Number</ion-label>
-        <ion-input type="text" placeholder="(+63)" [(ngModel)]="model.contactNumber" name="contactNumber"></ion-input>
+        <ion-label position="floating">Contact Number</ion-label>
+        <ion-input type="text" placeholder="(+63)" [(ngModel)]="model.contactNumber" name="contactNumber" required></ion-input>
       </ion-item>
       <ion-item>
-        <ion-label>License Number</ion-label>
-        <ion-input type="text" [(ngModel)]="model.licenseNumber" name="licenseNumber"></ion-input>
+        <ion-label position="floating">License Number</ion-label>
+        <ion-input type="text" [(ngModel)]="model.licenseNumber" name="licenseNumber" required></ion-input>
       </ion-item>
       <ion-item>
         <ion-label>Specialization</ion-label>
         <ion-select [(ngModel)]="model.specialization" name="specialization">
-          <ion-select-option value="default">--SELECT SPECIALIZATION--</ion-select-option>
-          <ion-select-option *ngFor="let list of spList" value="{{list.id}}">{{list.name}}</ion-select-option>
+          <ion-select-option value="">--SELECT SPECIALIZATION--</ion-select-option>
+          <ion-select-option *ngFor="let list of spList" >{{list.name}}</ion-select-option>
         </ion-select>
       </ion-item>
       <ion-item>
+        <ion-label class="label" for="id">PRC ID and Recent Picture</ion-label>
+        <ion-input class="form-control" name="id" type="file"></ion-input>
+      </ion-item>
+      <ion-item>
         <ion-label position="floating">Address</ion-label>
-        <ion-input [(ngModel)]="model.address" name="address"></ion-input>
+        <ion-input [(ngModel)]="model.address" name="address" required></ion-input>
       </ion-item>
       <ion-item>
-        <ion-label>Email</ion-label>
-        <ion-input  type="text"[(ngModel)]="model.email" name="email"></ion-input>
+        <ion-label position="floating">Email</ion-label>
+        <ion-input  type="text"[(ngModel)]="model.email" name="email" required></ion-input>
       </ion-item>
       <ion-item>
-        <ion-label>Password</ion-label>
-        <ion-input type="password" [(ngModel)]="model.password" name="password"></ion-input>
+        <ion-label position="floating">Password</ion-label>
+        <ion-input type="password" [(ngModel)]="model.password" name="password" required></ion-input>
       </ion-item>
       <ion-item>
-        <ion-label>Confirm Password</ion-label>
-        <ion-input primary type="password" [(ngModel)]="confirmPass" name="confirmPass"></ion-input>
+        <ion-label position="floating">Confirm Password</ion-label>
+        <ion-input primary type="password" [(ngModel)]="confirmPass" name="confirmPass" required></ion-input>
       </ion-item>
 
     </ion-list>

@@ -1,3 +1,8 @@
+/* eslint-disable @typescript-eslint/no-inferrable-types */
+/* eslint-disable @typescript-eslint/quotes */
+/* eslint-disable eqeqeq */
+import { Router } from '@angular/router';
+import { AlertController } from '@ionic/angular';
 /* eslint-disable no-var */
 /* eslint-disable @typescript-eslint/semi */
 /* eslint-disable @typescript-eslint/naming-convention */
@@ -30,15 +35,81 @@ export class DoctorProfilePage implements OnInit {
   spList: any = [];
   imgUrl: any;
   file: any;
+  insurance_af: any = [];
 
-  constructor(public userservice: UserService,public afu: AuthService,private menu: MenuController) { }
+  profile_changed: boolean = false;
+
+  pending_message: boolean = false;
+  fee: number = 0;
+  timeLeft: number = 10;
+  interval;
+
+  constructor(public userservice: UserService,public afu: AuthService,
+    private menu: MenuController, private alertCtrl: AlertController,
+    public router: Router) { }
 
   ngOnInit(): void {
     this.doctorMenu();
+    //  // console.log(e.data());
+    //  this.userservice.get_patientInfo(this.userId).then(e=>{
+    //    this.info = e.data();
+    //  }).then(()=>{
+    //    this.userservice.get_specializationInfo(this.info.specialization).then(e=>{
+    //      this.spInfo = e.data();
+    //    })
+    //  })
+
+    //  this.userservice.get_avatar(this.userId).then(e=>{
+    //    this.imgUrl = e.data().image;
+    //  })
+
+    //  var data;
+    //  var tempArray = [];
+    //  this.userservice.get_Speciaalization().then(e=>{
+    //    e.forEach(item=>{
+    //      data = item.data();
+    //      data.uid = item.id;
+    //      tempArray.push(data);
+    //    })
+    //  })
+    //  this.spList = tempArray; this.get_doctorInfo();
+    this.get_specialization();
+    this.get_doctorInfo();
+    //this.insurance_list();
+    //this.get_insurance();
+  }
+  // async showAlert1() {
+  //   const alert = await this.alertCtrl.create({
+  //   header: 'Consultation Fee',
+  //   subHeader: 'This action is irreversible. ',
+
+  //   buttons: [
+  //     {
+  //       text: 'Cancel',
+  //       handler: (data: any) => {
+  //         console.log('Canceled', data);
+  //       }
+  //     },
+  //     {
+  //       text: 'Set',
+  //       handler: (data: any) => {
+  //         this.router.navigate(['/doctor-profile'])
+  //       }
+  //     }
+  //   ]
+  //   });
+  //   await alert.present();
+  //   const result = await alert.onDidDismiss();
+  //   console.log(result);
+  //   }
+  get_doctorInfo()
+  {
     this.userId = this.afu.get_UID();
     this.userservice.get_patientInfo(this.userId).then(e=>{
-     // console.log(e.data());
+      console.log(e.data());
+     this.fee = e.data().consultation_fee;
       this.info = e.data();
+      this.check_verification(this.info.isVerified);
     }).then(()=>{
       this.userservice.get_specializationInfo(this.info.specialization).then(e=>{
         this.spInfo = e.data();
@@ -49,6 +120,28 @@ export class DoctorProfilePage implements OnInit {
       this.imgUrl = e.data().image;
     })
 
+  }
+  check_verification(verify)
+  {
+    if(verify == "pending")
+    {
+      console.log('pending!');
+      this.pending_message = true;
+      setTimeout(() => {
+        this.pending_message = false;
+      }, 10000);
+      this.interval = setInterval(() => {
+        if(this.timeLeft > 0) {
+          this.timeLeft--;
+        } else {
+          clearInterval(this.interval);
+          this.timeLeft = 10;
+        }
+      },1000)
+    }
+  }
+  get_specialization()
+  {
     var data;
     var tempArray = [];
     this.userservice.get_Speciaalization().then(e=>{
@@ -60,7 +153,6 @@ export class DoctorProfilePage implements OnInit {
     })
     this.spList = tempArray;
   }
-
   doctorMenu() {
     this.menu.enable(true, 'second');
   }

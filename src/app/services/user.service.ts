@@ -83,6 +83,10 @@ export class UserService {
       console.log(error.message);
     })
   }
+  update_doctor_fee(user_id,fee)
+  {
+    return this.db.firestore.collection('Users').doc(user_id).update(fee);
+  }
   update_patient_insurance(user_id,record)
   {
     return this.db.collection('Users').doc(user_id).update(record);
@@ -140,6 +144,16 @@ export class UserService {
     return this.db.firestore.collection('Health_Insurance').doc(id).collection('reviews')
     .where('from','==',user_id).get();
   }
+  check_affiliation(id,ins_id)
+  {
+    return this.db.firestore.collection('Insurance_Affiliation').where('doctor_id','==',id)
+    .where('insurance_id','==',ins_id).get();
+  }
+  insurance_affiliation(record)
+  {
+    return this.db.firestore.collection('Insurance_Affiliation')
+    .add(record);
+  }
   create_healthInsurance_feedback(ins_id,user_id,feedback,name)
   {
     return this.db.firestore.collection('Health_Insurance').doc(ins_id)
@@ -187,7 +201,8 @@ export class UserService {
   }
   get_doctor_upcoming(doc_id)
   {
-    return this.db.firestore.collection('upcoming').where('doctor_id','==',doc_id);
+    return this.db.firestore.collection('upcoming').where('doctor_id','==',doc_id)
+    .orderBy('id','asc');
   }
   get_labInfo(id)
   {

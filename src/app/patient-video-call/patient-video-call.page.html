@@ -10,11 +10,11 @@
   </ion-buttons>
   <ion-item>
     <ion-item >
-      <p >Patient's Name</p>
+      <p >{{currentUser.displayName}}</p>
       <video #local_video [autoplay]="true" [muted]="true"></video>
     </ion-item>
     <ion-item>
-      <p >Doctor's Name</p>
+      <p >{{remoteUser.fullname}}</p>
       <video #received_video [autoplay]="true"></video>
     </ion-item>
   </ion-item>

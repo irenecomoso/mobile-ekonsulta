@@ -78,6 +78,7 @@ export class DoctorMedicalCertificatePage implements OnInit {
         record2['title'] = "Medical Certificate"
         record2['description'] = "A doctor sent a medical Certificate. Check your Records now!";
         record2['createdAt'] = formatDate(new Date(),'short','en');
+        record2['id'] = new Date(formatDate(new Date(),'short','en')).getTime()
         //this.notif.send_patient(this.patientInfo.uid,record2);
         this.router.navigate[('/patient-doctor-chat')];
         setTimeout(() => {

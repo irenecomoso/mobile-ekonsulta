@@ -37,22 +37,8 @@ export class DoctorConsultationPage implements OnInit {
     private menu: MenuController
     //public notif : NotificationService
     ) { }
-
-   /** set to false so that when loading the patient's page, content of that function is not displayed */
-   upcoming = false;
-   done = false;
-
   doctorMenu() {
     this.menu.enable(true, 'second');
-  }
-
-  upcomingFunction(){
-    this.upcoming = true;
-    this.done = false;
-  }
-  doneFunction(){
-   this.upcoming = false;
-   this.done = true;
   }
   ngOnInit(): void {
     this.doctorMenu();
@@ -66,23 +52,29 @@ export class DoctorConsultationPage implements OnInit {
     console.log(info);
     this.userservice.check_upcoming(this.userId,info.uid).then(e=>{
       e.forEach(res=>{
-        this.userservice.update_upcoming(res.id).then(()=>{
-          this.router.navigate(['/doctor-patient-chat']);
-
+        if(res.data().status=="pending")
+        {
           //notification
           let record = {};
           record['title'] = "Consultation accepted!";
           record['description'] = "Your consultation has been accepted Join Now!";
           record['createdAt'] = formatDate(new Date(),'short','en');
+          record['id'] = new Date(formatDate(new Date(),'short','en')).getTime()
           //this.notif.send_patient(info.uid,record)
-
-          if(localStorage.getItem('data')==null)
-          {
-            localStorage.setItem('data',JSON.stringify(info))
-          }
+        }
+          // if(localStorage.getItem('data')==null)
+          // {
+          //   localStorage.setItem('data',JSON.stringify(info))
+          // }
+          this.userservice.update_upcoming(res.id).then(()=>{
+            this.router.navigate(['/doctor-patient-chat']);
+            if(localStorage.getItem('data')==null)
+            {
+              localStorage.setItem('data',JSON.stringify(info))
+            }
+          })
         })
       })
-    })
   }
   get_userInfo()
   {
@@ -99,6 +91,7 @@ export class DoctorConsultationPage implements OnInit {
             data.upcoming_id = e.doc.id;
             data.schedule = e.doc.data().schedule;
             data.schedtime = e.doc.data().time;
+            data.transaction_id = e.doc.data().transaction_id;
             data.consultation_schedule = e.doc.data().consultation_schedule;
             data.image = im.data().image;
             if(e.type == 'added')

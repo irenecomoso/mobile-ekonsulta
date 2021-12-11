@@ -18,6 +18,14 @@
           <ion-label class="name">{{info.fullname}}</ion-label><br><br>
         </ion-item>
         <ion-item>
+          <div *ngIf="info.isVerified === 'verified'" class="chip">
+            <div class="chip-content">Verified <span class="checked"><i class="bi bi-star-fill"></i></span></div>
+          </div>
+          <div *ngIf="info.isVerified=== 'pending' " class="chip">
+            <div class="chip-content1">Pending <span class="checked"><i class="bi bi-clock-history"></i></span></div>
+          </div>
+        </ion-item>
+        <ion-item>
           <ion-label position="stacked"></ion-label>
             <ion-input name="Email" readonly>Email: {{info.email}}</ion-input>
             <ion-input name="Date of Birth" readonly>Date of Birth: {{info.dob}}</ion-input>
@@ -28,6 +36,8 @@
         </ion-item><br><br><br><br><br>
         <div class="buttons">
           <ion-button  id="btn1" color="rgb(28,54,94)" expand="block" routerLink="/doctor-edit-profile"><ion-icon name="create"></ion-icon> Edit</ion-button>
+          <!-- <ion-button routerLink="/doctor-set-consultation-fee">CONSULTATION FEE</ion-button> -->
+          <ion-button routerLink="/doctor-edit-insurance">INSURANCE</ion-button>
           <ion-button  id="btn2" color="rgb(28,54,94)" routerLink="/login"><ion-icon name="exit"></ion-icon> Logout</ion-button>
         </div>
       </ion-card-content>

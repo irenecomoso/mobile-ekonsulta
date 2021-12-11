@@ -10,7 +10,7 @@
       <ion-item>
         <ion-label>Health Insurance</ion-label>
         <ion-select [(ngModel)]="health_insurance" name="health_insurance" type="text" class="insurance_h">
-          <ion-select-option *ngFor="let list of insList" value="{{list.uid}}" >{{list.name}}</ion-select-option>
+          <ion-select-option *ngFor="let list of insList" >{{list.name}}</ion-select-option>
         </ion-select>
       </ion-item>
       <ion-item>
@@ -67,7 +67,7 @@
             <ion-label>Choose Laboratory: &nbsp;
               <ion-select [(ngModel)]="lab_id" name="lab_id" id="" class="mb-2">
               <ion-select-option value="" selected>Select Laboratory</ion-select-option>
-              <ion-select-option *ngFor="let list of labList" value="{{list.uid}}">{{list.name}}</ion-select-option>
+              <ion-select-option *ngFor="let list of labList">{{list.name}}</ion-select-option>
             </ion-select></ion-label>
           </ion-item>
           <ion-item>

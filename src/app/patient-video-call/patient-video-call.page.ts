@@ -15,7 +15,7 @@ import { AngularFirestore } from '@angular/fire/firestore';
 import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 const mediaConstraints = {
   audio: true,
-  video: true
+  video:  { facingMode: "user" }
 };
 
 const servers = {
@@ -41,6 +41,9 @@ export class PatientVideoCallPage implements OnInit {
 
   doctorInfo: any = [];
   currentUser_id: string = "";
+  remoteUser: any = [];
+
+  currentUser: any = [];
 
   audio = new Audio('assets/sounds/Call.mp3');
 
@@ -52,6 +55,9 @@ export class PatientVideoCallPage implements OnInit {
     public afu: AuthService
   ) { }
   ngOnInit(){
+    this.remoteUser = JSON.parse(localStorage.getItem('data'));
+    this.currentUser_id = this.afu.get_UID();
+    this.currentUser = JSON.parse(localStorage.getItem('Users'));
   }
   ngAfterViewInit(): void {
 

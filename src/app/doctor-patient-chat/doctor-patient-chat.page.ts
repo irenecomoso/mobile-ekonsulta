@@ -106,7 +106,7 @@ export class DoctorPatientChatPage implements OnInit {
     }
   }
 
-  choosefile(e,type)
+ /* choosefile(e,type)
   {
     if(type=="cs")
     {
@@ -205,7 +205,7 @@ export class DoctorPatientChatPage implements OnInit {
   {
     const audio = new Audio('assets/sounds/video-button.mp3');
     audio.play();
-    window.open('/video-call','location=yes,height=570,width=2000,scrollbars=yes,status=yes');
+    window.open('/video-call','location=yes,height=270,width=1000,scrollbars=yes,status=yes');
   }
 
   /*finish_consultation()

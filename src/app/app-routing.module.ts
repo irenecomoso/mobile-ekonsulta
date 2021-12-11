@@ -171,6 +171,14 @@ const routes: Routes = [
     path: 'doctor-medical-certificate',
     loadChildren: () => import('./doctor-medical-certificate/doctor-medical-certificate.module').then( m => m.DoctorMedicalCertificatePageModule)
   },
+  {
+    path: 'doctor-set-consultation-fee',
+    loadChildren: () => import('./doctor-set-consultation-fee/doctor-set-consultation-fee.module').then( m => m.DoctorSetConsultationFeePageModule)
+  },
+  {
+    path: 'doctor-edit-insurance',
+    loadChildren: () => import('./doctor-edit-insurance/doctor-edit-insurance.module').then( m => m.DoctorEditInsurancePageModule)
+  },
 
 
 

@@ -26,16 +26,16 @@
   <div *ngIf="selectTabs==='upcoming'">
     <div *ngFor="let list of userList">
     <ion-list>
-      <ion-item button (click)="chat(list)">
+      <ion-item>
         <ion-label>
           <h2>{{list.fullname}}</h2>
             <div *ngIf="list.upcoming_status === 'pending'">
-               <ion-button>Accept</ion-button>
-               <ion-button>Schedule | {{list.schedule}} | {{list.schedtime}}</ion-button>
+               <ion-button (click)="chat(list)">Accept</ion-button>
+               <ion-button>{{list.consultation_schedule}} | {{list.schedule}} | {{list.schedtime}}</ion-button>
             </div>
             <div *ngIf="list.upcoming_status === 'ongoing'">
-              <ion-button>Join now</ion-button>
-              <ion-button>Schedule | {{list.schedule}} | {{list.schedtime}}</ion-button>
+              <ion-button (click)="chat(list)">Join now</ion-button>
+              <ion-label>{{list.consultation_schedule}} | {{list.schedule}} | {{list.schedtime}}</ion-label>
             </div>
       </ion-label>
       </ion-item>
@@ -45,12 +45,10 @@
 
   <div *ngIf="selectTabs==='done'">
     <ion-list>
-      <ion-item button *ngFor="let list of doneList">
-       <ion-label>
+      <ion-item *ngFor="let list of doneList">
         <h2>{{list.fullname}}</h2>
             <ion-button>Done</ion-button>
             <ion-button>{{list.consultation_schedule}} | {{list.schedule}} | {{list.schedtime}}</ion-button>
-       </ion-label>
       </ion-item>
     </ion-list>
   </div>
