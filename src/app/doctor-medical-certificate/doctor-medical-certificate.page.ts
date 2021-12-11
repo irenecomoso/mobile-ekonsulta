@@ -80,11 +80,12 @@ export class DoctorMedicalCertificatePage implements OnInit {
         record2['createdAt'] = formatDate(new Date(),'short','en');
         record2['id'] = new Date(formatDate(new Date(),'short','en')).getTime()
         //this.notif.send_patient(this.patientInfo.uid,record2);
-        this.router.navigate[('/patient-doctor-chat')];
+        //this.router.navigate[('/doctor-chat-info')];
         setTimeout(() => {
           this.success_message = "";
         }, 5000);
       })
+      this.router.navigate(['/doctor-chat-info']);
     }
     else{
       console.log('Empty Fields');

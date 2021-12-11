@@ -1,0 +1,58 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-button routerLink="/doctor-chat-info"><ion-icon name="arrow-back-outline"></ion-icon></ion-button>
+      <!-- <ion-menu-button color="dark"></ion-menu-button> -->
+    </ion-buttons>
+    <ion-title>E-konsulta</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+
+  <div class="header_details">
+    <p>Date</p>
+    <p>Filename</p>
+    <p>Action</p>
+</div>
+<div *ngIf="selectTabs==='medRecords'">
+  <ion-list>
+     <ion-item button *ngFor="let list of medList" >
+      <ion-label>
+        <div class="info_details">
+          <p>{{list.createdAt}}</p>
+          <p>{{list.filename}}</p>
+          <ion-button (click)="open(list.file)">View</ion-button>
+        </div>
+      </ion-label>
+     </ion-item>
+  </ion-list>
+</div>
+<div *ngIf="selectTabs==='labResults'">
+  <ion-list>
+     <ion-item *ngFor="let list of labList" >
+      <ion-label>
+        <div class="info_details">
+          <p>{{list.createdAt}}</p>
+          <p>{{list.filename}}</p>
+          <ion-button (click)="open(list.file)">View</ion-button>
+        </div>
+      </ion-label>
+     </ion-item>
+  </ion-list>
+</div>
+<div *ngIf="selectTabs==='prescriptions'">
+  <ion-list>
+     <ion-item  *ngFor="let list3 of presList" >
+      <ion-label>
+        <div class="info_details">
+          <p>{{list3.createdAt}}</p>
+          <p>{{list3.filename}}</p>
+          <ion-button (click)="open(list3.file)">View</ion-button>
+        </div>
+      </ion-label>
+     </ion-item>
+  </ion-list>
+</div>
+
+</ion-content>

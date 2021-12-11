@@ -179,6 +179,14 @@ const routes: Routes = [
     path: 'doctor-edit-insurance',
     loadChildren: () => import('./doctor-edit-insurance/doctor-edit-insurance.module').then( m => m.DoctorEditInsurancePageModule)
   },
+  {
+    path: 'doctor-shared-files',
+    loadChildren: () => import('./doctor-shared-files/doctor-shared-files.module').then( m => m.DoctorSharedFilesPageModule)
+  },
+  {
+    path: 'patient-shared-files',
+    loadChildren: () => import('./patient-shared-files/patient-shared-files.module').then( m => m.PatientSharedFilesPageModule)
+  },
 
 
 

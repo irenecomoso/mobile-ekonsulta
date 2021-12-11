@@ -106,6 +106,7 @@ export class DoctorPatientprescriptionPage implements OnInit {
       setTimeout(() => {
         this.success_message = "";
       }, 5000);
+      this.router.navigate[('/doctor-patient-chat')];
     }
     else
     {
@@ -114,7 +115,6 @@ export class DoctorPatientprescriptionPage implements OnInit {
         this.error_message = "";
       }, 5000);
     }
-    this.router.navigate[('/doctor-patient-chat')];
   }
   /*uploadMedical()
   {
