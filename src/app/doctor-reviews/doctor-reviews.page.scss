@@ -1,0 +1,42 @@
+.replylistt {
+    border: none;
+}
+
+.modal-content {
+    border: none;
+}
+
+.modal-body {
+    padding: 0;
+}
+
+.modal-body textarea {
+    width: 100%;
+    margin: -20px 0 0 0;
+}
+
+.modal-footer {
+    border: none;
+}
+
+#dComment {
+    border-radius: 50px;
+    background: #ebebeb;
+    padding: 10px;
+    margin: 0 0 20px;
+}
+
+#dComment h5 {
+    font-size: 20px;
+}
+
+#feedback{
+    border-radius: 50px;
+    --ion-background-color: #f0f0f0!important;
+    background: #ebebeb;
+    padding: 3px 0 3px 20px;
+}
+  
+#replies{
+    padding-left: 50px;
+}
