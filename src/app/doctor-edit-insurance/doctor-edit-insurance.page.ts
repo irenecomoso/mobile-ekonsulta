@@ -69,6 +69,43 @@ export class DoctorEditInsurancePage implements OnInit {
       })
     })
     this.spList = tempArray;
+    this.insurance_list();
+    this.get_insurance();
+  }
+  insurance_list()
+  {
+    var data;
+    var tempArray = [];
+    this.userservice.get_HealthInsurance().then(e=>{
+      e.forEach(item=>{
+        data = item.data();
+        data.uid = item.id;
+        tempArray.push(data);
+      })
+    })
+    this.insuranceList = tempArray;
+    console.log(this.insuranceList);
+  }
+  get_insurance()
+  {
+    var data;
+    var tempArray = [];
+    this.userservice.get_insurance_affiliation(this.userId)
+    .then(e=>{
+      e.forEach(item=>{
+        if(item.data().status == "verified")
+        {
+          this.userservice.get_HealthInsurance_Info(item.data().insurance_id).then(res=>{
+            data = item.data();
+            data.insurance_name = res.data().name;
+            data.uid = item.id;
+            tempArray.push(data);
+          })
+        }
+      })
+    })
+    this.insurance_af = tempArray;
+    console.log(this.insurance_af);
   }
   insurance_request()
   {

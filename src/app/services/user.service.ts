@@ -140,15 +140,19 @@ export class UserService {
     return this.db.firestore.collection('Health_Insurance').doc(id).collection('reviews')
     .where('from','==',user_id).get();
   }
-  check_affiliation(id,ins_id)
-  {
-    return this.db.firestore.collection('Insurance_Affiliation').where('doctor_id','==',id)
-    .where('insurance_id','==',ins_id).get();
-  }
   insurance_affiliation(record)
   {
     return this.db.firestore.collection('Insurance_Affiliation')
     .add(record);
+  }
+  get_insurance_affiliation(id)
+  {
+    return this.db.firestore.collection('Insurance_Affiliation').where('doctor_id','==',id).get();
+  }
+  check_affiliation(id,ins_id)
+  {
+    return this.db.firestore.collection('Insurance_Affiliation').where('doctor_id','==',id)
+    .where('insurance_id','==',ins_id).get();
   }
   create_healthInsurance_feedback(ins_id,user_id,feedback,name)
   {
