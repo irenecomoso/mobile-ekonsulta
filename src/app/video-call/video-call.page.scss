@@ -1,3 +1,35 @@
 video{
   background: rgb(194, 194, 194);
 }
+
+.video_cont {
+  display: flex;
+  flex-direction: column;
+  height: 70vh;
+  justify-content: space-between;
+  align-content: center;
+  width: 70vw;
+  margin: 0 auto 0 auto;
+}
+
+.video_cont div {
+  height: 50%;
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+}
+
+.video_cont div p {
+  margin: 20px 0 0 0;
+}
+
+.video_cont div video {
+  height: 100%;
+  width: 100%;
+}
+
+.video_btns {
+  width: 60vw;
+  margin: 30px auto 0 auto;
+  background: none;
+}

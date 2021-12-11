@@ -8,17 +8,22 @@
   <ion-item>
     <ion-back-button><ion-icon name="arrow-back-outline"></ion-icon></ion-back-button>
   </ion-item>
-  <div class="bg-dark row">
+
+  <div class="bg-dark row class video_cont">
+
     <div class="col">
       <p>{{currentUser.displayName}}</p>
       <video #local_video [autoplay]="true" [muted]="true"></video>
     </div>
+
     <div class="col">
       <p class="video-description text-center text-light">{{remoteUser.fullname}}</p>
       <video #received_video [autoplay]="true"></video>
     </div>
+
   </div>
-  <div class="bg-dark row">
+
+  <div class="row video_btns">
     <div class="options">
       <button *ngIf="call_interval" class="start-local">{{timeLeft}}</button>
       <button (click)="startLocalVideo()"title="Camera on"><ion-icon name="videocam-outline"></ion-icon></button>

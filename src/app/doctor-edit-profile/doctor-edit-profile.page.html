@@ -17,7 +17,7 @@
         <img src="{{imgUrl}}" id="pic">
         <div class="inner">
           <input class="inputfile" (change)="choosefile($event)" type="file" name="pic" accept="image/*">
-          <label><ion-icon name="cloud-upload-outline" (click)="uploadImage()"></ion-icon></label>
+          <label><ion-icon name="cloud-upload-outline" (click)="uploadImage()" id="upload_icon"></ion-icon></label>
         </div>
       </div>
     </div>
@@ -36,7 +36,7 @@
       </ion-item>
       <ion-item>
         <ion-label>Date of Birth</ion-label>
-        <ion-input [(ngModel)]="model.dob" displayFormat="MM-DD-YYYY" name="dob" type="date" placeholder="Select Date"><ion-icon name="calendar-outline"></ion-icon></ion-input>
+        <ion-input [(ngModel)]="model.dob" displayFormat="MM-DD-YYYY" name="dob" type="date" placeholder="Select Date" id="bod_input"><ion-icon name="calendar-outline" id="bod-icon"></ion-icon></ion-input>
       </ion-item>
       <ion-item>
         <ion-label>Contact Number</ion-label>

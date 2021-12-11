@@ -68,7 +68,7 @@
     fill: #fff;
 }
 
-ion-icon{
+#upload_icon{
   color:#fff !important;
   height:70%;
   width:70%;
@@ -85,4 +85,15 @@ ion-icon{
 #delete{
   border-radius: 4px;
   font-size: 12px;
+}
+
+#bod_input {
+  margin-left: 10px;
+}
+
+#bod-icon{
+  color:#000 !important;
+  height: 30px;
+  width: 30px;
+  align-self: right;
 }
