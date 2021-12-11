@@ -99,6 +99,7 @@ export class DoctorPatientprescriptionPage implements OnInit {
       record2['title'] = "Medical Summary and Prescription"
       record2['description'] = "The doctor sent your Medical Summary and your Prescription. Check your Records now!";
       record2['createdAt'] = formatDate(new Date(),'short','en');
+      record2['id'] = new Date(formatDate(new Date(),'short','en')).getTime()
       //this.notif.send_patient(this.patientInfo.uid,record2);
 
 
