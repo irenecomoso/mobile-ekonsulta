@@ -34,10 +34,6 @@ export class UserService {
   {
     return this.db.firestore.collection('Health_Insurance').doc(id).get();
   }
-  get_UserInfo(user_id: string)
-  {
-     return this.db.firestore.collection('Users').doc(user_id).get();
-  }
   get_avatar(user_id)
   {
     return this.db.firestore.collection('avatar').doc(user_id).get();
@@ -207,6 +203,10 @@ export class UserService {
   get_labInfo(id)
   {
     return this.db.collection('Laboratory_Partner').doc(id).get();
+  }
+  get_UserInfo(user_id: string)
+  {
+     return this.db.firestore.collection('Users').doc(user_id).get();
   }
   get_Lab_Results_Patient(email)
   {
@@ -390,6 +390,10 @@ export class UserService {
   get_medical_shared(id)
   {
     return this.db.firestore.collection('Medical_Records').doc(id).get();
+  }
+  get_shareFiles()
+  {
+    return this.db.firestore.collection('Shared_Files').get();
   }
   get_lab_shared(id)
   {

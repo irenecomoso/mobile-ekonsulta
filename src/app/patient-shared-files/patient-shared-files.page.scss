@@ -1,0 +1,29 @@
+.label_records {
+  font-size: 10px;
+}
+
+.btn_records {
+  border-left: 2px solid #16c2d5;
+  border-radius: 0;
+}
+
+.btn_records:first-child {
+  border-left: none;
+}
+
+.header_details {
+  display: flex;
+  align-content: center;
+  align-items: center;
+  width: 100vw;
+  justify-content: space-around;
+}
+
+.info_details {
+  display: flex;
+  width: 100%;
+  justify-content: space-around;
+  margin: 0 0 0 -5px;
+  border-bottom: none;
+}
+

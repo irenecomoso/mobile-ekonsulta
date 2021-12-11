@@ -3,14 +3,16 @@
     <!--<ion-buttons slot="start">
       <ion-back-button></ion-back-button>
    </ion-buttons>-->
-    <ion-title>E-konsulta</ion-title>
+   <ion-buttons>
+    <ion-button routerLink="/patient-doctor-chat" >
+      <ion-icon name="arrow-back-outline"></ion-icon>
+    </ion-button>
+   </ion-buttons>
+    <!-- <ion-title>E-konsulta</ion-title> -->
   </ion-toolbar>
 </ion-header>
 
 <ion-content>
-  <ion-button routerLink="/patient-doctor-chat" id="back" icon-only fill clear shape="square">
-    <ion-icon name="arrow-back-outline"></ion-icon>
-  </ion-button>
   <ion-avatar>
     <img src="https://ionicframework.com/docs/demos/api/avatar/avatar.svg" id="pic">
   </ion-avatar>
@@ -21,7 +23,7 @@
         Payment
       </ion-label>
     </ion-item> -->
-    <ion-item button>
+    <ion-item button routerLink="/patient-shared-files">
       <ion-label>
         Shared Files
       </ion-label>

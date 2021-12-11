@@ -7,6 +7,24 @@
     <ion-title>E-konsulta</ion-title>
   </ion-toolbar>
 </ion-header>
+<ion-header class="ion-no-border">
+  <ion-toolbar style="text-align:center;">
+    <ion-segment value="consultations" [(ngModel)]="selectTabs">
+      <ion-segment-button value="medRecords" class="btn_records">
+        <ion-label class="label_records">Medical<br>Records</ion-label>
+      </ion-segment-button>
+      <ion-segment-button value="labResults" class="btn_records">
+        <ion-label style="text-align: center;" class="label_records">Lab Results</ion-label>
+      </ion-segment-button>
+      <ion-segment-button value="prescriptions" class="btn_records">
+        <ion-label class="label_records">Prescriptions</ion-label>
+      </ion-segment-button>
+      <ion-segment-button value="insuranceLOA" class="btn_records">
+        <ion-label class="label_records">Insurance LOA</ion-label>
+      </ion-segment-button>
+    </ion-segment>
+  </ion-toolbar>
+</ion-header>
 
 <ion-content>
 

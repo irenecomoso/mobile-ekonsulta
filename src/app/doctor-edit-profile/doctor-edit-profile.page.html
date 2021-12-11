@@ -36,7 +36,7 @@
       </ion-item>
       <ion-item>
         <ion-label>Date of Birth</ion-label>
-        <ion-datetime value="{{info.dob}}" [(ngModel)]="model.dob"name="dob"></ion-datetime>
+        <ion-input [(ngModel)]="model.dob" displayFormat="MM-DD-YYYY" name="dob" type="date" placeholder="Select Date"><ion-icon name="calendar-outline"></ion-icon></ion-input>
       </ion-item>
       <ion-item>
         <ion-label>Contact Number</ion-label>

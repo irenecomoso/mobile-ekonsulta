@@ -58,6 +58,7 @@ export class PatientVideoCallPage implements OnInit {
     this.remoteUser = JSON.parse(localStorage.getItem('data'));
     this.currentUser_id = this.afu.get_UID();
     this.currentUser = JSON.parse(localStorage.getItem('Users'));
+    // this.videoCall_listener();
   }
   ngAfterViewInit(): void {
 
@@ -169,4 +170,18 @@ export class PatientVideoCallPage implements OnInit {
     const audio = new Audio('assets/sounds/callEnd.mp3');
     audio.play();
   }
+  // videoCall_listener()
+  // {
+  //   this.db.firestore.collection('calls').where('offer.doctor_id','==',this.docInfo.uid).
+  //   where('offer.patient_id','==',this.userid).onSnapshot(snapshot=>{
+  //     let changes = snapshot.docChanges();
+  //     changes.forEach(e=>{
+  //       if(e.type == 'added')
+  //       {
+  //         console.log('exist!');
+  //         this.video_call();
+  //       }
+  //     })
+  //   })
+  // }
 }

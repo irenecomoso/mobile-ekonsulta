@@ -25,42 +25,8 @@ export class PatientMyrecordsPage implements OnInit {
   medicalList: any = [];
   constructor(public userservice: UserService, public afu: AuthService,private menu: MenuController) { }
 
-  /** set to false so that when loading the user analytics page, content of that function is not displayed */
-  medicalrecords = false;
-  labresult = false;
-  presc =  false;
-  insurance_loa = false;
-
   patientMenu() {
     this.menu.enable(true, 'first');
-  }
-
-  medicalRecords(){
-    this.medicalrecords = true;
-    this.labresult = false;
-    this.presc = false;
-    this.insurance_loa = false;
-  }
-
-  labResult(){
-    this.medicalrecords = false;
-    this.labresult = true;
-    this.presc = false;
-    this.insurance_loa = false;
-  }
-
-  prescription(){
-    this.medicalrecords = false;
-    this.labresult = false;
-    this.presc = true;
-    this.insurance_loa = false;
-  }
-  insuranceLOA()
-  {
-    this.medicalrecords = false;
-    this.labresult = false;
-    this.presc = false;
-    this.insurance_loa = true;
   }
 
   ngOnInit(): void {

@@ -1,9 +1,85 @@
 <ion-header>
   <ion-toolbar>
-    <ion-title>patient-shared-files</ion-title>
+    <ion-buttons>
+      <ion-button routerLink="/patient-chat-info"><ion-icon name="arrow-back-outline"></ion-icon></ion-button>
+    </ion-buttons>
+    <ion-title >Ekonsulta</ion-title>
+  </ion-toolbar>
+</ion-header>
+<ion-header class="ion-no-border">
+  <ion-toolbar style="text-align:center;">
+    <ion-segment value="consultations" [(ngModel)]="selectTabs">
+      <ion-segment-button value="medRecords" class="btn_records">
+        <ion-label class="label_records">Medical<br>Records</ion-label>
+      </ion-segment-button>
+      <ion-segment-button value="labResults" class="btn_records">
+        <ion-label style="text-align: center;" class="label_records">Lab Results</ion-label>
+      </ion-segment-button>
+      <ion-segment-button value="prescriptions" class="btn_records">
+        <ion-label class="label_records">Prescriptions</ion-label>
+      </ion-segment-button>
+      <ion-segment-button value="insuranceLOA" class="btn_records">
+        <ion-label class="label_records">Insurance LOA</ion-label>
+      </ion-segment-button>
+    </ion-segment>
   </ion-toolbar>
 </ion-header>
 
 <ion-content>
-
+  <div class="header_details">
+    <p>Date</p>
+    <p>Filename</p>
+    <p>Action</p>
+</div>
+<div *ngIf="selectTabs==='medRecords'">
+  <ion-list>
+     <ion-item button *ngFor="let list of medList" >
+      <ion-label>
+        <div class="info_details">
+          <p>{{list.createdAt}}</p>
+          <p>{{list.filename}}</p>
+          <ion-button (click)="open(list.file)">View</ion-button>
+          <!-- <label>Select
+            <input type="checkbox"  (change)="chooseShare(list.uid,$event.target.checked)" [checked]="list.check">
+            <span class="checkmark"></span>
+          </label> -->
+        </div>
+      </ion-label>
+     </ion-item>
+  </ion-list>
+</div>
+<div *ngIf="selectTabs==='labResults'">
+  <ion-list>
+     <ion-item *ngFor="let list of labList" >
+      <ion-label>
+        <div class="info_details">
+          <p>{{list.createdAt}}</p>
+          <p>{{list.filename}}</p>
+          <ion-button (click)="open(list.file)">View</ion-button>
+          <!-- <label>Select
+            <input class="ms-2" type="checkbox"  (change)="chooseShare(list.uid,$event.target.checked)" [checked]="list.check">
+            <span class="checkmark"></span>
+          </label> -->
+        </div>
+      </ion-label>
+     </ion-item>
+  </ion-list>
+</div>
+<div *ngIf="selectTabs==='prescriptions'">
+  <ion-list>
+     <ion-item  *ngFor="let list3 of presList" >
+      <ion-label>
+        <div class="info_details">
+          <p>{{list3.createdAt}}</p>
+          <p>{{list3.filename}}</p>
+          <ion-button (click)="open(list3.file)">View</ion-button>
+          <!-- <label>Select
+            <input class="ms-2" type="checkbox"  (change)="chooseShare(list.uid,$event.target.checked)" [checked]="list.check">
+            <span class="checkmark"></span>
+          </label> -->
+        </div>
+      </ion-label>
+     </ion-item>
+  </ion-list>
+</div>
 </ion-content>
