@@ -30,6 +30,7 @@ export class DoctorSetConsultationFeePage implements OnInit {
   fee: number = 0;
   timeLeft: number = 10;
   interval;
+  success_message = "";
 
   constructor(public userservice: UserService,public afu: AuthService,
     private menu: MenuController, private alertCtrl: AlertController,
@@ -109,7 +110,6 @@ export class DoctorSetConsultationFeePage implements OnInit {
     this.userservice.update_doctor_fee(this.userId,record).then(()=>{
       console.log('Updated!');
     })
-    //this.router.navigate(['/patient-profile']);
   }
 
 }

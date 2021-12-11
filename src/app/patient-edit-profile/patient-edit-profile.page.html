@@ -1,10 +1,6 @@
 <ion-header>
   <ion-toolbar>
-    <ion-buttons slot="start">
-      <ion-button (click)="goback()">
-        <ion-icon name="arrow-back-outline"></ion-icon>
-      </ion-button>
-    </ion-buttons>
+      <ion-button routerLink="/patient-profile"><ion-icon name="arrow-back"></ion-icon></ion-button>
     <ion-title>Edit Profile</ion-title>
     <ion-buttons slot="primary">
       <ion-button color="danger" id="delete" routerLink="/patient-delete-account">Account<br> Deletion</ion-button>

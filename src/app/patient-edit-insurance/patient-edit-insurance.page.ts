@@ -75,6 +75,7 @@ export class PatientEditInsurancePage implements OnInit {
       })
     })
     this.insurance_list();
+    this.get_lab();
   }
   choosefile(e)
   {
