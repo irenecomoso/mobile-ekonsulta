@@ -16,7 +16,7 @@
     <ion-item>
       <ion-select [(ngModel)]="insurance_id" name="insurance_id">
         <ion-select-option value="">Choose Insurance</ion-select-option>
-          <ion-select-option *ngFor="let list of insuranceList">{{list.name}}</ion-select-option>
+          <ion-select-option *ngFor="let list of insuranceList" >{{list.name}}</ion-select-option>
       </ion-select>
     </ion-item>
     <ion-item>
@@ -30,12 +30,6 @@
     </ion-item>
   <ion-item *ngIf="request_status.length>0" class="alert alert-danger">
     {{request_status}}
-  </ion-item>
-  <ion-item *ngFor="let list of insurance_af" class="col-3">
-      <ion-item>{{list.insurance_name}}</ion-item>
-  </ion-item>
-  <ion-item *ngIf="request_sent" class="alert alert-success">
-    Request Sent!
   </ion-item>
   </ion-item>
 

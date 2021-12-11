@@ -110,6 +110,7 @@ export class DoctorSetConsultationFeePage implements OnInit {
     this.userservice.update_doctor_fee(this.userId,record).then(()=>{
       console.log('Updated!');
     })
+    //this.router.navigate(['/doctor-profile']);
   }
 
 }

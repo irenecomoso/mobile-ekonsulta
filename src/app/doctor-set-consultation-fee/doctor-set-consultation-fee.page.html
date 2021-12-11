@@ -1,7 +1,7 @@
 <ion-header>
   <ion-toolbar>
     <ion-buttons slot="start">
-      <ion-button routerLink="/doctor-profile"><ion-icon name="arrow-back-outline"></ion-icon></ion-button>
+      <ion-button routerLink="/doctor-profile"></ion-button>
     </ion-buttons>
     <ion-title>E-konsulta</ion-title>
   </ion-toolbar>
@@ -10,15 +10,13 @@
 <ion-content>
   <ion-item>
     <!-- <h3>Consultation Fee</h3> -->
-    <form #form='ngForm' (ngSubmit)="update_fee()">
-      <ion-item>
-        <p>Set Fee: </p>
-          <ion-input [(ngModel)]="fee" name="fee" type="number"></ion-input>
-      </ion-item>
-      <ion-button>
-        <ion-button routerLink="/doctor-profile">Cancel</ion-button>
-        <ion-button type="submit">Set</ion-button>
-      </ion-button>
-    </form>
+    <ion-item>
+      <p>Set Fee: </p>
+        <ion-input [(ngModel)]="fee" name="fee" type="number"></ion-input>
+    </ion-item>
+    <ion-button>
+      <ion-button routerLink="/doctor-profile">Cancel</ion-button>
+      <ion-button type="submit" (click)="update_fee()">Set</ion-button>
+    </ion-button>
   </ion-item>
 </ion-content>
