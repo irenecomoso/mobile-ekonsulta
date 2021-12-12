@@ -39,27 +39,28 @@ export class AuthService {
     })
   }
   registerWithEmail_patient(user){
-    return this.afu.createUserWithEmailAndPassword(user.email,user.password)
-    .then((userCredential)=>{
-      this.newUser = user;
-      console.log(this.newUser);
-      /*userCredential.user.updateProfile({
-        displayName: user.fullname
-      })*/
-      this.insertUserData_patient(userCredential)
-      this.afu.onAuthStateChanged(user => {
-        if(user)
-        this.store.storage.ref('Users/' + 'default' + '/profile.jpg').getDownloadURL()
-        .then(e=>{
+    return this.afu.createUserWithEmailAndPassword(user.email, user.password)
+      .then((userCredential) => {
+        this.newUser = user;
+        console.log(this.newUser);
+        userCredential.user.updateProfile( {
+          displayName: user.fullname
+        });
+        this.insertUserData_patient(userCredential)
+
+        this.afu.onAuthStateChanged(user => {
+          if(user)
+        this.store.storage.ref('Users/' + 'default' + '/profile.jpg').getDownloadURL().then(e =>{
           this.db.collection('avatar').doc(userCredential.user.uid).set({
-            image: e
+            image : e
           })
         })
       })
-    }).catch(error =>{
-      console.log(error)
-      throw error
-    })
+      })
+      .catch(error => {
+        console.log(error)
+        throw error
+      });
   }
   insertUserData_patient(userCredential: firebase.default.auth.UserCredential){
     return this.db.collection('Users').doc(userCredential.user.uid).set({

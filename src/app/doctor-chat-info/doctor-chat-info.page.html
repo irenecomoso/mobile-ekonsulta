@@ -29,9 +29,20 @@
       </ion-label>
     </ion-item>
     <ion-item button>
-      <ion-label>
-        Actions
-      </ion-label>
+      <!-- <ion-select #f (change)="change(f.value)">Action</ion-select> -->
+      <ion-button  (change)="change($event)">Action</ion-button>
+        <ion-item>
+          <button hidden id="showIns" class="btn btn-primary" type="button" data-bs-toggle="collapse" data-bs-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample">
+            Button with data-bs-target
+          </button>
+          <div class="collapse" id="collapseExample">
+            <ion-item>
+              <ion-button (click)="finish()">Finish Consultation</ion-button>
+              <ion-button (click)="cancel()">Cancel Consultation</ion-button>
+            </ion-item>
+        </div>
+        </ion-item>
+
     </ion-item>
   </ion-list>
 </ion-content>

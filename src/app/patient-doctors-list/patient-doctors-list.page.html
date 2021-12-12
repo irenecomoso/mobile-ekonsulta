@@ -23,7 +23,7 @@
 <ion-content>
   <ion-list>
     <ion-label *ngFor="let list of docList" class="card">
-      <ion-item button (click)="book_doctor_view(list)">
+      <ion-item>
         <ion-avatar slot="start">
           <img src="{{list.image}}">
         </ion-avatar>
@@ -31,6 +31,7 @@
           <h2>{{list.fullname}}</h2>
           <p>{{list.ins}}</p>
         </ion-label>
+        <ion-button button (click)="book_doctor_view(list)">View</ion-button>
       </ion-item>
     </ion-label>
   </ion-list>

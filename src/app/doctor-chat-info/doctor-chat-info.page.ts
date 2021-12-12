@@ -1,3 +1,4 @@
+/* eslint-disable eqeqeq */
 /* eslint-disable @typescript-eslint/semi */
 /* eslint-disable @typescript-eslint/naming-convention */
 /* eslint-disable @typescript-eslint/quotes */
@@ -36,7 +37,7 @@ export class DoctorChatInfoPage implements OnInit {
   medList: any = [];
   labList: any = [];
   presList: any = [];
-
+  show: boolean = false;
   constructor(
     public afu: AuthService,
     public userservice: UserService,
@@ -51,6 +52,23 @@ export class DoctorChatInfoPage implements OnInit {
       this.imgUrl = e.data().image;
     })
     this.patientInfo = JSON.parse(localStorage.getItem('data'));
+  }
+  change(e)
+  {
+    if(e != "")
+    {
+      document.getElementById('showIns').click();
+    }
+    else
+    {
+      document.getElementById('showIns').click();
+    }
+  }
+  finish(){
+
+  }
+  cancel(){
+
   }
    /* this.get_medical();
     this.get_lab();

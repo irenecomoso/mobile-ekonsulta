@@ -85,7 +85,6 @@ export class DoctorMedicalCertificatePage implements OnInit {
           this.success_message = "";
         }, 5000);
       })
-      this.router.navigate(['/doctor-chat-info']);
     }
     else{
       console.log('Empty Fields');

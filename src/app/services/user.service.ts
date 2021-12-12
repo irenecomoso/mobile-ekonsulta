@@ -289,14 +289,7 @@ export class UserService {
   create_doctor_upcoming(data)
   {
     return this.db.firestore.collection('upcoming')
-    .add({
-      createdAt: formatDate(new Date(),'MM/dd/yyyy','en'),
-      patient_id: data.patient_id,
-      doctor_id: data.doctor_id,
-      status: "pending",
-      schedule: data.schedule,
-      time : data.schedtime
-    })
+    .add(data)
   }
   get_scheduleInfo(sched_id)
   {

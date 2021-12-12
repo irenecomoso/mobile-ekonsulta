@@ -106,7 +106,6 @@ export class DoctorPatientprescriptionPage implements OnInit {
       setTimeout(() => {
         this.success_message = "";
       }, 5000);
-      this.router.navigate[('/doctor-patient-chat')];
     }
     else
     {
