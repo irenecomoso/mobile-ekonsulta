@@ -1,6 +1,6 @@
 ion-searchbar{
   margin-top: 7px;
-
+  border-radius: 5px !important;
 }
 
 ion-select{
@@ -17,4 +17,9 @@ h2{
 ion-label{
   display: block;
   width:max-content;
+}
+
+.card{
+  width: 80%;
+  margin: auto;
 }
