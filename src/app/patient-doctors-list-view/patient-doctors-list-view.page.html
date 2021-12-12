@@ -3,36 +3,44 @@
     <ion-buttons slot="start">
       <ion-button routerLink="/patient-doctors-list"><ion-icon name="arrow-back-outline"></ion-icon></ion-button>
     </ion-buttons>
-    <ion-title>patient-doctors-list-view</ion-title>
+    <ion-title>View Doctor</ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content>
   <form>
     <ion-item>
-      <p>Doctor: {{docInfo.fullname}}</p>
-      <p>Specialization: {{docInfo.ins}}</p>
+      <ion-grid>
+        <ion-row>
+          <ion-col><p>Doctor:</p></ion-col>
+          <ion-col>{{docInfo.fullname}}</ion-col>
+        </ion-row>
+        <ion-row>
+          <ion-col><p>Specialization:</p></ion-col>
+          <ion-col>{{docInfo.ins}}</ion-col>
+        </ion-row>
+      </ion-grid>
     </ion-item>
     <form #form="ngForm" (ngSubmit)="submit(form.value)">
       <div>
-        <h2>Select Schedule</h2>
+        <h2 class="ion-text-center">Select Schedule</h2>
         <ion-item>
-          <label>
+          <ion-label>
             Please fill in required fields
             <small>*</small>
-          </label>
+          </ion-label>
         </ion-item>
         <div>
-              <label>Scheduled Date</label>
+              <ion-label class="sched">Scheduled Date</ion-label>
               <small>*</small>
-              <div>
+
                 <div class="input-group date" id="datepicker">
-                  <input #date type="date" displayFormat="yyyy-mm-dd" (change)="getdate(date.value)">
+                  <ion-input #date type="date" displayFormat="yyyy-mm-dd" (change)="getdate(date.value)"></ion-input>
                 </div>
-              </div>
+
           </div>
           <div>
-              <label>Scheduled Time</label>
+              <ion-label class="sched">Scheduled Time</ion-label>
               <small>*</small>
               <ion-select [(ngModel)]="time" name="time">
                 <ion-select-option value="" selected>Select Time</ion-select-option>
@@ -45,7 +53,7 @@
         <div *ngIf="error_schedule.length > 0" >
           {{error_schedule}}
         </div>
-            <ion-button type="submit">Continue</ion-button>
+            <ion-button class="continue" type="submit">Continue</ion-button>
     </form>
   </form>
 
