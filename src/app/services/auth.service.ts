@@ -97,46 +97,47 @@ export class AuthService {
     })
   }
   registerWithEmail_Doctor(user) {
-      return this.afu.createUserWithEmailAndPassword(user.email, user.password)
-        .then((userCredential) => {
-          this.newUser = user;
-          console.log(this.newUser);
-          userCredential.user.updateProfile( {
-            displayName: user.fullname
-          });
-            this.insertUserData_doctor(userCredential)
+    return this.afu.createUserWithEmailAndPassword(user.email, user.password)
+    .then((userCredential) => {
+      this.newUser = user;
+      console.log(this.newUser);
+      userCredential.user.updateProfile( {
+        displayName: user.fullname
+      });
+        this.insertUserData_Doctor(userCredential)
 
-            this.afu.onAuthStateChanged(user => {
-              if(user)
-              this.store.storage.ref('Users/' + 'default' + '/profile.jpg').getDownloadURL().then(e =>{
-                this.db.collection('avatar').doc(userCredential.user.uid).set({
-                  image : e
-                })
-              })
+        this.afu.onAuthStateChanged(user => {
+          if(user)
+          this.store.storage.ref('Users/' + 'default' + '/profile.jpg').getDownloadURL().then(e =>{
+            this.db.collection('avatar').doc(userCredential.user.uid).set({
+              image : e
+            })
           })
-        })
-        .catch(error => {
-          console.log(error)
-          throw error
-        });
+      })
+    })
+    .catch(error => {
+      console.log(error)
+      throw error
+    });
     }
-    insertUserData_doctor(userCredential: firebase.default.auth.UserCredential): Promise<any>{
+    insertUserData_Doctor(userCredential: firebase.default.auth.UserCredential): Promise<any>{
       return this.db.collection('Users').doc(userCredential.user.uid).set({
         email: this.newUser.email,
+        paypal_email: this.newUser.paypal_email,
         password: this.newUser.password,
         fullname: this.newUser.fullname,
-        dob: this.newUser.dob,
-        address : this.newUser.address,
+        address: this.newUser.address,
         contact_number: this.newUser.contact_number,
         license_number: this.newUser.license_number,
         specialization: this.newUser.specialization,
+        dob: this.newUser.dob,
         consultation_fee : 0,
         createdAt: formatDate(new Date(), 'MM/dd/yyyy', 'en'),
         updatedAt: formatDate(new Date(), 'MM/dd/yyyy', 'en'),
+        status: 'active',
         role: 'doctor',
-        status:'active',
-        isVerified: 'pending',
-        disabled: 'false'
+        disabled: "false",
+        isVerified: "pending"
       }).then(()=>{
         this.store.ref('Users-Files/' + userCredential.user.uid + '/' + this.newUser.file.name).put(this.newUser.file)
         .then(()=>{

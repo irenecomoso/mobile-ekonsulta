@@ -43,6 +43,7 @@ export class DoctorRegisterPage implements OnInit {
       this.error = _error;
       this.router.navigate(['/doctor-register']);
     })
+    console.log(this.file);
   }
   choosefile(e)
   {
