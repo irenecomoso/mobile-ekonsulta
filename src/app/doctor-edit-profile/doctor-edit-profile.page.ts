@@ -67,7 +67,7 @@ export class DoctorEditProfilePage implements OnInit {
       this.userservice.update_user(this.userId,frm).then(()=>{
       console.log('Updated successfully!');
       this.ngOnInit();
-      this.router.navigate(['/doctor-profile'])
+      window.location.href='/doctor-profile';
     })
   }
   uploadImage()

@@ -1,6 +1,7 @@
 <ion-header>
   <ion-toolbar>
-      <ion-button routerLink="/patient-profile"><ion-icon name="arrow-back"></ion-icon></ion-button>
+      <!-- <ion-button routerLink="/patient-profile"><ion-icon name="arrow-back"></ion-icon></ion-button> -->
+      <ion-button routerLink="/patient-profile"><ion-icon name="close-outline"></ion-icon></ion-button>
     <ion-title>Edit Profile</ion-title>
     <ion-buttons slot="primary">
       <ion-button color="danger" id="delete" routerLink="/patient-delete-account">Account<br> Deletion</ion-button>
@@ -9,9 +10,6 @@
 </ion-header>
 
 <ion-content>
-  <ion-item>
-    <ion-back-button><ion-icon name="arrow-back-outline"></ion-icon></ion-back-button>
-  </ion-item>
   <div class="container">
     <div class="outer">
       <img src="{{imgUrl}}" id="pic">

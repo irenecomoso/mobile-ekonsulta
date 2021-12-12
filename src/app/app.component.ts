@@ -15,12 +15,14 @@ export class AppComponent {
   constructor(private router: Router,private menu: MenuController) {}
 
   click(){
-    window.location.href='/patient-profile';
+    //window.location.href='/patient-profile';
+    this.router.navigate(['/patient-profile']);
     this.menu.close();
   }
 
   click2(){
-    window.location.href='/doctor-profile';
+    //window.location.href='/doctor-profile';
+    this.router.navigate(['/doctor-profile']);
     this.menu.close();
   }
 

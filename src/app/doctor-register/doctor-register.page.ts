@@ -17,6 +17,7 @@ export class DoctorRegisterPage implements OnInit {
   spList: any = [];
   form: FormGroup;
   confirmPass: string;
+  file: any;
   model = new DoctorForm();
   error: { name: string; message: string } = { name: '', message: ''};
   constructor(public afu: AuthService,public router: Router,public userservice: UserService) { }
@@ -34,14 +35,18 @@ export class DoctorRegisterPage implements OnInit {
     //console.log(this.spList)
   }
   registerDoctor(frm){
-    //console.log(frm);
+    frm.file = this.file;
     this.clearErrorMessage();
     this.afu.registerWithEmail_Doctor(frm).then(()=>{
-      this.router.navigate(['/login'])
+      this.router.navigate(['/login']);
     }).catch(_error=>{
-      this.error =_error
-      this.router.navigate(['/doctor-register'])
+      this.error = _error;
+      this.router.navigate(['/doctor-register']);
     })
+  }
+  choosefile(e)
+  {
+    this.file = e.target.files[0]
   }
   clearErrorMessage()
   {

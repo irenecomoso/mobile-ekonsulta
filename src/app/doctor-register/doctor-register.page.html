@@ -1,17 +1,33 @@
 <ion-header>
   <ion-toolbar>
     <ion-buttons slot="start">
-      <ion-back-button routerLink="/">
+      <ion-button routerLink="/">
         <ion-icon name="arrow-back-outline"></ion-icon>
-      </ion-back-button>
+      </ion-button>
     </ion-buttons>
-    <ion-title>doctor-register</ion-title>
+    <ion-title>Doctor Registration</ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content>
   <form #info='ngForm' (ngSubmit)="registerDoctor(info.value)" class="register-form">
     <ion-list lines="full" class="ion-no-margin">
+      <ion-item>
+        <ion-label position="floating">Email</ion-label>
+        <ion-input  type="text"[(ngModel)]="model.email" name="email" required></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-label position="floating">Password</ion-label>
+        <ion-input type="password" [(ngModel)]="model.password" name="password" required></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-label position="floating">Confirm Password</ion-label>
+        <ion-input primary type="password" [(ngModel)]="confirmPass" name="confirmPass" required></ion-input>
+      </ion-item>
+      <ion-item class="form-group mb-2">
+        <ion-label class="label" for="email">Paypal Email <span class="trans">(<i>for transaction purposes</i>)</span> </ion-label>
+        <ion-input [(ngModel)]="model.paypal_email" type="email" name="paypal_email" placeholder="Email address" required></ion-input>
+      </ion-item>
       <ion-item>
         <ion-label position="floating">Full Name</ion-label>
         <ion-input [(ngModel)]="model.fullname" name="fullname" placeholder="Firstname Mi. Lastname"></ion-input>
@@ -44,17 +60,9 @@
         <ion-label position="floating">Address</ion-label>
         <ion-input [(ngModel)]="model.address" name="address" required></ion-input>
       </ion-item>
-      <ion-item>
-        <ion-label position="floating">Email</ion-label>
-        <ion-input  type="text"[(ngModel)]="model.email" name="email" required></ion-input>
-      </ion-item>
-      <ion-item>
-        <ion-label position="floating">Password</ion-label>
-        <ion-input type="password" [(ngModel)]="model.password" name="password" required></ion-input>
-      </ion-item>
-      <ion-item>
-        <ion-label position="floating">Confirm Password</ion-label>
-        <ion-input primary type="password" [(ngModel)]="confirmPass" name="confirmPass" required></ion-input>
+      <ion-item class="form-group mb-2">
+        <ion-label class="label" for="id">PRC ID and Recent Picture <span class="note">(<i>must be in 1 file</i>)</span> </ion-label>
+        <ion-input (change)="choosefile($event)" class="form-control" name="id" type="file" multiple></ion-input>
       </ion-item>
 
     </ion-list>
@@ -65,10 +73,9 @@
     <div style="text-align:center;">
       <ion-button display="center" id="btn1" color="rgb(28,54,94)" type="submit">Sign Up</ion-button>
     </div>
+    <div class="form-group">
+      <p *ngIf="error.message.length > 0" class="text-danger">
+          {{error.message}} </p>
+    </div>
   </form>
-  <div class="form-group">
-    <p *ngIf="error.message.length > 0" class="text-danger">
-        {{error.message}} </p>
-  </div>
-
 </ion-content>

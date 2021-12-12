@@ -1,9 +1,9 @@
 <ion-header>
   <ion-toolbar>
-    <ion-buttons>
-      <ion-button><ion-icon name="arrow-back-outline" routerLink="/patient-register"></ion-icon></ion-button>
+    <ion-buttons slot="start">
+      <ion-button routerLink="/register-choice"><ion-icon name="arrow-back-outline"></ion-icon></ion-button>
     </ion-buttons>
-    <ion-title>Ekonsulta</ion-title>
+    <ion-title>Patient Registration</ion-title>
   </ion-toolbar>
 </ion-header>
 
@@ -24,18 +24,24 @@
       </ion-item>
       <ion-item>
         <ion-label>Health Insurance</ion-label>
-        <ion-select [(ngModel)]="model.health_insurance" name="health_insurance">
-          <ion-select-option *ngFor="let list of insList" value="{{list.uid}}">{{list.name}}</ion-select-option>
-        </ion-select>
+        <select #f [(ngModel)]="model.health_insurance" name="health_insurance" (change)="change(f.value)">
+          <option value="none">--SELECT HEALTH INSURANCE--</option>
+          <option *ngFor="let list of insList" value="{{list.uid}}">{{list.name}}</option>
+        </select>
       </ion-item>
-      <ion-item>
-        <ion-label>Health Insurance #: </ion-label>
-        <ion-input [(ngModel)]="model.member_ID" name="member_ID" type="text"></ion-input>
-      </ion-item>
-      <ion-item>
+      <button hidden id="showIns" class="btn btn-primary" type="button" data-bs-toggle="collapse" data-bs-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample">
+        Button with data-bs-target
+      </button>
+      <div class="collapse" id="collapseExample">
+        <ion-item>
+          <ion-label>Health Insurance #: </ion-label>
+          <ion-input [(ngModel)]="model.member_ID" name="member_ID" type="text"></ion-input>
+          </ion-item>
+        <ion-item>
         <ion-label>Insurance Card Pic and Recent Picture</ion-label>
-        <ion-input type="file"></ion-input>
+        <ion-input type="file" (change)="choosefile($event)"></ion-input>
       </ion-item>
+    </div>
       <ion-item>
         <ion-label>Contact Number</ion-label>
         <ion-input [(ngModel)]="model.contact_number" name="contact_number" placeholder="(+63)" type="number"></ion-input>
