@@ -1,3 +1,4 @@
+/* eslint-disable eqeqeq */
 /* eslint-disable @typescript-eslint/no-inferrable-types */
 /* eslint-disable @typescript-eslint/quotes */
 import { Router } from '@angular/router';
@@ -47,7 +48,6 @@ export class PatientEditProfilePage implements OnInit {
   constructor(public afu: AuthService, public userservice: UserService, public router: Router) { }
 
   ngOnInit(): void {
-    localStorage.removeItem('data');
     this.userID = this.afu.get_UID();
 
     this.userservice.get_avatar(this.userID).then(e =>{
@@ -63,6 +63,7 @@ export class PatientEditProfilePage implements OnInit {
       this.health_insurance = e.data().health_insurance;
       this.member_ID = e.data().member_ID;
 
+      if(this.health_insurance != "none")
       this.userservice.get_HealthInsurance_Info(e.data().health_insurance).then(item=>{
         data = e.data();
         data.insurance_name=item.data().name;
@@ -75,9 +76,34 @@ export class PatientEditProfilePage implements OnInit {
           })
         })
       })
-    })
+      else
+      {
+        data = e.data();
+        data.insurance_name="none";
+        this.info = data;
+      }
+
+    })/*.then(()=>{
+      this.passwordUpdateChecker();
+    })*/
+
     this.insurance_list();
+
+    //this.get_lab();
   }
+  /*passwordUpdateChecker() //checks if there is a changed in password
+  {
+    let record = {};
+    record['id'] = this.userID;
+    record['role'] = this.info.role;
+    record['password'] = sessionStorage.getItem('Current');
+    if(this.info.password != sessionStorage.getItem('Current'))
+    {
+      this.userservice.update_password(record).then(()=>{
+        this.ngOnInit()
+      })
+    }
+  }*/
   insurance_list()
   {
     var data;
@@ -134,7 +160,7 @@ export class PatientEditProfilePage implements OnInit {
       this.userservice.update_user(this.userID,frm).then(()=>{
       console.log('patient Updated!');
       this.ngOnInit();
-      window.location.href='/patient-profile';
+      //.location.href='/patient-profile';
     })
   }
   data(frm){

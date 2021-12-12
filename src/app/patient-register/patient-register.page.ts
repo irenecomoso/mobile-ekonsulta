@@ -89,10 +89,10 @@ export class PatientRegisterPage implements OnInit {
             //this.notif.send_insurance(frm.health_insurance,record);
           }
           //End of notification
-          this.router.navigate(['/login'])
+        this.router.navigate(['/login'])
         }).catch(_error => {
           this.error = _error
-          this.router.navigate(['/patient-registration'])
+          //this.router.navigate(['/patient-registration'])
         })
     }
     else
