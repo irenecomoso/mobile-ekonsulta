@@ -259,10 +259,10 @@ export class UserService {
   {
     return this.db.firestore.collection('Schedule').doc(sched_id).collection('Time').doc(time_id).get();
   }
-  reservationChecker(sched_id,time_id)
+  reservationChecker(sched_id,time_id,consultation_schedule)
   {
     return this.db.firestore.collection('Schedule').doc(sched_id).collection('Time').doc(time_id)
-    .collection('Reservation').get();
+    .collection('Reservation').where('consultation_schedule','==',consultation_schedule).get();
   }
   get_consultation(doctor_id)
   {
@@ -385,6 +385,10 @@ export class UserService {
   }
   create_consultation(record){
     return this.db.firestore.collection('Consultation').add(record);
+  }
+  create_sharedFile(record)
+  {
+    return this.db.firestore.collection('Shared_Files').add(record);
   }
   get_sharedFile(doctor_id,patient_id)
   {

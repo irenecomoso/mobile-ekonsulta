@@ -21,7 +21,8 @@ import { environment } from 'src/environments/environment';
   entryComponents: [],
   imports: [BrowserModule, IonicModule.forRoot(), AppRoutingModule,
             FormsModule,ReactiveFormsModule,AngularFireDatabaseModule,AngularFirestoreModule,
-            AngularFireModule.initializeApp(environment.firebaseConfig),],
+            AngularFireModule.initializeApp(environment.firebaseConfig)
+          ],
   providers: [Camera,SplashScreen,StatusBar,{ provide: RouteReuseStrategy, useClass: IonicRouteStrategy}],
   bootstrap: [AppComponent],
 })

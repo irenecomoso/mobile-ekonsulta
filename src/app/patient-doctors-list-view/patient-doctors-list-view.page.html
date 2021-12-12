@@ -26,11 +26,9 @@
               <label>Scheduled Date</label>
               <small>*</small>
               <div>
-                <select [(ngModel)]="schedule" name="schedule" #date (change)="get_time(date.value)">
-                    <option value="" selected>Select Date</option>
-                    <!-- <ion-icon name="calendar-outline"></ion-icon> -->
-                    <option *ngFor="let list of scheduleList" value="{{list.uid}}">{{list.date}}</option>
-                </select>
+                <div class="input-group date" id="datepicker">
+                  <input #date type="date" displayFormat="yyyy-mm-dd" (change)="getdate(date.value)">
+                </div>
               </div>
           </div>
           <div>
@@ -40,12 +38,6 @@
                 <ion-select-option value="" selected>Select Time</ion-select-option>
                 <ion-select-option *ngFor="let list of timeList" value="{{list.uid}}">
                   {{list.time}}
-                  <span *ngIf="list.status!=='full'">
-                      notfull
-                  </span>
-                  <span *ngIf="list.status==='full'">
-                      full
-                </span>
                 </ion-select-option>
               </ion-select>
             </div>

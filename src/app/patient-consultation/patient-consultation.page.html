@@ -39,7 +39,7 @@
               <h2>{{list.fullname}}</h2>
                <ion-button>Pending</ion-button>
                <label>{{list.consultation_schedule}} | {{list.schedule}} | {{list.schedtime}}</label>
-               <!-- <ion-button *ngIf="list.paymentType === 'paypal'" (click)="showAlert(list)" >Cancel Consultation</ion-button> -->
+              <!-- <ion-button *ngIf="list.paymentType === 'paypal'" (click)="editCancel(list)" >Cancel Consultation</ion-button> -->
             </div>
             <div *ngIf="list.upcoming_status === 'ongoing'">
               <h2>{{list.fullname}}</h2>

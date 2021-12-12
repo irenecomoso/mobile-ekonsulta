@@ -31,6 +31,7 @@
     <p>Filename</p>
     <p>Action</p>
 </div>
+  <ion-item>
 <div *ngIf="selectTabs==='medRecords'">
   <ion-list>
      <ion-item button *ngFor="let list of medList" >
@@ -43,6 +44,9 @@
             <input type="checkbox"  (change)="chooseShare(list.uid,$event.target.checked)" [checked]="list.check">
             <span class="checkmark"></span>
           </label> -->
+          <ion-label>Select
+            <ion-checkbox (change)="chooseShare(list.uid,$event)" [checked]="list.check" color="dark"></ion-checkbox>
+          </ion-label>
         </div>
       </ion-label>
      </ion-item>
@@ -82,4 +86,8 @@
      </ion-item>
   </ion-list>
 </div>
+<ion-item>
+  <ion-button (click)="share()" type="button" >Share</ion-button>
+</ion-item>
+</ion-item>
 </ion-content>

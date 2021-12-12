@@ -52,6 +52,8 @@ export class PatientSharedFilesPage implements OnInit {
   medList: any = [];
   labList: any = [];
   presList: any = [];
+  shareFile: any = [];
+  docInfo: any = [];
 
   constructor(
     public afu: AuthService,
@@ -92,7 +94,7 @@ export class PatientSharedFilesPage implements OnInit {
       })
     })
     this.medList = tempArray;
-    console.log(this.medList);
+    //console.log(this.medList);
   }
 
   fileShared()
@@ -136,7 +138,7 @@ export class PatientSharedFilesPage implements OnInit {
       })
     })
     this.labList = tempArray;
-    console.log(this.labList);
+    //console.log(this.labList);
   }
 
   prescription_record()
@@ -193,13 +195,13 @@ export class PatientSharedFilesPage implements OnInit {
   choosefile2(e)
   {
     this.file1 = e.target.files[0];
-    console.log(this.file1);
+    //console.log(this.file1);
   }
   open(file)
   {
     window.open(file);
   }
-  chooseShare(file,isChecked: boolean)
+  chooseShare(file,isChecked)
   {
     if(isChecked)
     {
@@ -211,7 +213,32 @@ export class PatientSharedFilesPage implements OnInit {
       var index = this.tempArray.findIndex(x => x.value ===file);
       this.tempArray.splice(index);
     }
-    console.log(this.tempArray);
+    console.log("Irene");
+    console.log("yes",isChecked);
+  }
+  share()
+  {
+    this.shareFile = this.tempArray;
+    let record = {};
+    record['doctor_id'] = this.docInfo.uid;
+    record['patient_id'] = this.userid;
+    for(var i=0;i<this.flag;i++)
+    {
+      console.log(this.shareFile[i]);
+      record['file_id'] = this.shareFile[i];
+      this.userservice.create_sharedFile(record)
+      .then(()=>{
+        console.log('File['+i+'] Shared!');
+      })
+    }
+
+    let record2 = {};
+    record2['createdAt'] = formatDate(new Date(),'short','en');
+    record2['title'] = "File Sharing";
+    record2['description'] = "A patient shared his files with you";
+    //this.notif.send_doctor(this.docInfo.uid,record2)
+
+    this.flag = 0;
   }
 
 }
