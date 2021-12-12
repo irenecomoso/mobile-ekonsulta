@@ -8,7 +8,7 @@
 </ion-header>
 
 <ion-content>
-  <form #userRegForm='ngForm' class="register-form" (ngSubmit)="register_Patient(userRegForm.value)">
+  <form #userRegForm='ngForm' class="register-form" (ngSubmit)="register_Patient(userRegForm.value)" ngNativeValidate>
     <ion-list lines="full" class="ion-no-margin">
       <ion-item>
         <ion-label position="floating">Full Name</ion-label>
