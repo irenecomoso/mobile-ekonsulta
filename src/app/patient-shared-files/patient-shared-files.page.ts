@@ -203,7 +203,7 @@ export class PatientSharedFilesPage implements OnInit {
   }
   chooseShare(file,isChecked)
   {
-    if(isChecked)
+    /*if(isChecked)
     {
       this.tempArray.push(file);
       this.flag++;
@@ -213,8 +213,8 @@ export class PatientSharedFilesPage implements OnInit {
       var index = this.tempArray.findIndex(x => x.value ===file);
       this.tempArray.splice(index);
     }
-    console.log("Irene");
-    console.log("yes",isChecked);
+    console.log("Irene");*/
+    console.log(isChecked);
   }
   share()
   {

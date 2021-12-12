@@ -10,7 +10,7 @@
 </ion-header>
 
 <ion-content>
-  <form #info='ngForm' (ngSubmit)="registerDoctor(info.value)" class="register-form">
+  <form #info='ngForm' (ngSubmit)="registerDoctor(info.value)" class="register-form" ngNativeValidate>
     <ion-list lines="full" class="ion-no-margin">
       <ion-item>
         <ion-label position="floating">Email</ion-label>
@@ -39,11 +39,11 @@
       </ion-item>
       <ion-item>
         <ion-label position="floating">Contact Number</ion-label>
-        <ion-input type="text" placeholder="(+63)" [(ngModel)]="model.contactNumber" name="contactNumber" required></ion-input>
+        <ion-input type="text" placeholder="(+63)" [(ngModel)]="model.contact_number" name="contact_number" required></ion-input>
       </ion-item>
       <ion-item>
         <ion-label position="floating">License Number</ion-label>
-        <ion-input type="text" [(ngModel)]="model.licenseNumber" name="licenseNumber" required></ion-input>
+        <ion-input type="text" [(ngModel)]="model.license_number" name="licenseNumber" required></ion-input>
       </ion-item>
       <ion-item>
         <ion-label>Specialization</ion-label>
@@ -51,10 +51,6 @@
           <ion-select-option value="">--SELECT SPECIALIZATION--</ion-select-option>
           <ion-select-option *ngFor="let list of spList" >{{list.name}}</ion-select-option>
         </ion-select>
-      </ion-item>
-      <ion-item>
-        <ion-label class="label" for="id">PRC ID and Recent Picture</ion-label>
-        <ion-input class="form-control" name="id" type="file"></ion-input>
       </ion-item>
       <ion-item>
         <ion-label position="floating">Address</ion-label>

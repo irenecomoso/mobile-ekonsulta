@@ -31,8 +31,8 @@
     <p>Filename</p>
     <p>Action</p>
 </div>
-  <ion-item>
-<div *ngIf="selectTabs==='medRecords'">
+  <div>
+  <div *ngIf="selectTabs==='medRecords'">
   <ion-list>
      <ion-item button *ngFor="let list of medList" >
       <ion-label>
@@ -40,10 +40,6 @@
           <p>{{list.createdAt}}</p>
           <p>{{list.filename}}</p>
           <ion-button (click)="open(list.file)">View</ion-button>
-          <!-- <label>Select
-            <input type="checkbox"  (change)="chooseShare(list.uid,$event.target.checked)" [checked]="list.check">
-            <span class="checkmark"></span>
-          </label> -->
           <ion-label>Select
             <ion-checkbox (change)="chooseShare(list.uid,$event)" [checked]="list.check" color="dark"></ion-checkbox>
           </ion-label>
@@ -60,10 +56,9 @@
           <p>{{list.createdAt}}</p>
           <p>{{list.filename}}</p>
           <ion-button (click)="open(list.file)">View</ion-button>
-          <!-- <label>Select
-            <input class="ms-2" type="checkbox"  (change)="chooseShare(list.uid,$event.target.checked)" [checked]="list.check">
-            <span class="checkmark"></span>
-          </label> -->
+          <ion-label>Select
+            <input type="checkbox" #share onchange="chooseShare(list.uid,$event)" [checked]="list.check" color="dark">
+          </ion-label>
         </div>
       </ion-label>
      </ion-item>
@@ -77,17 +72,16 @@
           <p>{{list3.createdAt}}</p>
           <p>{{list3.filename}}</p>
           <ion-button (click)="open(list3.file)">View</ion-button>
-          <!-- <label>Select
-            <input class="ms-2" type="checkbox"  (change)="chooseShare(list.uid,$event.target.checked)" [checked]="list.check">
-            <span class="checkmark"></span>
-          </label> -->
+          <ion-label>Select
+            <ion-checkbox (change)="chooseShare(list3.uid,$event.target)" [checked]="list3.check" color="dark"></ion-checkbox>
+          </ion-label>
         </div>
       </ion-label>
      </ion-item>
   </ion-list>
 </div>
 <ion-item>
-  <ion-button (click)="share()" type="button" >Share</ion-button>
+  <ion-button (click)="share()">Share</ion-button>
 </ion-item>
-</ion-item>
+</div>
 </ion-content>

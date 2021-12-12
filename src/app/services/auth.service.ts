@@ -1,3 +1,5 @@
+/* eslint-disable @typescript-eslint/quotes */
+/* eslint-disable eqeqeq */
 /* eslint-disable @typescript-eslint/type-annotation-spacing */
 import { FirebaseApp } from '@angular/fire';
 /* eslint-disable curly */
@@ -78,6 +80,20 @@ export class AuthService {
       status:'active',
       isVerified: 'pending',
       disabled: 'false'
+    }).then(()=>{
+      if(this.newUser.file != undefined)
+      this.store.ref('Users-Files/' + userCredential.user.uid + '/' + this.newUser.file.name)
+      .put(this.newUser.file)
+      .then(()=>{
+        this.store.storage.ref('Users-Files/' + userCredential.user.uid + '/' + this.newUser.file.name)
+        .getDownloadURL()
+        .then(e=>{
+          this.db.firestore.collection('Users').doc(userCredential.user.uid).collection('Verification_Files')
+          .add({
+            file: e
+          })
+        })
+      })
     })
   }
   registerWithEmail_Doctor(user) {
@@ -111,9 +127,9 @@ export class AuthService {
         fullname: this.newUser.fullname,
         dob: this.newUser.dob,
         address : this.newUser.address,
-        licenceNumber: this.newUser.license_number,
+        contact_number: this.newUser.contact_number,
+        license_number: this.newUser.license_number,
         specialization: this.newUser.specialization,
-        contactNumber: this.newUser.contact_number,
         consultation_fee : 0,
         createdAt: formatDate(new Date(), 'MM/dd/yyyy', 'en'),
         updatedAt: formatDate(new Date(), 'MM/dd/yyyy', 'en'),
@@ -121,6 +137,18 @@ export class AuthService {
         status:'active',
         isVerified: 'pending',
         disabled: 'false'
+      }).then(()=>{
+        this.store.ref('Users-Files/' + userCredential.user.uid + '/' + this.newUser.file.name).put(this.newUser.file)
+        .then(()=>{
+          console.log("Files Stored!");
+          this.store.storage.ref('Users-Files/' + userCredential.user.uid + '/' + this.newUser.file.name)
+          .getDownloadURL().then(e=>{
+              this.db.collection('Users').doc(userCredential.user.uid).collection('Verification_Files')
+              .add({
+                file: e
+              })
+          })
+        })
       })
     }
     get_UID()

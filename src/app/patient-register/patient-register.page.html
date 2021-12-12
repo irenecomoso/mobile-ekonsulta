@@ -24,7 +24,7 @@
       </ion-item>
       <ion-item>
         <ion-label>Health Insurance</ion-label>
-        <select #f [(ngModel)]="model.health_insurance" name="health_insurance" (change)="change(f.value)">
+        <select #f [(ngModel)]="model.health_insurance" name="health_insurance" (change)="change(f.value)" ngNativeValidate>
           <option value="none">--SELECT HEALTH INSURANCE--</option>
           <option *ngFor="let list of insList" value="{{list.uid}}">{{list.name}}</option>
         </select>

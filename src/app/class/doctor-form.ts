@@ -6,7 +6,7 @@ export class DoctorForm {
     dob: string;
     address: string;
     specialization: string;
-    contactNumber: string;
-    licenseNumber: string;
+    contact_number: string;
+    license_number: string;
     paypal_email: string;
 }

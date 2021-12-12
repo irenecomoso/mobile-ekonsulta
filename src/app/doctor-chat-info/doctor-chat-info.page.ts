@@ -1,3 +1,5 @@
+/* eslint-disable @typescript-eslint/dot-notation */
+/* eslint-disable prefer-const */
 /* eslint-disable eqeqeq */
 /* eslint-disable @typescript-eslint/semi */
 /* eslint-disable @typescript-eslint/naming-convention */
@@ -53,69 +55,6 @@ export class DoctorChatInfoPage implements OnInit {
     })
     this.patientInfo = JSON.parse(localStorage.getItem('data'));
   }
-  change(e)
-  {
-    if(e != "")
-    {
-      document.getElementById('showIns').click();
-    }
-    else
-    {
-      document.getElementById('showIns').click();
-    }
-  }
-  finish(){
-
-  }
-  cancel(){
-
-  }
-   /* this.get_medical();
-    this.get_lab();
-    this.get_prescription();
-  uploadMedical()
-  {
-    if(this.filename != "" && this.file1 != "")
-    {
-      console.log(this.file1);
-      this.userservice.send_medicalRecord(this.patientInfo.uid,this.userid,this.filename+".pdf",this.file1)
-      .catch(error=>{
-        console.log(error)
-      }).then(()=>{
-        console.log("Stored successfully!");
-        this.success_message = "File sent successfully!";
-
-        let record2 ={};
-        record2['title'] = "Medical Certificate"
-        record2['description'] = "A doctor sent a medical Certificate. Check your Records now!";
-        record2['createdAt'] = formatDate(new Date(),'short','en');
-        this.notif.send_patient(this.patientInfo.uid,record2);
-
-        setTimeout(() => {
-          this.success_message = "";
-        }, 5000);
-      })
-    }
-    else{
-      console.log('Empty Fields');
-      this.error_message = "Empty Fields!";
-      setTimeout(() => {
-        this.error_message = "";
-      }, 5000);
-    }
-  }
-  choosefile2(e)
-  {
-    this.file1 = e.target.files[0];
-    console.log(this.file1);
-  }
-  close()
-  {
-    this.filename = "";
-    this.filename2 = "";
-    this.files.nativeElement.value = "";
-    this.files2.nativeElement.value= "";
-  }
   finish_consultation()
   {
     let record = {};
@@ -124,6 +63,7 @@ export class DoctorChatInfoPage implements OnInit {
       record['doctor_id'] = e.data().doctor_id;
       record['patient_id'] = e.data().patient_id;
       record['schedule'] = e.data().schedule;
+      record['transaction_id'] = e.data().transaction_id;
       record['consultation_schedule'] = e.data().consultation_schedule;
       record['time'] = e.data().time;
       record['status'] = "done";
@@ -131,94 +71,44 @@ export class DoctorChatInfoPage implements OnInit {
       this.userservice.remove_upcoming(this.patientInfo.upcoming_id).then(()=>{
         console.log('Upcoming removed!')
 
+        let record2= {};
+        record2['status'] = "done";
+        this.userservice.update_transaction_admin(this.patientInfo.transaction_id,record2);
         this.userservice.remove_share(this.userid,this.patientInfo.uid);
 
       }).then(()=>{
         this.userservice.create_consultation(record).then(()=>{
           console.log('Consultation Record Created!');
-          this.router.navigate(['doctor-patients']);
+          this.router.navigate(['doctor-consultation']);
 
           let record2 ={};
           record2['title'] = "Consultation Finished"
           record2['description'] = "Congratulations! You have finished your Consultation!";
           record2['createdAt'] = formatDate(new Date(),'short','en');
-          this.notif.send_patient(this.patientInfo.uid,record2);
+          record2['id'] = new Date(formatDate(new Date(),'short','en')).getTime()
+          //this.notif.send_patient(this.patientInfo.uid,record2);
         })
       })
     });
   }
-  open(file)
-  {
-    window.open(file);
-  }
-  get_medical()
-  {
-    var data;
-    var tempArray = [];
-    this.userservice.get_sharedFile(this.userid,this.patientInfo.uid)
-    .onSnapshot(snapshot=>{
-      let changes = snapshot.docChanges();
-      changes.forEach(item=>{
-        this.userservice.get_medical_shared(item.doc.data().file_id)
-        .then(e=>{
-          if(e.exists)
-          {
-            data = e.data();
-            data.uid = e.id;
-            tempArray.push(data);
-          }
-        })
-      })
-    })
-    this.medList = tempArray;
-    console.log(this.medList);
-  }
-  get_lab()
-  {
-    var data;
-    var tempArray = [];
-    this.userservice.get_sharedFile(this.userid,this.patientInfo.uid)
-    .onSnapshot(snapshot=>{
-      let changes = snapshot.docChanges();
-      changes.forEach(item=>{
-        this.userservice.get_lab_shared(item.doc.data().file_id)
-        .then(e=>{
-          if(e.exists)
-          {
-            console.log(e.data());
-            data = e.data();
-            data.uid = e.id;
-            tempArray.push(data);
-          }
-        })
-      })
-    })
-    this.labList = tempArray;
-    console.log(this.labList);
-  }
 
-  get_prescription()
+  cancel_consultation()
   {
-    var data;
-    var tempArray = [];
-    this.userservice.get_sharedFile(this.userid,this.patientInfo.uid)
-    .onSnapshot(snapshot=>{
-      let changes = snapshot.docChanges();
-      changes.forEach(item=>{
-        this.userservice.get_prescription_shared(item.doc.data().file_id)
-        .then(e=>{
-          if(e.exists)
-          {
-            console.log(e.data());
-            data = e.data();
-            data.uid = e.id;
-            tempArray.push(data);
-          }
-        })
-      })
+    console.log(this.patientInfo);
+    this.userservice.cancel_consultation_doctor(this.patientInfo)
+    .then(()=>{
+      console.log('Upcoming Removed!');
+      console.log('Cancelled Consultation!');
+
+      this.router.navigate(['doctor-consultation']);
+
+      let record = {};
+      record['title'] = "Consultation Cancelled";
+      record['description'] = "Your consultation has been cancelled because of your nonappearance.";
+      record['createdAt'] = formatDate(new Date(),'short','en');
+      record['id'] = new Date(formatDate(new Date(),'short','en')).getTime()
+      //this.notif.send_patient(this.patientInfo.uid,record);
     })
-    this.presList = tempArray;
-    console.log(this.presList);
-  }*/
+  }
 
 }

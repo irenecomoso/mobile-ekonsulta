@@ -237,6 +237,22 @@ export class UserService {
     return this.db.firestore.collection('Transaction').where('doctor_id','==',doctor_id)
     .where('status','==','sent').get();
   }
+  update_transaction_admin(id,record)
+  {
+    return this.db.firestore.collection('Transaction').doc(id).update(record)
+    .then(()=>{
+      console.log(id + " Transaction Updated!");
+    })
+  }
+  cancel_consultation_doctor(info)
+  {
+    return this.db.collection('upcoming').doc(info.upcoming_id).delete().then(()=>{
+      console.log('Upcoming Deleted!');
+     return this.db.collection('Transaction').doc(info.transaction_id).update({
+        status: "noshow"
+      })
+    })
+  }
   get_patient_consultation(patient_id)
   {
     return this.db.firestore.collection('Consultation').where('patient_id','==',patient_id).get();
