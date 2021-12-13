@@ -49,7 +49,7 @@
         <ion-label>Specialization</ion-label>
         <ion-select [(ngModel)]="model.specialization" name="specialization">
           <ion-select-option value="">--SELECT SPECIALIZATION--</ion-select-option>
-          <ion-select-option *ngFor="let list of spList" >{{list.name}}</ion-select-option>
+          <ion-select-option *ngFor="let list of spList" value="{{list.uid}}">{{list.name}}</ion-select-option>
         </ion-select>
       </ion-item>
       <ion-item>
