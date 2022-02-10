@@ -6,10 +6,11 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./patient-chat-info.page.scss'],
 })
 export class PatientChatInfoPage implements OnInit {
-
+  docInfo: any = [];
   constructor() { }
 
   ngOnInit() {
+    this.docInfo = JSON.parse(localStorage.getItem('data'));
   }
 
 }

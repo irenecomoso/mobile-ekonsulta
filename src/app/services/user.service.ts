@@ -56,9 +56,12 @@ export class UserService {
   {
     const user = this.fireb.auth().currentUser;
     const newPassword = record.password;
+    this.db.collection('Users').doc(user_id).update(record)
+      .then(()=>{
+        console.log('Updated');
+      })
    return user.updatePassword(newPassword).then(()=>{
       console.log("Password Changed!");
-      this.db.collection('Users').doc(user_id).update(record);
     }).catch((error)=>{
       console.log(error);
     })
@@ -84,9 +87,10 @@ export class UserService {
   {
     return this.db.firestore.collection('Users').doc(user_id).update(fee);
   }
-  update_patient_insurance(user_id,record)
+  update_patient_insurance(user_id,insInfo_id,record)
   {
-    return this.db.collection('Users').doc(user_id).update(record);
+    return this.db.firestore.collection('Users').doc(user_id).collection('Insurance_Info')
+    .doc(insInfo_id).update(record);
   }
   update_password(data)
   {
@@ -259,7 +263,8 @@ export class UserService {
   }
   get_patient_transaction(patient_id)
   {
-    return this.db.firestore.collection('Transaction').where('patient_id','==',patient_id).get();
+    return this.db.firestore.collection('Users').doc(patient_id).collection('Transaction_History')
+    .orderBy('id','desc').get();
   }
   get_transaction_doctor(doctor_id)
   {

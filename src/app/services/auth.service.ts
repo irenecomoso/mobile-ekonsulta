@@ -31,6 +31,7 @@ export class AuthService {
   loginWithEmail(email: string,password: string,role: string){
     return this.afu.signInWithEmailAndPassword(email,password).then(res=>{
       localStorage.setItem('Users',JSON.stringify(res.user));
+      sessionStorage.setItem('Current',password);
     }).then(()=>{
       if(role === 'patient'){
         this.router.navigate(['/patient-profile']);

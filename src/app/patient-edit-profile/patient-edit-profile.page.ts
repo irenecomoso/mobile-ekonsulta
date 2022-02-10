@@ -137,24 +137,6 @@ export class PatientEditProfilePage implements OnInit {
       }, 5000);
     });
   }
-  update_insurance()
-  {
-    let record = {}
-    if(this.info.isVerified === 'verified' && this.info.health_insurance === this.health_insurance)
-    {
-      record['isVerified'] = 'verified';
-    }
-    else
-    {
-      record['isVerified'] = 'pending';
-    }
-    record['health_insurance'] = this.health_insurance;
-    record['member_ID'] = this.member_ID;
-    this.userservice.update_patient_insurance(this.userID,record).then(()=>{
-      console.log('Sent!');
-      this.ngOnInit();
-    })
-  }
   update(frm)
   {
       this.userservice.update_user(this.userID,frm).then(()=>{

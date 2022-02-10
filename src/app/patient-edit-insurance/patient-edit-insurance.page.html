@@ -4,23 +4,30 @@
       <!-- <ion-button routerLink="/patient-profile"><ion-icon name="arrow-back-outline"></ion-icon></ion-button> -->
       <ion-button routerLink="/patient-profile"><ion-icon name="close-outline"></ion-icon></ion-button>
     </ion-buttons>
-    <ion-title>Patient Insurance</ion-title>
+    <ion-title>{{info.insurance_name}}</ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content>
   <ion-list lines="full" class="ion-no-margin">
-      <p>Status: {{info.isVerified}}</p>
+    <p *ngIf="info.health_insurance !== 'none'">Status: {{info.isVerified}}</p>
+    <p *ngIf="info.health_insurance === 'none'">Status: none</p>
       <ion-item>
         <ion-label>Health Insurance</ion-label>
-        <ion-select [(ngModel)]="health_insurance" name="health_insurance" type="text" class="insurance_h"  >
+        <ion-select [(ngModel)]="health_insurance" name="health_insurance" type="text" class="form-select"  >
           <ion-select-option value="{{info.health_insurance}}" selected>{{info.insurance_name}}</ion-select-option>
-          <ion-select-option *ngFor="let list of insList" >{{list.name}}</ion-select-option>
+          <ion-select-option *ngFor="let list of insList">{{list.name}}</ion-select-option>
         </ion-select>
       </ion-item>
       <ion-item>
         <ion-label>Health Insurance#</ion-label>
         <ion-input type="text" [(ngModel)]="member_ID" value="{{info.member_ID}}" name="member_ID" class="insurance_no" style="width: 200px;"></ion-input>
+      </ion-item>
+      <ion-item>
+        <label class="label" for="id">Insurance Card Pic and Recent Picture <span><i>(must be in one file)</i></span></label> <br>
+        <ion-label>
+          <ion-input (change)="choosefile2($event)" name="id" type="file"></ion-input>
+        </ion-label>
       </ion-item>
       <ion-item *ngIf="verified_message" class="alert alert-danger">
         {{verified_message}}
@@ -35,13 +42,14 @@
 
     <div class="info_container">
 
-      <div class="info_content">
-            <ion-item>
-              <ion-label>INFO</ion-label>
-            </ion-item>
-      </div>
 
-      <div class="info_content">
+
+      <div *ngIf="info.health_insurance !== 'none' && info.isVerified !== 'pending'">
+        <div class="info_content">
+          <ion-item>
+            <ion-label>INFO</ion-label>
+          </ion-item>
+        </div>
           <ion-item>
           <ion-label>Package: {{insurance_info.Package}}</ion-label>
           </ion-item>
@@ -60,38 +68,38 @@
           <ion-item *ngIf="request_sent.length > 0" style="margin-top: 2%;" class="alert alert-warning">
             {{request_sent}}
           </ion-item >
+          <ion-item>
+            <div class="laboratory_content">
+                <h5>LABORATORY</h5>
+                <ion-item>
+                    <ion-select [(ngModel)]="lab_id" name="lab_id" id="" class="mb-2">
+                    <ion-select-option value="" selected>Select Laboratory</ion-select-option>
+                    <ion-select-option *ngFor="let list of labList" value="{{list.uid}}">{{list.name}}</ion-select-option>
+                  </ion-select>
+                </ion-item>
+                <ion-item>
+                  <ion-label>Filename: &nbsp;</ion-label>
+                    <ion-input [(ngModel)]="filename" type="text" size="25"></ion-input>
+                </ion-item>
+                <ion-item >
+                  <ion-input (change)="choosefile($event)" type="file"></ion-input>
+                </ion-item>
+                <ion-item>
+                  <ion-button (click)="send_labLOA()" class="send">Send LOA</ion-button>
+                </ion-item>
+                <ion-item *ngIf="lab_message" class="alert alert-success">
+                  {{lab_message}}
+                </ion-item>
+                <ion-item *ngIf="empty_field" class="alert alert-danger">
+                  {{empty_field}}
+                </ion-item>
+            </div>
+          </ion-item>
       </div>
 
     </div>
 
 
-    <ion-item>
-      <div class="laboratory_content">
-          <h5>LABORATORY</h5>
-          <ion-item>
-              <ion-select [(ngModel)]="lab_id" name="lab_id" id="" class="mb-2">
-              <ion-select-option value="" selected>Select Laboratory</ion-select-option>
-              <ion-select-option *ngFor="let list of labList" value="{{list.uid}}">{{list.name}}</ion-select-option>
-            </ion-select>
-          </ion-item>
-          <ion-item>
-            <ion-label>Filename: &nbsp;
-              <ion-input [(ngModel)]="filename" type="text" size="25"></ion-input>
-            </ion-label>
-          </ion-item>
-          <ion-item >
-            <ion-input (change)="choosefile($event)" type="file"></ion-input>
-          </ion-item>
-          <ion-item>
-            <ion-button (click)="send_labLOA()" class="send">Send LOA</ion-button>
-          </ion-item>
-          <ion-item *ngIf="lab_message" class="alert alert-success">
-            {{lab_message}}
-          </ion-item>
-          <ion-item *ngIf="empty_field" class="alert alert-danger">
-            {{empty_field}}
-          </ion-item>
-      </div>
-    </ion-item>
+
 
 </ion-content>
