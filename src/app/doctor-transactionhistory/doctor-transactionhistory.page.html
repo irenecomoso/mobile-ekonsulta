@@ -39,23 +39,44 @@
      <p>Patient</p>
      <p>Schedule</p>
      <p>Fee</p>
-     <p>Transaction ID</p>
+     <p>PType</p>
+     <p>XID</p>
      <p>Status</p>
      <p>Deductions</p>
-     <p>Net Income</p>
+     <p>Net</p>
    </ion-item>
  <ion-list *ngFor="let list of tranList">
    <ion-item id="list">
-     <ion-label lines="full">
-      <h3>{{list.updatedAt}}</h3>
-      <h2><b>{{list.patient_name}}</b> paid an amount of &#36;{{list.Amount}} as a payment
-        for one consultation.</h2>
-      <p>Schedule: {{list.Schedule}}</p>
-      <p>Gross Amount: {{list.Amount}}</p>
-      <p>Deduction(s): {{list.total_dec}}</p>
-      <p>Net Income:{{list.net_income}}</p>
-      <p style="color: rgb(28,54,94);">Transaction ID:{{list.uid}}</p>
+    <ion-label>
+      <ion-label>
+        <p>{{list.createdAt}}</p>
+      </ion-label>
+      <ion-label>
+       <p>{{list.patient_name}}</p>
      </ion-label>
+     <ion-label>
+       <p>{{list.schedule}}</p>
+     </ion-label>
+     <ion-label>
+       <p>{{list.Amount}}</p>
+     </ion-label>
+     <ion-label>
+       <p>{{list.paymentType}}</p>
+     </ion-label>
+     <ion-label>
+      <p>{{list.transaction_id}}</p>
+    </ion-label>
+    <ion-label>
+      <p *ngIf="list.status!=='refund'" class="content content-success text-center border-bottom">Successful</p>
+      <p *ngIf="list.status==='refund'" class="content content-cancel text-center border-bottom">Cancelled</p>
+    </ion-label>
+    <ion-label>
+      <p>{{list.deduction}}</p>
+    </ion-label>
+    <ion-label>
+      <p>{{list.net_income}}</p>
+    </ion-label>
+    </ion-label>
    </ion-item>
  </ion-list>
 </ion-content>

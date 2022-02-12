@@ -273,8 +273,8 @@ export class UserService {
   }
   get_transaction_doctor(doctor_id)
   {
-    return this.db.firestore.collection('Transaction').where('doctor_id','==',doctor_id)
-    .where('status','==','sent').get();
+    return this.db.firestore.collection('Users').doc(doctor_id).collection('Transaction_History')
+    .orderBy('id','desc').get();
   }
   update_transaction_admin(id,record)
   {
