@@ -92,6 +92,11 @@ export class UserService {
     return this.db.firestore.collection('Users').doc(user_id).collection('Insurance_Info')
     .doc(insInfo_id).update(record);
   }
+  get_doctorEarning(id)
+  {
+    return this.db.firestore.collection('Users').doc(id).collection('Transaction_History')
+    .get();
+  }
   update_password(data)
   {
     if(data.role == 'patient' && data.role == 'doctor')

@@ -3,13 +3,13 @@
     <ion-buttons slot="start">
       <ion-menu-button color="dark"></ion-menu-button>
     </ion-buttons>
-    <ion-title><b>E-KONSULTA</b></ion-title>
+    <ion-title><b>Patients Analytics</b></ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content>
   <ion-toolbar style="text-align:center;">
-    <h1>Patients Analytics</h1>
+    <h1>Analytics</h1>
     <ion-segment value="consultations" [(ngModel)]="selectTabs">
       <ion-segment-button value="Today">
         <ion-label>Today</ion-label>
@@ -18,6 +18,19 @@
       <ion-segment-button value="Total">
         <ion-label style="text-align: center;">Total Users</ion-label>
         <p class="card-text">{{total}}</p>
+      </ion-segment-button>
+    </ion-segment>
+  </ion-toolbar>
+  <ion-toolbar style="text-align:center;">
+    <h1>Earnings</h1>
+    <ion-segment value="consultations" [(ngModel)]="selectTabs">
+      <ion-segment-button value="Today">
+        <ion-label>Current</ion-label>
+        <p>{{currentEarning}}</p>
+      </ion-segment-button>
+      <ion-segment-button value="Total">
+        <ion-label style="text-align: center;">Total Earnigs: </ion-label>
+        <p class="card-text">{{totalEarning}}</p>
       </ion-segment-button>
     </ion-segment>
   </ion-toolbar>
