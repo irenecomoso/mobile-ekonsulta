@@ -45,12 +45,12 @@
 
   <div *ngIf="selectTabs==='done'">
     <ion-list>
-      <ion-item *ngFor="let list of doneList">
-        <ion-label><h2>{{list.fullname}}</h2></ion-label>
-            <ion-label>
-              <ion-label>Done</ion-label>
+      <ion-item button *ngFor="let list of doneList">
+       <ion-label>
+        <h2>{{list.fullname}}</h2>
+            <ion-label style="font-weight: 1000; color: green; font-size: 20px">Done<ion-icon name="checkmark-circle-outline"></ion-icon></ion-label>
             <ion-label>{{list.consultation_schedule}} | {{list.schedule}} | {{list.schedtime}}</ion-label>
-            </ion-label>
+       </ion-label>
       </ion-item>
     </ion-list>
   </div>

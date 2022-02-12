@@ -41,7 +41,7 @@
           <p>{{list.filename}}</p>
           <ion-button (click)="open(list.file)">View</ion-button>
           <ion-label>Select
-            <ion-checkbox (change)="chooseShare(list.uid,$event)" [checked]="list.check" color="dark"></ion-checkbox>
+            <input type="checkbox" #share onchange="chooseShare(list.uid,$event)" [checked]="list.check" color="blue">
           </ion-label>
         </div>
       </ion-label>
@@ -57,7 +57,7 @@
           <p>{{list.filename}}</p>
           <ion-button (click)="open(list.file)">View</ion-button>
           <ion-label>Select
-            <input type="checkbox" #share onchange="chooseShare(list.uid,$event)" [checked]="list.check" color="dark">
+            <input type="checkbox" #share onchange="chooseShare(list.uid,$event)" [checked]="list.check" color="blue">
           </ion-label>
         </div>
       </ion-label>
@@ -73,7 +73,7 @@
           <p>{{list3.filename}}</p>
           <ion-button (click)="open(list3.file)">View</ion-button>
           <ion-label>Select
-            <ion-checkbox (change)="chooseShare(list3.uid,$event.target)" [checked]="list3.check" color="dark"></ion-checkbox>
+            <input type="checkbox" #share onchange="chooseShare(list3.uid,$event)" [checked]="list3.check" color="blue">
           </ion-label>
         </div>
       </ion-label>
