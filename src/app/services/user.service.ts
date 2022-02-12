@@ -271,6 +271,24 @@ export class UserService {
     return this.db.firestore.collection('Users').doc(patient_id).collection('Transaction_History')
     .orderBy('id','desc').get();
   }
+  update_transaction_insurance(userid,id,record)
+  {
+    return this.db.firestore.collection('Health_Insurance').doc(userid).collection('Transaction').doc(id).update(record)
+    .then(()=>{
+      console.log(id + " Transaction Updated!");
+    })
+  }
+  cancel_consultation_insurance(info)
+  {
+    return this.db.collection('upcoming').doc(info.upcoming_id).delete()
+    .then(()=>{
+      console.log('Upcoming Deleted!');
+      return this.db.collection('Health_Insurance').doc(info.health_insurance).collection('Transaction')
+      .doc(info.transaction_id).update({
+        status: "noshow"
+      })
+    })
+  }
   get_transaction_doctor(doctor_id)
   {
     return this.db.firestore.collection('Users').doc(doctor_id).collection('Transaction_History')

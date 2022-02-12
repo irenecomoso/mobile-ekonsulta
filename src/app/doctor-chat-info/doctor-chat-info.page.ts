@@ -1,3 +1,5 @@
+/* eslint-disable no-trailing-spaces */
+/* eslint-disable curly */
 /* eslint-disable @typescript-eslint/dot-notation */
 /* eslint-disable prefer-const */
 /* eslint-disable eqeqeq */
@@ -57,6 +59,7 @@ export class DoctorChatInfoPage implements OnInit {
   }
   finish_consultation()
   {
+    console.log(this.patientInfo);
     let record = {};
     this.userservice.get_upcoming(this.patientInfo.upcoming_id).then(e=>{
       record['createdAt'] = formatDate(new Date(),'MM/dd/yyyy','en');
@@ -73,7 +76,12 @@ export class DoctorChatInfoPage implements OnInit {
 
         let record2= {};
         record2['status'] = "done";
-        this.userservice.update_transaction_admin(this.patientInfo.transaction_id,record2);
+        if(this.patientInfo.paymentType != "insurance")
+         this.userservice.update_transaction_admin(this.patientInfo.transaction_id,record2);
+        else
+        {
+          this.userservice.update_transaction_insurance(this.patientInfo.health_insurance,this.patientInfo.transaction_id,record2);
+        }
         this.userservice.remove_share(this.userid,this.patientInfo.uid);
 
       }).then(()=>{
@@ -95,6 +103,7 @@ export class DoctorChatInfoPage implements OnInit {
   cancel_consultation()
   {
     console.log(this.patientInfo);
+    if(this.patientInfo.paymentType != 'insurance')
     this.userservice.cancel_consultation_doctor(this.patientInfo)
     .then(()=>{
       console.log('Upcoming Removed!');
@@ -109,6 +118,23 @@ export class DoctorChatInfoPage implements OnInit {
       record['id'] = new Date(formatDate(new Date(),'short','en')).getTime()
       //this.notif.send_patient(this.patientInfo.uid,record);
     })
+    else
+    {
+      this.userservice.cancel_consultation_insurance(this.patientInfo)
+      .then(()=>{
+        console.log('Upcoming Removed!');
+        console.log('Cancelled Consultation!!');
+
+        this.router.navigate(['doctor-consultation']);
+
+        let record = {};
+        record['title'] = "Consultation Cancelled";
+        record['description'] = "Your consultation has been cancelled because of your nonappearance.";
+        record['createdAt'] = formatDate(new Date(),'short','en');
+        record['id'] = new Date(formatDate(new Date(),'short','en')).getTime()
+        //this.notif.send_patient(this.patientInfo.uid,record);
+      })
+    }
   }
 
 }
