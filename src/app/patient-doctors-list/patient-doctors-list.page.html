@@ -10,12 +10,6 @@
 <ion-header class="ion-no-border">
   <ion-toolbar style="text-align:center;">
     <ion-searchbar animated [(ngModel)]="searchName" (input)="get_doctorList()" name="searchName" placeholder="Search Doctor"></ion-searchbar>
-    <!--<ion-item>
-      <ion-label>Specialization</ion-label>
-      <ion-select interface="popover" value="All" name="specialization">
-        <ion-select-option *ngFor="let list of spList" value="{{list.name}}">{{list.name}}</ion-select-option>
-      </ion-select>
-    </ion-item>-->
   </ion-toolbar>
 </ion-header>
 
