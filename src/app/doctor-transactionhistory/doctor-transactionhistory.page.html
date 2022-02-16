@@ -34,41 +34,30 @@
       <ion-select-option value="">Year</ion-select-option>
      </ion-select>
    </ion-item>
-   <ion-item>
-     <p> Date</p>
-     <p>Patient</p>
-     <p>Schedule</p>
-     <p>Fee</p>
-     <p>PType</p>
-     <p>XID</p>
-     <p>Status</p>
-     <p>Deductions</p>
-     <p>Net</p>
-   </ion-item>
  <ion-list *ngFor="let list of tranList">
    <ion-item id="list">
     <ion-label>
       <ion-label>
-        <p>{{list.createdAt}}</p>
+        <p>Date: <i>{{list.createdAt}}</i></p>
       </ion-label>
       <ion-label>
-       <p>{{list.patient_name}}</p>
+       <p>Patient: <b>{{list.patient_name}}</b></p>
      </ion-label>
      <ion-label>
-       <p>{{list.schedule}}</p>
+       <p>Schedule: {{list.schedule}}</p>
      </ion-label>
      <ion-label>
-       <p>{{list.Amount}}</p>
+       <p>Amount: {{list.Amount}}</p>
      </ion-label>
      <ion-label>
-       <p>{{list.paymentType}}</p>
+       <p>Payment Type: {{list.paymentType}}</p>
      </ion-label>
      <ion-label>
-      <p>{{list.transaction_id}}</p>
+      <p>Transaction ID: {{list.transaction_id}}</p>
     </ion-label>
     <ion-label>
-      <p *ngIf="list.status!=='refund'" class="content content-success text-center border-bottom">Successful</p>
-      <p *ngIf="list.status==='refund'" class="content content-cancel text-center border-bottom">Cancelled</p>
+      <p *ngIf="list.status!=='refund'" class="content content-success text-center border-bottom">Status: Successful</p>
+      <p *ngIf="list.status==='refund'" class="content content-cancel text-center border-bottom">Status: Cancelled</p>
     </ion-label>
     <ion-label>
       <p>{{list.deduction}}</p>
