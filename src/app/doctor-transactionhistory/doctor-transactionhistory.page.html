@@ -56,8 +56,8 @@
       <p>Transaction ID: {{list.transaction_id}}</p>
     </ion-label>
     <ion-label>
-      <p *ngIf="list.status!=='refund'" class="content content-success text-center border-bottom">Status: Successful</p>
-      <p *ngIf="list.status==='refund'" class="content content-cancel text-center border-bottom">Status: Cancelled</p>
+      <p *ngIf="list.status!=='refund'" >Successful</p>
+      <p *ngIf="list.status==='refund'" >Cancelled</p>
     </ion-label>
     <ion-label>
       <p>{{list.deduction}}</p>

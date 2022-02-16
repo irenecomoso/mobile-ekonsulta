@@ -1,3 +1,4 @@
+/* eslint-disable no-trailing-spaces */
 /* eslint-disable curly */
 /* eslint-disable @typescript-eslint/no-unused-expressions */
 /* eslint-disable one-var */
@@ -15,7 +16,7 @@ import { AngularFirestore } from '@angular/fire/firestore';
 import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 const mediaConstraints = {
   audio: true,
-  video:  { facingMode: "user" }
+  video:  { width: 650, height: 400}
 };
 
 const servers = {
@@ -135,6 +136,7 @@ export class VideoCallPage implements OnInit {
   createRecorder(stream, mimeType) {
     // the stream data is stored in this array
     let recordedChunks = [];
+
     const mediaRecorder = new (window as any).MediaRecorder(stream);
 
     mediaRecorder.ondataavailable =(e)=>{
@@ -152,19 +154,19 @@ export class VideoCallPage implements OnInit {
   saveFile(recordedChunks){
 
     const blob = new Blob(recordedChunks, {
-       type: 'video/webm'
-     });
-     let filename = window.prompt('Enter file name'),
-     downloadLink = document.createElement('a');
-     downloadLink.href = URL.createObjectURL(blob);
-     downloadLink.download = `${filename}.webm`;
+      type: 'video/webm'
+    });
+    let filename = window.prompt('Enter file name'),
+    downloadLink = document.createElement('a');
+    downloadLink.href = URL.createObjectURL(blob);
+    downloadLink.download = `${filename}.webm`;
 
-     var blb = URL.createObjectURL(blob);
+    var blb = URL.createObjectURL(blob);
 
-     document.body.appendChild(downloadLink);
-     downloadLink.click();
-     URL.revokeObjectURL(blb); // clear from memory
-     document.body.removeChild(downloadLink);
+    document.body.appendChild(downloadLink);
+    downloadLink.click();
+    URL.revokeObjectURL(blb); // clear from memory
+    document.body.removeChild(downloadLink);
  }
 
 
@@ -185,6 +187,7 @@ export class VideoCallPage implements OnInit {
   private remoteVideo()
   {
     pc.ontrack = this.handleTrackEvent;
+    console.log('Remote Working ' + pc.ontrack);
   }
 
   private handleTrackEvent = (event: RTCTrackEvent) => {
@@ -207,15 +210,13 @@ export class VideoCallPage implements OnInit {
   }
   //Create Call
   async Call(): Promise<void> {
-
+    this.remoteVideo();
     this.call_interval = true;
     setTimeout(() => {
       this.call_interval = false;
     }, 13000);
     this.callTimer();
     this.call_sound('call');
-
-    this.remoteVideo();
     // Reference Firestore collections for signaling
       const callDoc = this.db.firestore.collection('calls').doc();
       const offerCandidates = callDoc.collection('offerCandidates');
@@ -233,6 +234,7 @@ export class VideoCallPage implements OnInit {
         user1 = this.remoteUser.uid;
         user2 = this.currentUser_id;
       }
+
       this.callInput = callDoc.id;
       // Get candidates for caller, save to db
       pc.onicecandidate = event => {
