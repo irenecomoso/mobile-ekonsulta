@@ -56,14 +56,14 @@
       <p>Transaction ID: {{list.transaction_id}}</p>
     </ion-label>
     <ion-label>
-      <p *ngIf="list.status!=='refund'" >Successful</p>
-      <p *ngIf="list.status==='refund'" >Cancelled</p>
+      <p *ngIf="list.status!=='refund'" >Status: Successful</p>
+      <p *ngIf="list.status==='refund'" >Status: Cancelled</p>
     </ion-label>
     <ion-label>
-      <p>{{list.deduction}}</p>
+      <p>Deductions: {{list.deduction}}</p>
     </ion-label>
     <ion-label>
-      <p>{{list.net_income}}</p>
+      <p>Net Income: {{list.net_income}}</p>
     </ion-label>
     </ion-label>
    </ion-item>
