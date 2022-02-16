@@ -42,7 +42,7 @@
           <div>
               <ion-label class="sched">Scheduled Time</ion-label>
               <small>*</small>
-              <ion-select [(ngModel)]="time" name="time">
+              <ion-select [(ngModel)]="time" name="time" class="form-select required bg-white">
                 <ion-select-option value="" selected>Select Time</ion-select-option>
                 <ion-select-option *ngFor="let list of timeList" value="{{list.uid}}">
                   {{list.time}}
