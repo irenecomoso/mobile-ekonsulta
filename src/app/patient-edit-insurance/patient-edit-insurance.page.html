@@ -54,10 +54,10 @@
           <ion-label>Package: {{insurance_info.Package}}</ion-label>
           </ion-item>
           <ion-item>
-            <span>Current Spent:</span><ion-button>{{insurance_info.spent}}php</ion-button>
+            <span>Current Spent:</span><ion-label style="font-weight: 1000;">{{insurance_info.spent}}php</ion-label>
           </ion-item>
           <ion-item>
-            <span>Limit:</span><ion-button>{{insurance_info.limit}}php</ion-button>
+            <span>Limit:</span><ion-label style="font-weight: 1000;">{{insurance_info.limit}}php</ion-label>
           </ion-item>
           <ion-item>
             <ion-button (click)="request_LOA()" >Request LOA</ion-button>

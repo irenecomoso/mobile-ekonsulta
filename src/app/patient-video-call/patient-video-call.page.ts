@@ -55,17 +55,21 @@ export class PatientVideoCallPage implements OnInit {
     public afu: AuthService
   ) { }
   ngOnInit(){
-    this.remoteUser = JSON.parse(localStorage.getItem('data'));
-    this.currentUser_id = this.afu.get_UID();
-    this.currentUser = JSON.parse(localStorage.getItem('Users'));
-    // this.videoCall_listener();
+    this.callInput = localStorage.getItem('callInput');
+    if(this.callInput)
+    {
+      //this.answerCall();
+      document.getElementById('answerCall').click();
+      this.remoteVideo();
+    }
+    // this.remoteUser = JSON.parse(localStorage.getItem('data'));
+    // this.currentUser_id = this.afu.get_UID();
+    // this.currentUser = JSON.parse(localStorage.getItem('Users'));
+    // // this.videoCall_listener();
   }
   ngAfterViewInit(): void {
-
-
     this.doctorInfo = JSON.parse(localStorage.getItem('data'));
     this.currentUser_id = this.afu.get_UID();
-
 
     var data;
     this.db.firestore.collection('calls').where('offer.doctor_id','==',this.doctorInfo.uid).
@@ -82,7 +86,7 @@ export class PatientVideoCallPage implements OnInit {
           console.log('not exist!');
           this.call_end();
         }
-        else
+        else if( e.type == 'modified')
         {
           console.log('Modified!');
           this.call_sound('accepted');
@@ -91,8 +95,38 @@ export class PatientVideoCallPage implements OnInit {
       })
       this.callInput = data;
     })
-
     this.requestMediaDevices();
+
+    // this.doctorInfo = JSON.parse(localStorage.getItem('data'));
+    // this.currentUser_id = this.afu.get_UID();
+
+
+    // var data;
+    // this.db.firestore.collection('calls').where('offer.doctor_id','==',this.doctorInfo.uid).
+    // where('offer.patient_id','==',this.currentUser_id).onSnapshot(snapshot=>{
+    //   let changes = snapshot.docChanges();
+    //   changes.forEach(e=>{
+    //     if(e.type == 'added')
+    //     {
+    //       console.log('exist!');
+    //       this.call_sound('call');
+    //     }
+    //     else if(e.type == 'removed')
+    //     {
+    //       console.log('not exist!');
+    //       this.call_end();
+    //     }
+    //     else
+    //     {
+    //       console.log('Modified!');
+    //       this.call_sound('accepted');
+    //     }
+    //     data = e.doc.id;
+    //   })
+    //   this.callInput = data;
+    // })
+
+    // this.requestMediaDevices();
   }
   private async requestMediaDevices(): Promise<void> {
     this.localStream = await navigator.mediaDevices.getUserMedia(mediaConstraints)
@@ -113,10 +147,42 @@ export class PatientVideoCallPage implements OnInit {
     console.log(event);
     this.receivedVideo.nativeElement.srcObject = event.streams[0];
   }
+
+  pauseLocalVideo(): void{
+    this.localStream.getTracks().forEach(track=>{
+      track.enabled = false;
+    });
+    this.localVideo.nativeElement.srcObject = undefined;
+  }
+
+  startLocalVideo(): void{
+    this.localStream.getTracks().forEach(track=>{
+      track.enabled = true;
+    });
+    this.localVideo.nativeElement.srcObject = this.localStream;
+  }
+  // private async requestMediaDevices(): Promise<void> {
+  //   this.localStream = await navigator.mediaDevices.getUserMedia(mediaConstraints)
+  //   //this.localVideo.nativeElement.srcObject = this.localStream;
+  //   this.localStream.getTracks().forEach((track) => {
+  //     pc.addTrack(track, this.localStream);
+  // });
+
+  // // Show stream in HTML video
+  // this.localVideo.nativeElement.srcObject = this.localStream;
+  //   //this.pauseLocalVideo();
+  // }
+  // private async remoteVideo()
+  // {
+  //   pc.ontrack = this.handleTrackEvent;
+  // }
+  // private handleTrackEvent = (event: RTCTrackEvent) => {
+  //   console.log(event);
+  //   this.receivedVideo.nativeElement.srcObject = event.streams[0];
+  // }
    //Answer Call
    async answerCall() {
-
-    this.remoteVideo();
+    console.log("Answer Working!");
     const callId = this.callInput;
     const callDoc = this.db.firestore.collection('calls').doc(callId);
     const offerCandidates = callDoc.collection('offerCandidates');
@@ -170,18 +236,4 @@ export class PatientVideoCallPage implements OnInit {
     const audio = new Audio('assets/sounds/callEnd.mp3');
     audio.play();
   }
-  // videoCall_listener()
-  // {
-  //   this.db.firestore.collection('calls').where('offer.doctor_id','==',this.docInfo.uid).
-  //   where('offer.patient_id','==',this.userid).onSnapshot(snapshot=>{
-  //     let changes = snapshot.docChanges();
-  //     changes.forEach(e=>{
-  //       if(e.type == 'added')
-  //       {
-  //         console.log('exist!');
-  //         this.video_call();
-  //       }
-  //     })
-  //   })
-  // }
 }
