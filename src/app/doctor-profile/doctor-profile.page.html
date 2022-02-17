@@ -18,12 +18,14 @@
           <ion-label class="name">{{info.fullname}}</ion-label><br><br>
         </ion-item>
         <ion-item>
-          <div *ngIf="info.isVerified === 'verified'" class="chip">
-            <div class="chip-content">Verified <span class="checked"><i class="bi bi-star-fill"></i></span></div>
-          </div>
-          <div *ngIf="info.isVerified=== 'pending' " class="chip">
-            <div class="chip-content1">Pending <span class="checked"><i class="bi bi-clock-history"></i></span></div>
-          </div>
+          <ion-chip *ngIf="info.isVerified === 'verified'">
+            <ion-label>Verified </ion-label>
+            <ion-icon name="checkmark-circle" style="color:green;"></ion-icon>
+          </ion-chip>
+          <ion-chip *ngIf="info.isVerified=== 'pending' ">
+            <ion-label>Pending </ion-label>
+            <ion-icon name="time" style="color:rgb(246, 122, 20);"></ion-icon>
+          </ion-chip>
         </ion-item>
         <ion-item>
           <ion-label position="stacked"></ion-label>
@@ -33,11 +35,11 @@
             <ion-input name="Address" readonly>Address: {{info.address}}</ion-input>
             <ion-input name="License Number" readonly>License Number: {{info.license_number}}</ion-input>
             <ion-input name="Specialization" readonly>Specialization: {{spInfo.name}}</ion-input>
-        </ion-item><br><br><br><br><br>
+        </ion-item>
         <div class="buttons">
           <ion-button  id="btn1" color="rgb(28,54,94)" expand="block" routerLink="/doctor-edit-profile"><ion-icon name="create"></ion-icon> Edit</ion-button>
-          <ion-button id="btn3" routerLink="/doctor-set-consultation-fee">CONSULTATION FEE</ion-button>
-          <ion-button id="btn4" routerLink="/doctor-edit-insurance">INSURANCE</ion-button>
+          <ion-button id="btn3" color="rgb(28,54,94)" routerLink="/doctor-set-consultation-fee"><ion-icon name="wallet"></ion-icon> Consultation Fee</ion-button>
+          <ion-button id="btn4" color="rgb(28,54,94)" routerLink="/doctor-edit-insurance"><ion-icon name="shield-half"></ion-icon> Insurance</ion-button>
           <ion-button  id="btn2" color="rgb(28,54,94)" routerLink="/login"><ion-icon name="exit"></ion-icon> Logout</ion-button>
         </div>
       </ion-card-content>
