@@ -3,7 +3,7 @@
     <ion-buttons slot="start">
       <ion-menu-button color="dark"></ion-menu-button>
     </ion-buttons>
-    <ion-title>E-konsulta</ion-title>
+    <ion-title><b>E-KONSULTA</b></ion-title>
   </ion-toolbar>
 </ion-header>
 
@@ -59,7 +59,7 @@
       <ion-item button *ngFor="let list of doneList">
        <ion-label>
         <h2>{{list.fullname}}</h2>
-            <ion-label style="font-weight: 1000; color: green; font-size: 20px">Done<ion-icon name="checkmark-circle-outline"></ion-icon></ion-label>
+            <ion-label style=" color: rgb(20, 195, 20); font-size: 20px"><b>Done</b><ion-icon name="checkmark"></ion-icon></ion-label>
             <ion-label>{{list.consultation_schedule}} | {{list.schedule}} | {{list.time}}</ion-label>
        </ion-label>
       </ion-item>

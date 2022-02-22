@@ -3,7 +3,7 @@
     <ion-buttons slot="start">
       <ion-menu-button color="dark"></ion-menu-button>
     </ion-buttons>
-    <ion-title>E-konsulta</ion-title>
+    <ion-title><b>E-KONSULTA</b></ion-title>
     <ion-buttons slot="end" routerLink="/patient-notifications">
       <ion-icon slot="icon-only" name="notifications-outline"></ion-icon>
       <ion-badge hidden="true" color="danger" style="position: absolute; right: 2px; bottom: 15px; border-radius:100px; height:9px; width:1px;">.</ion-badge></ion-buttons>
@@ -37,7 +37,7 @@
         </div>
           <div class="buttons">
             <ion-button  id="btn1" color="rgb(28,54,94)" expand="block" routerLink="/patient-edit-profile"><ion-icon name="create"></ion-icon> Edit</ion-button>
-            <ion-button id="btn3" routerLink="/patient-edit-insurance">Insurance</ion-button>
+            <ion-button id="btn3" routerLink="/patient-edit-insurance"><ion-icon name="shield"></ion-icon>Insurance</ion-button>
             <ion-button  id="btn2" color="rgb(28,54,94)" (click)="logout()"><ion-icon name="exit"></ion-icon> Logout</ion-button>
           </div>
         </ion-card-content>

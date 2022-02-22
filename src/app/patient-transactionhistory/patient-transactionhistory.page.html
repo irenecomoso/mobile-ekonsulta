@@ -1,13 +1,13 @@
 <ion-header>
   <ion-toolbar>
-    <ion-title>E-konsulta</ion-title>
+    <ion-title><b>E-KONSULTA</b></ion-title>
     <ion-buttons slot="start">
       <ion-menu-button autoHide="false"></ion-menu-button>
     </ion-buttons>
   </ion-toolbar>
 </ion-header>
 
-<ion-header class="ion-no-border">
+<ion-header  class="ion-no-border">
   <ion-toolbar>
     <ion-title style="text-align:center;" id="fixed">Transaction History</ion-title>
   </ion-toolbar>
@@ -36,27 +36,23 @@
          <ion-select-option *ngFor="let list of getMonth()" value="{{list}}">{{list}}</ion-select-option>
        </ion-select>
      </ion-item>
- <ion-list *ngFor="let list of transList">
-   <ion-label>
-     <p> Date: <i>{{list.createdAt}}</i></p>
-   </ion-label>
-   <ion-label>
-    <p> Doctor: <b>{{list.doctor_name}}</b> | {{list.specialization}}</p>
-  </ion-label>
-  <ion-label>
-    <p> Amount: {{list.Amount}}</p>
-  </ion-label>
-  <ion-label>
-    <p> Payment Type: {{list.paymentType}}</p>
-  </ion-label>
-  <ion-label>
-    <p> Trasaction ID: {{list.transaction_id}}</p>
-  </ion-label>
-  <ion-label>
-    <p *ngIf="list.status==='done'" class="content content-cancel border-bottom"> Status: Done</p>
-    <p *ngIf="list.status==='cancel'" class="content content-cancel border-bottom"> Status: Cancelled</p>
-    <p *ngIf="list.status==='noshow'" class="content content-cancel border-bottom"> Status: No Show</p>
-  </ion-label>
+
+    <ion-item *ngFor="let list of transList" lines="none">
+      <ion-label class="ion-text-wrap">
+        <ion-text color="primary">
+          <h3> Date: <i>{{list.createdAt}}</i></h3>
+        </ion-text>
+        <p>Doctor: <b>{{list.doctor_name}}</b> | {{list.specialization}}</p>
+        <p>Amount: {{list.Amount}}</p>
+        <p>Payment Type: {{list.paymentType}}</p>
+        <ion-text color="secondary">
+          <p> Trasaction ID: {{list.transaction_id}}</p>
+        </ion-text>
+        <p *ngIf="list.status==='done'" class="content content-cancel border-bottom"> Status: Done</p>
+        <p *ngIf="list.status==='cancel'" class="content content-cancel border-bottom"> Status: Cancelled</p>
+        <p *ngIf="list.status==='noshow'" class="content content-cancel border-bottom"> Status: No Show</p>
+      </ion-label>
+    </ion-item>
      <!-- <ion-label lines="full">
       <h3>{{list.createdAt}}</h3>
       <h2><b>{{userInfo.fullname}}</b> paid an amount of &#36;{{list.Amount}} as a
@@ -65,6 +61,4 @@
       <p>Physician: {{list.doctor_name}} - {{list.Specialization}}</p>
       <p style="color: rgb(28,54,94);">Transaction ID: {{list.uid}}</p>
      </ion-label> -->
-
- </ion-list>
 </ion-content>
