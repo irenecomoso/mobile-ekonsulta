@@ -50,58 +50,9 @@ export class DoctorProfilePage implements OnInit {
 
   ngOnInit(): void {
     this.doctorMenu();
-    //  // console.log(e.data());
-    //  this.userservice.get_patientInfo(this.userId).then(e=>{
-    //    this.info = e.data();
-    //  }).then(()=>{
-    //    this.userservice.get_specializationInfo(this.info.specialization).then(e=>{
-    //      this.spInfo = e.data();
-    //    })
-    //  })
-
-    //  this.userservice.get_avatar(this.userId).then(e=>{
-    //    this.imgUrl = e.data().image;
-    //  })
-
-    //  var data;
-    //  var tempArray = [];
-    //  this.userservice.get_Speciaalization().then(e=>{
-    //    e.forEach(item=>{
-    //      data = item.data();
-    //      data.uid = item.id;
-    //      tempArray.push(data);
-    //    })
-    //  })
-    //  this.spList = tempArray; this.get_doctorInfo();
     this.get_specialization();
     this.get_doctorInfo();
-    //this.insurance_list();
-    //this.get_insurance();
   }
-  // async showAlert1() {
-  //   const alert = await this.alertCtrl.create({
-  //   header: 'Consultation Fee',
-  //   subHeader: 'This action is irreversible. ',
-
-  //   buttons: [
-  //     {
-  //       text: 'Cancel',
-  //       handler: (data: any) => {
-  //         console.log('Canceled', data);
-  //       }
-  //     },
-  //     {
-  //       text: 'Set',
-  //       handler: (data: any) => {
-  //         this.router.navigate(['/doctor-profile'])
-  //       }
-  //     }
-  //   ]
-  //   });
-  //   await alert.present();
-  //   const result = await alert.onDidDismiss();
-  //   console.log(result);
-  //   }
   get_doctorInfo()
   {
     this.userId = this.afu.get_UID();
