@@ -34,38 +34,24 @@
       <ion-select-option value="">Year</ion-select-option>
      </ion-select>
    </ion-item>
- <ion-list *ngFor="let list of tranList">
-   <ion-item id="list">
-    <ion-label>
-      <ion-label>
-        <p>Date: <i>{{list.createdAt}}</i></p>
-      </ion-label>
-      <ion-label>
-       <p>Patient: <b>{{list.patient_name}}</b></p>
-     </ion-label>
-     <ion-label>
-       <p>Schedule: {{list.schedule}}</p>
-     </ion-label>
-     <ion-label>
-       <p>Amount: {{list.Amount}}</p>
-     </ion-label>
-     <ion-label>
-       <p>Payment Type: {{list.paymentType}}</p>
-     </ion-label>
-     <ion-label>
-      <p>Transaction ID: {{list.transaction_id}}</p>
-    </ion-label>
-    <ion-label>
+
+   <ion-item *ngFor="let list of tranList">
+    <ion-label class="ion-text-wrap">
+      <ion-text color="primary">
+        <h3>Date: <i>{{list.createdAt}}</i></h3>
+      </ion-text>
+      <p>Patient: <b>{{list.patient_name}}</b></p>
+      <p>Schedule: {{list.schedule}}</p>
+      <p>Amount: {{list.Amount}}</p>
+      <p>Payment Type: {{list.paymentType}}</p>
+      <ion-text color="secondary">
+        <p>Trasaction ID: {{list.transaction_id}}</p>
+      </ion-text>
       <p *ngIf="list.status!=='refund'" >Status: Successful</p>
       <p *ngIf="list.status==='refund'" >Status: Cancelled</p>
-    </ion-label>
-    <ion-label>
       <p>Deductions: {{list.deduction}}</p>
-    </ion-label>
-    <ion-label>
       <p>Net Income: {{list.net_income}}</p>
     </ion-label>
-    </ion-label>
-   </ion-item>
- </ion-list>
+  </ion-item>
+
 </ion-content>
