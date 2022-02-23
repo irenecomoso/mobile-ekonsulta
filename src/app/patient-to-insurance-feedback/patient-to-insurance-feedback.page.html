@@ -10,7 +10,7 @@
 <ion-content>
   <div class="insurance">
     <ion-searchbar animated [(ngModel)]="searchNameins" (input)="get_healthList()" placeholder="Search Health Insurance"></ion-searchbar>
-    <ion-list>
+    <ion-list lines="none">
       <ion-label *ngFor="let list of list" class="card">
         <ion-item button (click)="view_review_insurance(list)">
           <ion-avatar slot="start">

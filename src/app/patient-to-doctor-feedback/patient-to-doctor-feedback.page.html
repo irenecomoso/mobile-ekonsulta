@@ -10,7 +10,7 @@
 <ion-content>
   <div class="doctors">
     <ion-searchbar animated [(ngModel)]="searchNamedoc" (input)="doctor_list()" name="searchName" placeholder="Search Doctors"></ion-searchbar>
-    <ion-list>
+    <ion-list lines="none">
       <ion-label *ngFor="let list of list" class="card">
         <ion-item button (click)="view_review_doc(list)">
           <ion-avatar slot="start">
