@@ -1,7 +1,7 @@
 <ion-header class="ion-no-border">
   <ion-toolbar id="fixed">
     <ion-buttons slot="start">
-      <ion-back-button routerLink="/doctor-consultation"></ion-back-button>
+      <ion-button (click)="back()"><ion-icon name="arrow-back-outline"></ion-icon></ion-button>
     </ion-buttons>
     <ion-avatar slot="start" id="icon">
       <img src={{patientInfo.image}} id="pic">

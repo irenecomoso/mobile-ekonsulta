@@ -49,7 +49,6 @@ export class DoctorConsultationPage implements OnInit {
   }
   chat(info)
   {
-    console.log(info);
     this.userservice.check_upcoming(this.userId,info.uid).then(e=>{
       e.forEach(res=>{
         if(res.data().status=="pending")
@@ -62,10 +61,6 @@ export class DoctorConsultationPage implements OnInit {
           record['id'] = new Date(formatDate(new Date(),'short','en')).getTime()
           //this.notif.send_patient(info.uid,record)
         }
-          // if(localStorage.getItem('data')==null)
-          // {
-          //   localStorage.setItem('data',JSON.stringify(info))
-          // }
           this.userservice.update_upcoming(res.id).then(()=>{
             this.router.navigate(['/doctor-patient-chat']);
             if(localStorage.getItem('data')==null)

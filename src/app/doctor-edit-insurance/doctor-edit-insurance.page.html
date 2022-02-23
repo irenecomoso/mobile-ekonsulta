@@ -14,6 +14,7 @@
     <h3>Insurance Affiliations</h3>
   </ion-item>
   <ion-item>
+    <ion-label>
     <ion-item>
       <ion-select [(ngModel)]="insurance_id" name="insurance_id">
         <ion-select-option value="">Choose Insurance</ion-select-option>
@@ -23,17 +24,19 @@
     <ion-item>
       <ion-button (click)="insurance_request()">Request</ion-button>
     </ion-item>
-    <ion-item *ngFor="let list of insurance_af" class="col-3">
+
+      <ion-item *ngFor="let list of insurance_af" class="col-3">
         <ion-label>
           <p>{{list.insurance_name}}</p>
         </ion-label>
-    </ion-item>
+      </ion-item>
     <ion-item *ngIf="request_sent" class="alert alert-success">
       Request Sent!
     </ion-item>
   <ion-item *ngIf="request_status.length>0" class="alert alert-danger">
     {{request_status}}
   </ion-item>
+    </ion-label>
 
   </ion-item>
 

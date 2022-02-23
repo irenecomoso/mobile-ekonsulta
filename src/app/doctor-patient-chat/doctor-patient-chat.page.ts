@@ -105,6 +105,9 @@ export class DoctorPatientChatPage implements OnInit {
       console.log("Empty!");
     }
   }
+  back(){
+    window.location.href='/doctor-consultation';
+  }
 
  /* choosefile(e,type)
   {
