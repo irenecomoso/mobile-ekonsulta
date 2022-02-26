@@ -109,7 +109,7 @@ export class DoctorConsultationPage implements OnInit {
     var tempArray = [];
     this.userservice.get_consultation(this.userId).then(e=>{
       e.forEach(item=>{
-        console.log(item.data());
+        //console.log(item.data());
         this.userservice.get_UserInfo(item.data().patient_id).then(a=>{
           data = a.data();
           data.schedule = item.data().schedule;
@@ -120,7 +120,7 @@ export class DoctorConsultationPage implements OnInit {
       })
     })
     this.doneList = tempArray;
-    console.log(this.doneList);
+    //console.log(this.doneList);
   }
 
 }

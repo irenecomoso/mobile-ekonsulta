@@ -142,8 +142,8 @@ export class PatientEditProfilePage implements OnInit {
       this.userservice.update_user(this.userID,frm).then(()=>{
       console.log('patient Updated!');
       this.ngOnInit();
-      //window.location.href='/patient-profile';
-      this.router.navigate(['/patient-profile']);
+      window.location.href='/patient-profile';
+      //this.router.navigate(['/patient-profile']);
     })
   }
   data(frm){

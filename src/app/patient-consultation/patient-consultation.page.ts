@@ -27,6 +27,7 @@ export class PatientConsultationPage implements OnInit {
   selectTabs= 'upcoming';
 
   userid: any;
+  currentDate: string = "";
 
   docList: any = [];
   doneList: any = [];
@@ -43,7 +44,8 @@ export class PatientConsultationPage implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    //console.log("TEST");
+    //getting the current Date
+    this.currentDate = formatDate(new Date(),'MM/dd/yyyy hh:mm','en');
     this.patientMenu();
     localStorage.removeItem('data');
 
@@ -115,6 +117,8 @@ export class PatientConsultationPage implements OnInit {
           this.userservice.get_avatar(e.doc.data().doctor_id).then(img=>{
             data = a.data();
             data.upcoming_status = e.doc.data().status;
+            data.createdAt = e.doc.data().createdAt;
+            data.cancelLimit = e.doc.data().cancelLimit;
             data.schedule = e.doc.data().schedule;
             data.schedtime = e.doc.data().time;
             data.upcoming_id = e.doc.id;
@@ -139,6 +143,7 @@ export class PatientConsultationPage implements OnInit {
   editCancel(info)
   {
     this.info = info;
+    this.router.navigate(['/patient-cancel-consultation']);
   }
   cancel()
   {

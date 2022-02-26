@@ -1,0 +1,28 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-button routerLink="/patient-consultation"><ion-icon name="close-outline"></ion-icon></ion-button>
+    <ion-title>patient-cancel-consultation</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <div class="block-center">
+    <ion-card>
+      <ion-card-content style="text-align: left;">
+        <!-- <ion-item>
+          <ion-avatar slot="start">
+            <img src="{{imgUrl}}">
+          </ion-avatar>
+          <ion-label class="name">{{info.fullname}}</ion-label><br>
+        </ion-item><br> -->
+        <p>This is permanent. When you cancel consultation, you won't be able to retrieve the content or information.</p><br>
+        <p><b>Are you sure you want to cancel consultation?</b></p>
+        <br><br><br>
+        <div class="buttons">
+          <ion-button  id="btn1" color="rgb(28,54,94)" expand="block" routerLink="/patient-consultation"> Discard</ion-button>
+          <ion-button id="btn2" color="rgb(28,54,94)" expand="block" (click)="cancel()">Continue</ion-button>
+        </div>
+      </ion-card-content>
+    </ion-card>
+  </div>
+</ion-content>

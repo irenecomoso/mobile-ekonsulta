@@ -187,6 +187,10 @@ const routes: Routes = [
     path: 'patient-shared-files',
     loadChildren: () => import('./patient-shared-files/patient-shared-files.module').then( m => m.PatientSharedFilesPageModule)
   },
+  {
+    path: 'patient-cancel-consultation',
+    loadChildren: () => import('./patient-cancel-consultation/patient-cancel-consultation.module').then( m => m.PatientCancelConsultationPageModule)
+  },
 
 
 
