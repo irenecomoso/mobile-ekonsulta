@@ -487,7 +487,7 @@ export class UserService {
   }
   send_labLOA(lab_id,patient_id,record)
   {
-   return this.store.ref('Lab-LOA/' + lab_id + '/' + 'patients/' + patient_id + '/' + record.filename).put(record.file)
+    return this.store.ref('Lab-LOA/' + lab_id + '/' + 'patients/' + patient_id + '/' + record.filename).put(record.file)
     .then(()=>{
     return  this.store.storage.ref('Lab-LOA/' + lab_id + '/' + 'patients/' + patient_id + '/' + record.filename).getDownloadURL()
       .then(e=>{

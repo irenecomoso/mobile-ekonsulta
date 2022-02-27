@@ -14,6 +14,7 @@
 import { AuthService } from './../services/auth.service';
 import { AngularFirestore } from '@angular/fire/firestore';
 import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
+import { formatDate } from '@angular/common';
 const mediaConstraints = {
   audio: true,
   video:  { width: 650, height: 400}
@@ -156,17 +157,17 @@ export class VideoCallPage implements OnInit {
     const blob = new Blob(recordedChunks, {
       type: 'video/webm'
     });
-    let filename = window.prompt('Enter file name'),
-    downloadLink = document.createElement('a');
-    downloadLink.href = URL.createObjectURL(blob);
-    downloadLink.download = `${filename}.webm`;
+    let filename = this.remoteUser.fullname+"_"+formatDate(new Date(),'short','en'),
+     downloadLink = document.createElement('a');
+     downloadLink.href = URL.createObjectURL(blob);
+     downloadLink.download = `${filename}.webm`;
 
-    var blb = URL.createObjectURL(blob);
+     var blb = URL.createObjectURL(blob);
 
-    document.body.appendChild(downloadLink);
-    downloadLink.click();
-    URL.revokeObjectURL(blb); // clear from memory
-    document.body.removeChild(downloadLink);
+     document.body.appendChild(downloadLink);
+     downloadLink.click();
+     URL.revokeObjectURL(blb); // clear from memory
+     document.body.removeChild(downloadLink);
  }
 
 

@@ -147,11 +147,11 @@ export class PatientEditInsurancePage implements OnInit {
   }
   send_labLOA()
   {
-    if(this.file && this.filename && this.lab_id)
+    if(this.file && this.lab_id)
     {
       let record = {};
       record['file'] = this.file;
-      record['filename'] = this.filename;
+      record['filename'] = this.file.name;
       this.userservice.send_labLOA(this.lab_id,this.userID,record)
       .then(()=>{
         console.log('added!');
@@ -159,8 +159,9 @@ export class PatientEditInsurancePage implements OnInit {
         let record2 = {};
         record2['createdAt'] = formatDate(new Date(),'short','en');
         record2['title'] = "LOA";
+        record2['id'] = new Date(formatDate(new Date(),'short','en')).getTime()
         record2['description'] = "A patient sent an LOA. Check your LOA list";
-        //this.notif.send_lab(this.info.health_insurance,record2)
+        //this.notif.send_lab(this.lab_id,record2)
 
         this.lab_message = "File sent!";
         this.file = "";
