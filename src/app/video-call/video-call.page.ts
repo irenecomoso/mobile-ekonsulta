@@ -17,7 +17,7 @@ import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { formatDate } from '@angular/common';
 const mediaConstraints = {
   audio: true,
-  video:  { width: 650, height: 400}
+  video:  { facingMode: "user" }
 };
 
 const servers = {
@@ -314,6 +314,9 @@ export class VideoCallPage implements OnInit {
     {
       var audio = new Audio('assets/sounds/video-button.mp3');
       audio.play();
+    }
+    back(){
+      window.location.href='/patient-consultation';
     }
 
 }
