@@ -42,6 +42,10 @@
         <ion-input type="text" placeholder="(+63)" [(ngModel)]="model.contact_number" name="contact_number" required></ion-input>
       </ion-item>
       <ion-item>
+        <ion-label position="floating">Address</ion-label>
+        <ion-input [(ngModel)]="model.address" name="address" required></ion-input>
+      </ion-item>
+      <ion-item>
         <ion-label position="floating">License Number</ion-label>
         <ion-input type="text" [(ngModel)]="model.license_number" name="license_number" required></ion-input>
       </ion-item>
@@ -51,10 +55,6 @@
           <ion-select-option value="">--SELECT SPECIALIZATION--</ion-select-option>
           <ion-select-option *ngFor="let list of spList" value="{{list.uid}}">{{list.name}}</ion-select-option>
         </ion-select>
-      </ion-item>
-      <ion-item>
-        <ion-label position="floating">Address</ion-label>
-        <ion-input [(ngModel)]="model.address" name="address" required></ion-input>
       </ion-item>
       <ion-item class="form-group mb-2">
         <ion-label class="label" for="id">PRC ID and Recent Picture <span class="note">(<i>must be in 1 file</i>)</span> </ion-label>

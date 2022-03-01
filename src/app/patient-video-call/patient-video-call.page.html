@@ -11,24 +11,24 @@
   </ion-buttons>
   <ion-item>
 
-  <div class="video_cont">
-      <div>
+  <ion-item class="video_cont">
+      <ion-item>
 
-          <p>Patient</p>
+          <p>Patient's Name</p>
           <video #local_video [autoplay]="true" [muted]="true"></video>
 
-     </div>
+      </ion-item>
 
-      <div>
+      <ion-item>
 
-          <p >Doctor</p>
+          <p>Doctor's Name</p>
           <video #received_video [autoplay]="true"></video>
 
-      </div>
-  </div>
+      </ion-item>
+  </ion-item>
   </ion-item>
 
-  <div class="video_btns">
+  <ion-item class="video_btns">
       <ion-item>
         <ion-button (click)="startLocalVideo()"><ion-icon name="videocam-outline"></ion-icon></ion-button>
         <ion-button (click)="pauseLocalVideo()" class="stop-local" title="Camera/Mic off">
@@ -37,6 +37,6 @@
         </ion-button>
         <ion-button (click)="answerCall()"><ion-icon name="call-outline"></ion-icon></ion-button>
       </ion-item>
-  </div>
+  </ion-item>
 
 </ion-content>
