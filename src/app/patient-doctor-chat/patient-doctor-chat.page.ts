@@ -1,3 +1,7 @@
+import { Router } from '@angular/router';
+/* eslint-disable prefer-const */
+import { SharedDataService } from './../services/shared-data.service';
+import { AngularFirestore } from '@angular/fire/firestore';
 import { UserService } from './../services/user.service';
 import { AuthService } from 'src/app/services/auth.service';
 import { ChatService } from './../services/chat.service';
@@ -27,27 +31,17 @@ export class PatientDoctorChatPage implements OnInit {
   chat$: Observable<any>;
 
   imgUrl: any;
-
-  /** set to false so that when loading the user analytics page, content of that function is not displayed */
-  medicalrecords = true;
-  labresult = false;
-  presc =  false;
-  medcertificate1 = false;
-  insurance_loa = false;
+  dataInput: string = "";
 
   constructor(
     public chats: ChatService,
     public afu: AuthService,
-    public userservice: UserService
+    public userservice: UserService,
+    public db: AngularFirestore,
+    public sds: SharedDataService,
+    public router: Router
   ) { }
-  insuranceLOA()
-  {
-    this.medicalrecords = false;
-    this.labresult = false;
-    this.presc = false;
-    this.medcertificate1 = false;
-    this.insurance_loa = true;
-  }
+
   ngOnInit(): void {
     this.userid = this.afu.get_UID();
     console.log(this.userid);
@@ -61,6 +55,43 @@ export class PatientDoctorChatPage implements OnInit {
       })
     }).then(()=>{
       this.chat_source();
+    })
+    this.finish_consultation();
+    this.videoCall_listener();
+  }
+  videoCall_listener()
+  {
+    this.db.firestore.collection('calls').where('offer.doctor_id','==',this.docInfo.uid).
+    where('offer.patient_id','==',this.userid).onSnapshot(snapshot=>{
+      let changes = snapshot.docChanges();
+      changes.forEach(e=>{
+        if(e.type == 'added')
+        {
+          console.log('exist!');
+          this.video_call();
+        }
+      })
+    })
+  }
+
+  answerCall()
+  {
+    console.log("test");
+    localStorage.setItem('callInput',this.dataInput);
+    this.video_call();
+    document.getElementById("closeModal").click();
+  }
+
+  finish_consultation()
+  {
+    this.userservice.removed_upcoming_trigger(this.userid).onSnapshot(snapshot=>{
+      let changes = snapshot.docChanges();
+      changes.forEach(e=>{
+        if(e.type == 'removed')
+        {
+          this.router.navigate(['patient-consultation']);
+        }
+      })
     })
   }
 

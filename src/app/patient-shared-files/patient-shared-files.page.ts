@@ -1,3 +1,5 @@
+/* eslint-disable arrow-body-style */
+import { ChatService } from './../services/chat.service';
 /* eslint-disable @typescript-eslint/no-shadow */
 /* eslint-disable curly */
 /* eslint-disable no-var */
@@ -17,6 +19,9 @@ import { Observable } from 'rxjs';
 /* eslint-disable @typescript-eslint/no-inferrable-types */
 import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { formatDate } from '@angular/common';
+import { AngularFirestore } from '@angular/fire/firestore';
+import { SharedDataService } from '../services/shared-data.service';
+import { map } from 'rxjs/operators';
 
 @Component({
   selector: 'app-patient-shared-files',
@@ -59,6 +64,9 @@ export class PatientSharedFilesPage implements OnInit {
     public afu: AuthService,
     public userservice: UserService,
     public router: Router,
+    public chats: ChatService,
+    public db: AngularFirestore,
+    public sds: SharedDataService
     //public notif: NotificationService
   ) { }
 
@@ -68,11 +76,70 @@ export class PatientSharedFilesPage implements OnInit {
     this.userservice.get_avatar(this.userid).then(e=>{
       this.imgUrl = e.data().image;
     })
-    this.patientInfo = JSON.parse(localStorage.getItem('data'));
+    this.docInfo = JSON.parse(localStorage.getItem('data'));
+    this.chats.check_chat(this.docInfo.uid,this.userid).then(e=>{
+      e.forEach(item=>{
+        this.chat_id = item.id;
+      })
+    }).then(()=>{
+      this.chat_source();
+    })
     this.fileShared();
     this.get_medicalRecord();
     this.get_labRecord();
     this.prescription_record();
+
+    //this.finish_consultation();
+
+    //this.videoCall_listener();
+  }
+  // videoCall_listener()
+  // {
+  //   this.db.firestore.collection('calls').where('offer.doctor_id','==',this.docInfo.uid).
+  //   where('offer.patient_id','==',this.userid).onSnapshot(snapshot=>{
+  //     let changes = snapshot.docChanges();
+  //     changes.forEach(e=>{
+  //       if(e.type == 'added')
+  //       {
+  //         console.log('exist!');
+  //         this.video_call();
+  //       }
+  //     })
+  //   })
+  // }
+  // answerCall()
+  // {
+  //   console.log("test");
+  //   localStorage.setItem('callInput',this.dataInput);
+  //   this.video_call();
+  //   document.getElementById("closeModal").click();
+  // }
+
+  // finish_consultation()
+  // {
+  //   this.userservice.removed_upcoming_trigger(this.userid).onSnapshot(snapshot=>{
+  //     let changes = snapshot.docChanges();
+  //     changes.forEach(e=>{
+  //       if(e.type == 'removed')
+  //       {
+  //         this.router.navigate(['patient-consultation']);
+  //       }
+  //     })
+  //   })
+  // }
+
+  chat_source()
+  {
+     console.log(this.chat_id);
+     this.chat$=this.chats.get(this.chat_id).pipe(
+      map(doc => {
+        return {
+          id: doc.payload.id,
+          ...
+          Object.assign({}, doc.payload.data() )
+        };
+      })
+    );
   }
   get_medicalRecord()
   {
@@ -94,7 +161,6 @@ export class PatientSharedFilesPage implements OnInit {
       })
     })
     this.medList = tempArray;
-    //console.log(this.medList);
   }
 
   fileShared()
@@ -201,9 +267,9 @@ export class PatientSharedFilesPage implements OnInit {
   {
     window.open(file);
   }
-  chooseShare(file,isChecked)
+  chooseShare(file,isChecked: boolean)
   {
-    /*if(isChecked)
+    if(isChecked)
     {
       this.tempArray.push(file);
       this.flag++;
@@ -213,8 +279,7 @@ export class PatientSharedFilesPage implements OnInit {
       var index = this.tempArray.findIndex(x => x.value ===file);
       this.tempArray.splice(index);
     }
-    console.log("Irene");*/
-    console.log(isChecked);
+    console.log(this.tempArray);
   }
   share()
   {

@@ -191,6 +191,10 @@ const routes: Routes = [
     path: 'patient-cancel-consultation',
     loadChildren: () => import('./patient-cancel-consultation/patient-cancel-consultation.module').then( m => m.PatientCancelConsultationPageModule)
   },
+  {
+    path: 'medical-certificate',
+    loadChildren: () => import('./medical-certificate/medical-certificate.module').then( m => m.MedicalCertificatePageModule)
+  },
 
 
 

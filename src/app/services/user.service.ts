@@ -438,6 +438,10 @@ export class UserService {
   {
     return this.db.firestore.collection('upcoming').doc(upcoming_id).delete();
   }
+  removed_upcoming_trigger(patient_id)
+  {
+    return this.db.firestore.collection('upcoming').where('patient_id','==',patient_id);
+  }
   remove_share(doctor_id,patient_id)
   {
     return this.db.firestore.collection('Shared_Files').where('doctor_id','==',doctor_id)

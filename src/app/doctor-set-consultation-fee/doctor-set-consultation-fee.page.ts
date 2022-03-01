@@ -1,3 +1,4 @@
+/* eslint-disable curly */
 /* eslint-disable eqeqeq */
 /* eslint-disable no-var */
 /* eslint-disable @typescript-eslint/dot-notation */
@@ -26,42 +27,25 @@ export class DoctorSetConsultationFeePage implements OnInit {
   imgUrl : any;
   profile_changed: boolean = false;
 
+  fee : number = 0;
+  feeDisplay : number = 0;
+  deduction: number = 0;
+  net_pay: number = 0;
+
   pending_message: boolean = false;
-  fee: number = 0;
   timeLeft: number = 10;
   interval;
   success_message = "";
 
-  constructor(public userservice: UserService,public afu: AuthService,
-    private menu: MenuController, private alertCtrl: AlertController,
-    public router: Router) { }
+  constructor(
+    public userservice: UserService,
+    public afu: AuthService,
+    private menu: MenuController,
+    private alertCtrl: AlertController,
+    public router: Router
+    ) { }
 
   ngOnInit(): void {
-    this.userId = this.afu.get_UID();
-    this.userservice.get_patientInfo(this.userId).then(e=>{
-     // console.log(e.data());
-      this.info = e.data();
-    }).then(()=>{
-      this.userservice.get_specializationInfo(this.info.specialization).then(e=>{
-        this.spInfo = e.data();
-      })
-    })
-
-    this.userservice.get_avatar(this.userId).then(e=>{
-      this.imgUrl = e.data().image;
-    })
-
-    var data;
-    var tempArray = [];
-    this.userservice.get_Speciaalization().then(e=>{
-      e.forEach(item=>{
-        data = item.data();
-        data.uid = item.id;
-        tempArray.push(data);
-      })
-    })
-    //this.spList = tempArray;
-    this.update_fee();
     this.get_doctorInfo();
   }
   get_doctorInfo()
@@ -69,13 +53,17 @@ export class DoctorSetConsultationFeePage implements OnInit {
     this.userId = this.afu.get_UID();
     this.userservice.get_patientInfo(this.userId).then(e=>{
       console.log(e.data());
-     this.fee = e.data().consultation_fee;
-     console.log(this.fee);
+      this.feeDisplay = e.data().consultation_fee;
+
+      this.deduction = e.data().consultation_fee*(10/100);
+      this.net_pay = e.data().consultation_fee-this.deduction;
+
       this.info = e.data();
       this.check_verification(this.info.isVerified);
     }).then(()=>{
       this.userservice.get_specializationInfo(this.info.specialization).then(e=>{
-        this.spInfo = e.data();
+        if(e.exists)
+          this.spInfo = e.data();
       })
     })
 
@@ -110,7 +98,6 @@ export class DoctorSetConsultationFeePage implements OnInit {
     this.userservice.update_doctor_fee(this.userId,record).then(()=>{
       console.log('Updated!');
     })
-    //this.router.navigate(['/doctor-profile']);
   }
 
 }

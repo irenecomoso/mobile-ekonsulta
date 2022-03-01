@@ -10,9 +10,18 @@
   </ion-button>
   <ion-card>
     <ion-card-header>
-      <ion-card-title>Medical Certificate</ion-card-title>
+      <ion-card-title>Send Medical Certificate</ion-card-title>
     </ion-card-header>
     <ion-card-content style="text-align: left;">
+      <ion-item>
+        <ion-input [(ngModel)]="sf" type="text" placeholder="Suffer's from"></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-input [(ngModel)]="prsc" type="text" placeholder="Prescription"></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-button class="buttons" style="text-align: center;" (click)="generate_MC()">Generate Medical Certificate</ion-button>
+      </ion-item>
       <ion-item>
         <ion-input [(ngModel)]="filename" type="text" placeholder="File name"></ion-input>
       </ion-item>

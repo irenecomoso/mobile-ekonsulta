@@ -41,6 +41,8 @@ export class DoctorMedicalCertificatePage implements OnInit {
 
   error_message = "";
   success_message = "";
+  sf: string = "";
+  prsc: string = "";
 
 
   medList: any = [];
@@ -80,7 +82,7 @@ export class DoctorMedicalCertificatePage implements OnInit {
         record2['createdAt'] = formatDate(new Date(),'short','en');
         record2['id'] = new Date(formatDate(new Date(),'short','en')).getTime()
         //this.notif.send_patient(this.patientInfo.uid,record2);
-        //this.router.navigate[('/doctor-chat-info')];
+
         setTimeout(() => {
           this.success_message = "";
         }, 5000);
@@ -98,5 +100,18 @@ export class DoctorMedicalCertificatePage implements OnInit {
   {
     this.file1 = e.target.files[0];
     console.log(this.file1);
+  }
+  generate_MC()
+  {
+    let record = {};
+    record['patients_id'] = this.patientInfo.uid;
+    record['sf'] = this.sf;
+    record['prsc'] = this.prsc;
+    record['fullname'] = this.patientInfo.fullname;
+    if(localStorage.getItem('mc')==null)
+          {
+            localStorage.setItem('mc',JSON.stringify(record))
+          }
+    window.open('medical-certificate');
   }
 }
