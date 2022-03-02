@@ -25,10 +25,12 @@
       <ion-button (click)="insurance_request()">Request</ion-button>
     </ion-item>
 
-      <ion-item *ngFor="let list of insurance_af" class="col-3">
-        <ion-label>
-          <p>{{list.insurance_name}}</p>
-        </ion-label>
+      <ion-item *ngFor="let list of insurance_af" class="col-12">
+        <ion-chip>
+          <ion-label>
+            <p>{{list.insurance_name}}</p>
+          </ion-label>
+        </ion-chip> 
       </ion-item>
     <ion-item *ngIf="request_sent" class="alert alert-success">
       Request Sent!

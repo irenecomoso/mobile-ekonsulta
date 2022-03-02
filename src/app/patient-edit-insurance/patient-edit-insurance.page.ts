@@ -38,6 +38,7 @@ export class PatientEditInsurancePage implements OnInit {
 
   labList: any = [];
   lab_id: string = "";
+  lab_id2: string = ""; //for request LOA 
   empty_field: string = "";
   lab_message: string = "";
 
@@ -203,11 +204,14 @@ export class PatientEditInsurancePage implements OnInit {
       .then(e=>{
         if(e.empty)
         {
-          this.userservice.request_LOA(this.info.health_insurance,this.userID)
+          if(this.lab_id2 != "")
+          {
+            this.userservice.request_LOA(this.info.health_insurance,this.userID,this.lab_id2)
             .then(()=>{
               this.request_sent = "Request Sent!";
               setTimeout(() => {
                 this.request_sent = "";
+                this.lab_id2 = "";
               }, 3000);
               let record = {};
               record['createdAt'] = formatDate(new Date(),'short','en');
@@ -216,6 +220,14 @@ export class PatientEditInsurancePage implements OnInit {
               //this.notif.send_insurance(this.info.health_insurance,record)
 
             })
+          }
+          else
+          {
+            this.request_error = "Please choose a laboratory!";
+            setTimeout(() => {
+              this.request_error = "";
+            }, 3000);
+          }
         }
         else
         {
