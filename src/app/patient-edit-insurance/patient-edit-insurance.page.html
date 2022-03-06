@@ -60,6 +60,12 @@
             <span>Limit:</span><ion-label style="font-weight: 1000;">{{insurance_info.limit}}php</ion-label>
           </ion-item>
           <ion-item>
+            <ion-select [(ngModel)]="lab_id2" name="lab_id">
+              <ion-select-option value="">Select Laboratory</ion-select-option>
+                <ion-select-option *ngFor="let list of labList" value="{{list.uid}}">{{list.name}}</ion-select-option>
+            </ion-select>
+          </ion-item>
+          <ion-item>
             <ion-button (click)="request_LOA()" >Request LOA</ion-button>
           </ion-item>
           <ion-item *ngIf="request_error.length > 0" style="margin-top: 2%;" class="alert alert-danger">

@@ -75,5 +75,8 @@ export class MedicalCertificatePage implements OnInit {
       pdf.save('medicalCertificate.pdf');
     })
   }
+  back(){
+    window.location.href='/doctor-consultation';
+  }
 
 }
