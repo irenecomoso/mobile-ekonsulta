@@ -44,6 +44,12 @@ export class UserService {
     return this.db.firestore.collection('Users').doc(id).collection('Insurance_Info')
     .where('health_insurance','==',ins_id).get();
   }
+  update_university(id,data)
+  {
+    return this.db.firestore.collection('Users').doc(id).update({
+      university: data
+    })
+  }
   get_patientInfo(id)
   {
     return this.db.firestore.collection('Users').doc(id).get();

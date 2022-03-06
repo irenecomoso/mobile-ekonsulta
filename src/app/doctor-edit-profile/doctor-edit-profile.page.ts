@@ -1,3 +1,5 @@
+/* eslint-disable eqeqeq */
+/* eslint-disable curly */
 /* eslint-disable @typescript-eslint/quotes */
 /* eslint-disable @typescript-eslint/no-inferrable-types */
 /* eslint-disable @typescript-eslint/naming-convention */
@@ -35,12 +37,13 @@ export class DoctorEditProfilePage implements OnInit {
   imgUrl: any;
   file: any;
   form: FormGroup;
+  university: string = "";
   constructor(public userservice: UserService, public afu: AuthService, public router: Router) { }
 
   ngOnInit(): void {
     this.userId = this.afu.get_UID();
     this.userservice.get_patientInfo(this.userId).then(e=>{
-     // console.log(e.data());
+      this.university = e.data().university;
       this.info = e.data();
     }).then(()=>{
       this.userservice.get_specializationInfo(this.info.specialization).then(e=>{
@@ -78,5 +81,23 @@ export class DoctorEditProfilePage implements OnInit {
   {
     this.file = e.target.files[0];
     console.log(this.file);
+  }
+  updateUni()
+  {
+    if(this.university != "")
+    this.userservice.update_university(this.userId,this.university)
+    .then(()=>{
+      document.getElementById("alert2").hidden = false;
+      setTimeout(() => {
+        document.getElementById("alert2").hidden = true;
+      }, 3000);
+    })
+    else
+    {
+      document.getElementById("alert3").hidden = false;
+      setTimeout(() => {
+        document.getElementById("alert3").hidden = true;
+      }, 3000);
+    }
   }
 }

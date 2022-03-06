@@ -62,4 +62,25 @@
       <ion-button display="center" id="btn1" color="rgb(28,54,94)" type="submit" >Save Changes</ion-button>
     </div><br>
   </form>
+  <div class="sec2">
+    <div>
+      <ion-button display="center" id="showIns" class="btn2S" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSec2" aria-expanded="false" aria-controls="collapseSec2" >
+        More
+      </ion-button>
+    </div>
+    <div class="collapse" id="collapseSec2">
+        <input [(ngModel)]="university" class="form-control" type="text" placeholder="Input University">
+        <div style="margin-top: 3%;" hidden id="alert2" class="alert alert-success">
+          Successfully Updated!
+        </div>
+        <div style="margin-top: 3%;" hidden id="alert3" class="alert alert-danger">
+          Empty Field!
+        </div>
+        <div class="container-fluid">
+          <div style="position:relative;left: 80%; margin-top: 4%;">
+            <ion-button (click)="updateUni()" type="button" class="update">Update</ion-button>
+          </div>
+        </div>
+    </div>
+  </div>
 </ion-content>
