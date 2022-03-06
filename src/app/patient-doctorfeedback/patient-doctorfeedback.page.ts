@@ -1,3 +1,8 @@
+/* eslint-disable @typescript-eslint/no-inferrable-types */
+/* eslint-disable curly */
+/* eslint-disable @typescript-eslint/no-shadow */
+/* eslint-disable @typescript-eslint/dot-notation */
+/* eslint-disable prefer-const */
 import { Router } from '@angular/router';
 /* eslint-disable @typescript-eslint/naming-convention */
 /* eslint-disable one-var */
@@ -9,6 +14,7 @@ import { AuthService } from './../services/auth.service';
 import { UserService } from './../services/user.service';
 import { SharedDataService } from './../services/shared-data.service';
 import { Component, OnInit } from '@angular/core';
+import { formatDate } from '@angular/common';
 
 @Component({
   selector: 'app-patient-doctorfeedback',
@@ -24,6 +30,8 @@ export class PatientDoctorfeedbackPage implements OnInit {
 
   flist: any = [];
   replyList: any = [];
+  rating: string = "0";
+  doctor_rating: string = "";
 
   feedback: string;
   constructor(public share: SharedDataService,public userservice: UserService, public afu: AuthService, public router: Router) { }
@@ -48,6 +56,7 @@ export class PatientDoctorfeedbackPage implements OnInit {
     //console.log(this.info2);
 
     this.get_feedback();
+    this.get_rating();
   }
   add_feedback()
   {
@@ -61,9 +70,22 @@ export class PatientDoctorfeedbackPage implements OnInit {
         if(this.feedback != "")
           {
             //add feedback
-            this.userservice.create_Doctor_feedback(this.info2.uid,this.userId,this.feedback,this.userInfo.fullname)
+            let record= {}
+            record['feedback'] = this.feedback;
+            record['rating'] = this.rating;
+            this.userservice.create_Doctor_feedback(this.info2.uid,this.userId,record,this.userInfo.fullname)
             .then(()=>{
               console.log("Added!");
+
+              //add notification to receiver
+              let record = {};
+              record['createdAt'] = formatDate(new Date(),'short','en');
+              record['title'] = "Feedback";
+              record['id'] = new Date(formatDate(new Date(),'short','en')).getTime();
+              record['description'] = this.userInfo.fullname+" sent you a feedback! Go to Reviews and Check it!";
+              //this.notif.send_doctor(this.info2.uid,record)
+
+
               this.ngOnInit();
               this.feedback = "";
             })
@@ -105,7 +127,36 @@ export class PatientDoctorfeedbackPage implements OnInit {
       })
     })
     this.flist = tempArray;
-    //console.log(this.flist);
+    console.log(this.flist);
+  }
+  get_rating()
+  {
+    var one=0,two=0,three=0,four=0,five=0;
+    var totalScore = 0;
+    var totalReview = 0;
+    var rating = 0;
+    this.userservice.get_Doctor_Reviews(this.info2.uid)
+    .then(a=>{
+      a.forEach(item=>{
+        console.log(item.data().rating);
+        if(item.data().rating == '1')
+          one++;
+        if(item.data().rating=='2')
+          two++;
+        if(item.data().rating=='3')
+          three++;
+        if(item.data().rating=='4')
+          four++;
+        if(item.data().rating=='5')
+          five++;
+      })
+    }).then(()=>{
+      console.log(one+ ' ' +two+' '+three+' '+four+' '+five);
+      totalScore = 1*one + 2*two + 3*three + 4*four + 5*five;
+      totalReview = one + two + three + four + five;
+      rating = totalScore/totalReview;
+      this.doctor_rating = rating.toFixed(1);
+    })
   }
   back(){
     localStorage.removeItem('data');

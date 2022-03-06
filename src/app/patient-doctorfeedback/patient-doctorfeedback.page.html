@@ -19,6 +19,15 @@
         <p>Contact: {{info2.contact_number}}</p>
         <p>Address: {{info2.address}}</p>
       </ion-label>
+      <ion-label class="row">
+        <ion-label class="col-md-2">
+          <p class="rating rating1" *ngIf="doctor_rating <= '1'">Rating: {{doctor_rating}}</p>
+          <p class="rating rating2" *ngIf="doctor_rating >= '1' && doctor_rating <= '2'">Rating: {{doctor_rating}}</p>
+          <p class="rating rating3" *ngIf="doctor_rating >= '2.1' && doctor_rating <= '3'">Rating: {{doctor_rating}}</p>
+          <p class="rating rating4" *ngIf="doctor_rating >= '3.1' && doctor_rating <= '4'">Rating: {{doctor_rating}}</p>
+          <p class="rating rating5" *ngIf="doctor_rating >= '4.1' && doctor_rating <= '5'">Rating: {{doctor_rating}}</p>
+        </ion-label>
+      </ion-label>
     </ion-item>
   </ion-list>
   <div class="content">
@@ -32,6 +41,13 @@
             <h2>{{list.fullname}}</h2>
             <h3>{{list.feedback}}</h3>
             <p>{{list.createdAt}}</p>
+            <ion-label>
+              <span class="list-rating" *ngIf="list.rating === '1'" style="color: red;">{{list.rating}} <i class="bi bi-star-fill"></i></span>
+                  <span class="list-rating" *ngIf="list.rating === '2'" style="color: red;">{{list.rating}} <i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i></span>
+                  <span class="list-rating" *ngIf="list.rating === '3'" style="color: rgb(0, 160, 0)">{{list.rating}} <i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i></span>
+                  <span class="list-rating" *ngIf="list.rating === '4'" style="color: green">{{list.rating}} <i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i></span>
+                  <span class="list-rating" *ngIf="list.rating === '5'" style="color: rgb(255, 174, 0)">{{list.rating}} <i class="bi bi-star-fill"><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i></i></span>
+            </ion-label>
           </ion-label>
         </ion-item>
       </ion-list>

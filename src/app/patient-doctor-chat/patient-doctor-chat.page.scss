@@ -87,6 +87,9 @@ ion-input{
 .item-has-focus{
   --highlight-background: #ffffff;
 }
-#upldImg{
-  width: 20px;
+#imgFile ion-input {
+  padding: 0px;
 }
+#imgFile ion-icon{
+  size: large;
+ }

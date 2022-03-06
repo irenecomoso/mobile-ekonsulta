@@ -43,9 +43,9 @@
 
 <ion-footer>
   <ion-toolbar>
-    <ion-item>
+    <ion-item class="fileUpld">
         <ion-label class="col-2">
-          <ion-input (change)="chooseImage($event)" type="file" id="upldImg"><ion-icon name="attach-outline"></ion-icon></ion-input>
+          <ion-input (change)="chooseImage($event)" type="file" id="imgFile"><ion-icon size="large" name="attach-outline"></ion-icon></ion-input>
         </ion-label>
         <ion-input [(ngModel)]="content" placeholder="Type to chat"></ion-input>
     </ion-item>
