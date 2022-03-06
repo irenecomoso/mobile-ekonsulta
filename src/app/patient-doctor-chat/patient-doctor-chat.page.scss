@@ -49,6 +49,10 @@ ion-icon{
   background-color: #0084FF;
   color: white;
 }
+.innermsg.img {
+  float: right;
+  color: white;
+}
 
 .avtr{
   width:30px;
@@ -82,4 +86,7 @@ ion-input{
 
 .item-has-focus{
   --highlight-background: #ffffff;
+}
+#upldImg{
+  width: 20px;
 }

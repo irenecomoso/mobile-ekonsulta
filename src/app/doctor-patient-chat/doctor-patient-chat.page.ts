@@ -87,6 +87,10 @@ export class DoctorPatientChatPage implements OnInit {
       })
     );
   }
+  viewImage(e)
+  {
+    window.open(e);
+  }
   send_message()
   {
     if(this.content!="")

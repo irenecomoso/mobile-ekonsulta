@@ -530,4 +530,11 @@ export class UserService {
     return this.db.firestore.collection('Users').doc(id).collection('Insurance_Info').doc(record.id)
     .update(record);
   }
+  send_chat_image(record)
+  {
+    return this.store.ref('chat-image/' + record.filename).put(record.file)
+    .then(()=>{
+      return this.store.storage.ref('chat-image/' + record.filename).getDownloadURL();
+    })
+  }
 }

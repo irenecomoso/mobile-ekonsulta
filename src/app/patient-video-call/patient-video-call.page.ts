@@ -15,8 +15,8 @@ import { AngularFirestore } from '@angular/fire/firestore';
 import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 const mediaConstraints = {
   audio: true,
-  //video: {width: 650, height: 400}
-  video:  { facingMode: "user" }
+  video: {width: 650, height: 400}
+  //video:  { facingMode: "user" }
 };
 
 const servers = {

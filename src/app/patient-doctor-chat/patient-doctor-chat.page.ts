@@ -1,3 +1,5 @@
+/* eslint-disable curly */
+/* eslint-disable @typescript-eslint/dot-notation */
 import { Router } from '@angular/router';
 /* eslint-disable prefer-const */
 import { SharedDataService } from './../services/shared-data.service';
@@ -32,6 +34,7 @@ export class PatientDoctorChatPage implements OnInit {
 
   imgUrl: any;
   dataInput: string = "";
+  file: any;
 
   constructor(
     public chats: ChatService,
@@ -110,10 +113,33 @@ export class PatientDoctorChatPage implements OnInit {
   }
   send_message()
   {
-    if(this.content != "")
+    let record = {};
+    record['content']= this.content;
+
+    let record2 = {};
+
+    if(this.file != undefined)
     {
-      this.chats.send_message(this.chat_id,this.content,this.userid).then(()=>{
+      record2['file'] = this.file;
+      record2['filename'] = this.file.name;
+    }
+
+
+    if(this.content != "" || this.file != undefined)
+    {
+      if(this.file)
+      this.userservice.send_chat_image(record2).then(e=>{
+        record['imageFile'] = e;
+        this.chats.send_message(this.chat_id,record,this.userid).then(()=>{
+          this.content="";
+          this.file = "";
+          console.log("message sent!");
+        })
+      })
+      else
+      this.chats.send_message(this.chat_id,record,this.userid).then(()=>{
         this.content="";
+        this.file = "";
         console.log("message sent!");
       })
     }
@@ -121,6 +147,11 @@ export class PatientDoctorChatPage implements OnInit {
     {
       console.log("Empty!");
     }
+  }
+  chooseImage(e)
+  {
+    this.file = e.target.files[0];
+    console.log(this.file);
   }
   video_call()
   {
